@@ -278,7 +278,6 @@ function schedule(req, res) {
                                 var upcomingMatches = [];
                                 var previousMatches = [];
                                 matchesMap.forEach(function (value, key) {
-                                    console.log(value.datetime);
                                     if (value.datetime < now && value.playerMatches.homeTeam.map1.length > 0) {
                                         previousMatches.push(value);
                                     } else {
