@@ -84,7 +84,21 @@
                     </div>
                     <div class="match-details">
                         {{#if noData}}
+                        <div class="match_{{id}}" id="match_{{id}}_map_1" hidden>
                         <p class="team-caption">No data have been updated yet for this match. Please check back later. </p>
+                        </div>
+                        <div class="match_{{id}}" id="match_{{id}}_map_2" hidden>
+                        <p class="team-caption">No data have been updated yet for this match. Please check back later. </p>
+                        </div>
+                        <div class="match_{{id}}" id="match_{{id}}_map_3" hidden>
+                        <p class="team-caption">No data have been updated yet for this match. Please check back later. </p>
+                        </div>
+                        <div class="match_{{id}}" id="match_{{id}}_map_4" hidden>
+                        <p class="team-caption">No data have been updated yet for this match. Please check back later. </p>
+                        </div>
+                        <div class="match_{{id}}" id="match_{{id}}_map_5" hidden>
+                        <p class="team-caption">No data have been updated yet for this match. Please check back later. </p>
+                        </div>
                         {{else}}
                         <div class="match_{{id}}" id="match_{{id}}_map_1" hidden>
                             <div class="match-details-team">
@@ -186,12 +200,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{#if noData}}
-                                        <tr>
-                                            <td>
-                                                <p class="team-caption">No data have been updated yet for this match. </p>
-                                            </td>
-                                            {{else}} {{#each playerMatches.homeTeam.map2}}
+                                         {{#each playerMatches.homeTeam.map2}}
                                             <tr>
                                                 <td style="padding: 0">
                                                     <p class="playercaption">{{playerName}}
@@ -211,7 +220,7 @@
                                                     {{else}} {{points}} {{/if}}
                                                 </td>
                                             </tr>
-                                            {{/each}} {{/if}}
+                                            {{/each}}
                                     </tbody>
                                 </table>
 
@@ -230,13 +239,7 @@
                                             <th class="th-points" scope="col">Points</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        {{#if noData}}
-                                        <tr>
-                                            <td>
-                                                <p class="team-caption">No data have been updated yet for this match. </p>
-                                            </td>
-                                            {{else}} {{#each playerMatches.awayTeam.map2}}
+                                    <tbody> {{#each playerMatches.awayTeam.map2}}
                                             <tr>
                                                 <td style="padding: 0">
                                                     <p class="playercaption">{{playerName}}
@@ -258,7 +261,7 @@
                                                     {{else}} {{points}} {{/if}}
                                                 </td>
                                             </tr>
-                                            {{/each}} {{/if}}
+                                            {{/each}}
                                     </tbody>
                                 </table>
                             </div>
@@ -280,12 +283,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{#if noData}}
-                                        <tr>
-                                            <td>
-                                                <p class="team-caption">No data have been updated yet for this match. </p>
-                                            </td>
-                                            {{else}} {{#each playerMatches.homeTeam.map3}}
+                                         {{#each playerMatches.homeTeam.map3}}
                                             <tr>
                                                 <td style="padding: 0">
                                                     <p class="playercaption">{{playerName}}
@@ -305,7 +303,7 @@
                                                     {{else}} {{points}} {{/if}}
                                                 </td>
                                             </tr>
-                                            {{/each}} {{/if}}
+                                            {{/each}} 
                                     </tbody>
                                 </table>
 
@@ -324,13 +322,7 @@
                                             <th class="th-points" scope="col">Points</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        {{#if noData}}
-                                        <tr>
-                                            <td>
-                                                <p class="team-caption">No data have been updated yet for this match. </p>
-                                            </td>
-                                            {{else}} {{#each playerMatches.awayTeam.map3}}
+                                    <tbody> {{#each playerMatches.awayTeam.map3}}
                                             <tr>
                                                 <td style="padding: 0">
                                                     <p class="playercaption">{{playerName}}
@@ -352,7 +344,7 @@
                                                     {{else}} {{points}} {{/if}}
                                                 </td>
                                             </tr>
-                                            {{/each}} {{/if}}
+                                            {{/each}}
                                     </tbody>
                                 </table>
                             </div>
@@ -374,12 +366,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{#if noData}}
-                                        <tr>
-                                            <td>
-                                                <p class="team-caption">No data have been updated yet for this match. </p>
-                                            </td>
-                                            {{else}} {{#each playerMatches.homeTeam.map4}}
+                                         {{#each playerMatches.homeTeam.map4}}
                                             <tr>
                                                 <td style="padding: 0">
                                                     <p class="playercaption">{{playerName}}
@@ -399,7 +386,7 @@
                                                     {{else}} {{points}} {{/if}}
                                                 </td>
                                             </tr>
-                                            {{/each}} {{/if}}
+                                            {{/each}}
                                     </tbody>
                                 </table>
 
@@ -419,12 +406,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{#if noData}}
-                                        <tr>
-                                            <td>
-                                                <p class="team-caption">No data have been updated yet for this match. </p>
-                                            </td>
-                                            {{else}} {{#each playerMatches.awayTeam.map4}}
+                                        {{#each playerMatches.awayTeam.map4}}
                                             <tr>
                                                 <td style="padding: 0">
                                                     <p class="playercaption">{{playerName}}
@@ -446,7 +428,7 @@
                                                     {{else}} {{points}} {{/if}}
                                                 </td>
                                             </tr>
-                                            {{/each}} {{/if}}
+                                            {{/each}}
                                     </tbody>
                                 </table>
                             </div>
@@ -468,12 +450,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{#if noData}}
-                                        <tr>
-                                            <td>
-                                                <p class="team-caption">No data have been updated yet for this match. </p>
-                                            </td>
-                                            {{else}} {{#each playerMatches.homeTeam.map5}}
+                                        {{#each playerMatches.homeTeam.map5}}
                                             <tr>
                                                 <td style="padding: 0">
                                                     <p class="playercaption">{{playerName}}
@@ -493,7 +470,7 @@
                                                     {{else}} {{points}} {{/if}}
                                                 </td>
                                             </tr>
-                                            {{/each}} {{/if}}
+                                            {{/each}}
                                     </tbody>
                                 </table>
 
@@ -512,13 +489,7 @@
                                             <th class="th-points" scope="col">Points</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        {{#if noData}}
-                                        <tr>
-                                            <td>
-                                                <p class="team-caption">No data have been updated yet for this match. </p>
-                                            </td>
-                                            {{else}} {{#each playerMatches.awayTeam.map5}}
+                                    <tbody> {{#each playerMatches.awayTeam.map5}}
                                             <tr>
                                                 <td style="padding: 0">
                                                     <p class="playercaption">{{playerName}}
@@ -540,7 +511,7 @@
                                                     {{else}} {{points}} {{/if}}
                                                 </td>
                                             </tr>
-                                            {{/each}} {{/if}}
+                                            {{/each}}
                                     </tbody>
                                 </table>
                             </div>
