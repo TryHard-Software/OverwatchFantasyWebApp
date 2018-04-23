@@ -106,7 +106,6 @@ function schedule(req, res) {
                                     var map5Name = maps.get(map5Id) ? maps.get(map5Id).name : "N/A";
                                     var awayScore = 0;
                                     var homeScore = 0;
-                                    var noData = match.map1_winner ? false : true; 
                                     map1WinnerId == teamAwayId ? awayScore++ : homeScore++;
                                     map2WinnerId == teamAwayId ? awayScore++ : homeScore++;
                                     map3WinnerId == teamAwayId ? awayScore++ : homeScore++;
@@ -158,8 +157,7 @@ function schedule(req, res) {
                                                 map4: [],
                                                 map5: []
                                             }
-                                        },
-                                        noData: noData
+                                        }
                                     }
                                     //matchesArr.push(matchData);
                                     matchesMap.set(match.id, matchData);
@@ -274,14 +272,14 @@ function schedule(req, res) {
                                     });
 
                                 }
-
-
-
                                 var now = new Date();
                                 var upcomingMatches = [];
                                 var previousMatches = [];
                                 matchesMap.forEach(function (value, key) {
-                                    if (value.datetime < now && value.playerMatches.homeTeam.map1.length > 0) {
+                                    if (value.playerMatches.homeTeam.map1.length === 0) {
+                                        value.noData = true;
+                                    }
+                                    if (value.datetime < now && value.map1WinnerId) {
                                         previousMatches.push(value);
                                     } else {
                                         upcomingMatches.push(value);
