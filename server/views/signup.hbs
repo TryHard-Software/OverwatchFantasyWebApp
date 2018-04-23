@@ -1,0 +1,40 @@
+<html class="bg-wrapper signup-bg">
+    <div class="container-login">
+        <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
+            <div class="panel panel-default panel-transparent">
+                <div class="panel-heading">
+                    <h3>Sign Up for an Account</h3>
+                </div>
+                <div class="panel-body">
+                    {{#if message }}
+                    <div class="alert alert-danger">
+                        {{message}}
+                    </div>
+                    {{/if}}
+                    <form id="signup" name="signup" method="post" action="/signup">
+                        <div class="form-group">
+                            <label for="username" class="label-text">Enter a Username</label>
+                            <input type="text" class="form-control" name="username" placeholder="Enter Username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="label-text">Enter an E-mail Address</label>
+                            <input type="email" class="form-control" name="email" placeholder="johnsmith@yahoo.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="label-text">Enter a Password</label>
+                            <input type="password" class="form-control" name="password" placeholder="Password" required>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" name="remember_me" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Remember Me</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg label-text" id="btn-signup">Sign Up</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</html>

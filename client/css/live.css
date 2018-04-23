@@ -1,0 +1,27 @@
+
+#live-resize-highlighter {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    height: 10px;
+    width: 10px;
+    border-right: 4px solid red;
+    border-bottom: 4px solid red;
+}
+
+#live-resize-info-text {
+    color: red;
+    margin-left: 600px;
+}
+
+#live-mobile-info-text {
+    color: red;
+}
+
+.twitch-container {
+    position: relative;
+    /* height: 50%;
+    width: 50%; */
+    overflow: auto;
+    resize: both;
+}

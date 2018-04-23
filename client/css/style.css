@@ -1,0 +1,211 @@
+
+@import url(navbar.css); 
+@import url(about.css);
+@import url(landing.css);
+@import url(background.css); 
+@import url(dashboard.css); 
+@import url(chat.css);
+@import url(live.css);
+@import url(schedule.css); 
+
+@font-face {
+    font-family: ovw-italic;
+    src: url("/fonts/bignoodletoo.ttf");
+}
+
+@font-face {
+    font-family: ovw-regular;
+    src: url("/fonts/kow.ttf");
+}
+
+h1 {
+    font-family: ovw-regular;
+    font-size: 10vh;
+    text-align: center;
+    margin: 0;
+}
+
+h2 {
+    font-family: ovw-italic;
+}
+
+h3 {
+    font-family: ovw-regular;
+    font-size: 50px;
+}
+
+h4, .home-play-button {
+    font-family: ovw-regular;
+    font-size: 7vh;
+}
+
+h5 {
+    font-family: ovw-italic;
+    font-size: 20px;
+}
+
+.jumbotron-text {
+    font-family: ovw-italic;
+    font-size: 7vh;
+    margin: 0px;
+}
+
+.bold {
+    font-weight: bold; 
+}
+
+.home-title {
+    text-align: center;
+    color: white;
+}
+
+
+.panel-transparent {
+    background: none;
+}
+
+.panel-transparent .panel-heading {
+    background-color: rgba(255, 255, 255, 0.8)!important;
+}
+
+.panel-transparent .panel-body {
+    background-color: rgba(255, 255, 255, 0.75)!important;
+}
+
+#image_404 {
+    border: 1px white solid;
+    border-radius: 5px;
+    display: block;
+    margin: auto;
+}
+
+.leaderboard {
+    font-family: ovw-regular;
+    font-size: 20px;
+}
+
+
+.label-text {
+    font-family: ovw-regular;
+    font-size: 25px;
+}
+
+.news-text {
+    font-family: ovw-regular;
+    font-size: 22px;
+}
+.forgot-password {
+    float: right;
+}
+a:hover {
+    color: #f99e1a;
+    text-decoration: none;
+}
+
+.container-login  {
+    margin-top: 10%;
+}
+
+
+@media only screen and (max-width: 1296px) {
+    #rosterTable, #playerTable {
+        width: 100%;
+    }
+    #roster, #playerTable {
+        width: 100%;
+        margin: 0px;
+    }
+    .mobileSpecificButton {
+        display: inline-block;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .report-issue {
+        display: none;
+    }
+
+    #chat-window {
+        width: 90%;
+    }
+
+    #chat-icon { 
+        width: 70px;
+        height: 75px;
+    }
+    .chat-icon-text {
+        display: none; 
+    }
+
+    .container-dashboard, .container-live {
+        margin-top: 0px;
+    }
+    .navbar {
+        margin-bottom: 0;
+    }
+    .navbar-header {
+        float: none;
+    }
+    .nav-item.nav-link {
+        text-align: center;
+        font-size: 40px;
+        padding-left: 15px;
+        padding-right: 15px;
+        display: block;
+    }
+    .panel-body {
+        text-align: center;
+    }
+    tr .playerPicContainer {
+        padding: 0;
+        min-height: 200px;
+    }
+    #rosterTable, #playerTable {
+        width: 100%;
+        font-size: 16px;
+    }
+    .playerPicContainerMinHeight {
+        min-height: 110px;
+    }
+    .playerNameMobile {
+        position: absolute;
+        top: 8px;
+        margin-left: -40px;
+        left: 50%;
+        width: 80px;
+    }
+    tr .teamContainerOut {
+        position: relative;
+        height: 100%;
+    }
+    tr .teamContainer {
+        position: absolute;
+        left: 50%;
+        margin-left: -35px;
+        width: 70px;
+        top: 50%;
+        margin-top: -50px;
+        height: 100px;
+    }
+    table {
+        table-layout: fixed;
+    }
+    #roster, #playerTable {
+        width: 100%;
+        margin: 0px;
+        font-size: 16px;
+    }
+    .dev-profile {
+        width: 100%;
+    }
+    .table.vertical-align.leaderboard>tbody>tr>td {
+        overflow: hidden;
+    }
+    .table.leaderboard>thead:first-child>tr:first-child>th {
+        font-size: 13px;
+        overflow: hidden;
+    }
+    .table.leaderboard>tbody>tr>td {
+        font-size: 12px;
+    }
+}

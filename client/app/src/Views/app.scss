@@ -1,0 +1,519 @@
+
+
+@font-face {
+    font-family: ovw-italic;
+    src: url("/fonts/bignoodletoo.ttf");
+}
+
+@font-face {
+    font-family: ovw-regular;
+    src: url("/fonts/kow.ttf");
+}
+
+h1 {
+    font-family: ovw-regular;
+    font-size: 10vh;
+    text-align: center;
+    margin: 0;
+}
+
+h2 {
+    font-family: ovw-italic;
+}
+
+h3 {
+    font-family: ovw-regular;
+    font-size: 50px;
+}
+
+h4, .home-play-button {
+    font-family: ovw-regular;
+    font-size: 7vh;
+}
+
+h5 {
+    font-family: ovw-italic;
+    font-size: 20px;
+}
+
+.jumbotron-text {
+    font-family: ovw-italic;
+    font-size: 7vh;
+    margin: 0px;
+}
+
+.bold {
+    font-weight: bold; 
+}
+
+.home-title {
+    text-align: center;
+    color: white;
+}
+
+
+.panel-transparent {
+    background: none;
+}
+
+.panel-transparent .panel-heading {
+    background-color: rgba(255, 255, 255, 0.8)!important;
+}
+
+.panel-transparent .panel-body {
+    background-color: rgba(255, 255, 255, 0.75)!important;
+}
+
+#image_404 {
+    border: 1px white solid;
+    border-radius: 5px;
+    display: block;
+    margin: auto;
+}
+
+.leaderboard {
+    font-family: ovw-regular;
+    font-size: 20px;
+}
+
+
+.label-text {
+    font-family: ovw-regular;
+    font-size: 25px;
+}
+
+.news-text {
+    font-family: ovw-regular;
+    font-size: 22px;
+}
+
+a:hover {
+    color: #f99e1a;
+    text-decoration: none;
+}
+
+.container-login  {
+    margin-top: 10%;
+}
+
+
+.signup-bg {
+    background: url("/images/backgrounds/genji.jpg");
+}
+
+.dashboard-bg {
+    background: url("/images/backgrounds/winstons-lab.jpg");
+}
+
+.leaderboard-bg {
+    background: url("/images/backgrounds/tracer.jpg");
+}
+
+.notfound-bg {
+    background: url("/images/backgrounds/junkertown.jpg");
+}
+
+.about-bg {
+    background: url("/images/backgrounds/bastion.jpg");
+}
+
+.news-bg {
+    background: url("/images/backgrounds/moon.jpg");
+}
+
+.tutorial-bg {
+    background: url("/images/backgrounds/dva.jpg");
+}
+
+.information-bg {
+    background: url("/images/backgrounds/dva.jpg");
+}
+
+.live-bg {
+    background: url("/images/backgrounds/hollywood.jpg");
+}
+
+body {
+    background-color: #43484c;
+}
+
+html {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#chat-icon, #chat-window{ 
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+#chat-icon {
+    width: 200px;
+    height: 80px;
+    background: black;
+    border-radius: 20px;
+    padding-left: 5px;
+}
+.container-chat{
+    text-align:center;
+    display: block;
+}
+
+#chat-icon:hover{
+    cursor: pointer;
+}
+
+.chat-icon-text:hover {
+    color: #f99e1a;
+}
+
+#lucio-logo{
+    margin-top: 12px;
+    float: left;
+}
+
+.chat-icon-text {
+    font-family: ovw-regular;
+    background: black;
+    color:white; 
+    font-size: 40px;
+    padding-top:10px;
+    float: left;
+}
+
+#chat-window {
+    background: white;
+    width: 400px;
+    height: 500px;
+    border-radius: 10px;
+    flex: 1;
+    opacity: 0.95;
+}
+
+#chat-body {
+    opacity: 0.9; 
+}
+
+#chat-input {
+    background: white;
+    position: absolute;
+    bottom: 0px;
+    padding: 5px;
+    border-radius: 10px;
+    opacity: 1;
+}
+
+#chat-header {
+    background:black;
+    font-family: ovw-regular;
+    top:0px;
+    border-radius: 10px 10px 0px 0px;
+    display: inline-block;
+    width: 100%;
+}
+
+.chat-headline{
+    color: white; 
+    padding: 10px;
+    font-size: 35px;
+    margin: 0;
+    float: left;
+}
+
+#minimize-icon {
+    float: right;
+    display: block;
+    max-width: 60px;
+    border-radius: 10px 10px 0 0;
+}
+#minimize-icon:hover{
+    cursor: pointer;
+}
+
+
+#live-resize-highlighter {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    height: 10px;
+    width: 10px;
+    border-right: 4px solid red;
+    border-bottom: 4px solid red;
+}
+
+#live-resize-info-text {
+    color: red;
+    margin-left: 600px;
+}
+
+#live-mobile-info-text {
+    color: red;
+}
+
+.twitch-container {
+    position: relative;
+    /* height: 50%;
+    width: 50%; */
+    overflow: auto;
+    resize: both;
+}
+
+.container-home {
+    text-align: center;
+}
+
+#banner {
+    width: 90%;
+}
+
+
+
+ul {
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .list-group {
+      max-height: 380px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+  }
+  
+  .list-group-item {
+      overflow: hidden; 
+      word-wrap: break-word;
+  }
+
+#bg-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+}
+
+.bg-wrapper {
+    background-size: cover;
+    /*background-repeat: repeat-y;*/
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    -ms-content-zooming: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+
+
+.white {
+    color: white;
+    font-size: 1.2em;
+}
+
+
+
+
+
+@media only screen and (max-width: 1296px) {
+    #rosterTable, #playerTable {
+        width: 100%;
+    }
+    #roster, #playerTable {
+        width: 100%;
+        margin: 0px;
+    }
+    .mobileSpecificButton {
+        display: inline-block;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .report-issue {
+        display: none;
+    }
+
+    #chat-window {
+        width: 90%;
+    }
+
+    #chat-icon { 
+        width: 70px;
+        height: 75px;
+    }
+    .chat-icon-text {
+        display: none; 
+    }
+
+    .container-dashboard, .container-live {
+        margin-top: 0px;
+    }
+    .navbar {
+        margin-bottom: 0;
+    }
+    .navbar-header {
+        float: none;
+    }
+    .nav-item.nav-link {
+        text-align: center;
+        font-size: 40px;
+        padding-left: 15px;
+        padding-right: 15px;
+        display: block;
+    }
+    .panel-body {
+        text-align: center;
+    }
+    tr .playerPicContainer {
+        padding: 0;
+        min-height: 200px;
+    }
+    #rosterTable, #playerTable {
+        width: 100%;
+        font-size: 16px;
+    }
+    .playerPicContainerMinHeight {
+        min-height: 110px;
+    }
+    .playerNameMobile {
+        position: absolute;
+        top: 8px;
+        margin-left: -40px;
+        left: 50%;
+        width: 80px;
+    }
+    tr .teamContainerOut {
+        position: relative;
+        height: 100%;
+    }
+    tr .teamContainer {
+        position: absolute;
+        left: 50%;
+        margin-left: -35px;
+        width: 70px;
+        top: 50%;
+        margin-top: -50px;
+        height: 100px;
+    }
+    table {
+        table-layout: fixed;
+    }
+    #roster, #playerTable {
+        width: 100%;
+        margin: 0px;
+        font-size: 16px;
+    }
+    .dev-profile {
+        width: 100%;
+    }
+    .table.vertical-align.leaderboard>tbody>tr>td {
+        overflow: hidden;
+    }
+    .table.leaderboard>thead:first-child>tr:first-child>th {
+        font-size: 13px;
+        overflow: hidden;
+    }
+    .table.leaderboard>tbody>tr>td {
+        font-size: 12px;
+    }
+}
+
+.app {
+  background-color: azure;
+}
+
+
+.navbar {
+    background-color: black;
+    font-family: ovw-regular;
+    padding: 5px;
+    margin-bottom: 0;
+    border-bottom: solid 1px white;
+
+}
+
+
+.navbar-toggler-icon {
+    background-image: url('/images/hamburger.png');
+}
+
+.navbar-toggle {
+    margin: 0px;
+}
+
+.navbar-brand {
+    display: inline-block;
+    color: white;
+    padding-left: 40px;
+    font-size: 40px;
+}
+
+.navbar-toggler-icon {
+    color: white;
+}
+
+
+.navbar-nav {
+    padding-top: 7px;
+}
+
+
+.nav-item.nav-link {
+    font-family: ovw-italic;
+    font-size: 25px;
+    color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.nav-item.nav-link:hover {
+    color: #f99e1a;
+    text-decoration: none;
+}
+
+
+.about-text {
+    font-family: ovw-regular;
+    font-size: 30px;
+    text-align: center;
+}
+
+.dev-icon {
+    max-width: 100px;
+    border-radius: 50%;
+}
+
+.dev-profile {
+    margin-top: 20px;
+    text-align: center;
+    width: 50%;
+    float: left;
+}
+
+.logo-ovw {
+    position: absolute;
+    left: 10px;
+    top: 15px;
+}
+
+
+.nav-tabs {
+    text-align: center;
+}
+
+
+.nav-tabs>li, .nav-pills>li {
+    float: none;
+    display: inline-block;
+    *display: inline;
+    /* ie7 fix */
+}

@@ -1,0 +1,45 @@
+<html class="bg-wrapper dashboard-bg">
+<div class="container-login">
+    <div class="col-md-6 col-sm-12 col-xs-12 col-md-offset-3">
+        <div class="panel panel-default panel-transparent">
+            <div class="panel-heading">
+                <h3>Admin</h3>
+            </div>
+            <div class="panel-body">
+                <h2>Status: {{message}}</h2>
+                <br>
+                <br>
+                <br>
+                {{#if rosterLock}}
+                <form action="/admin/global/rosterLock/false">
+                    <input type="submit" value="Unlock Roster" />
+                </form>
+                <p style="color: red">Roster is locked.</p>
+                {{else}}
+                <form action="/admin/global/rosterLock/true">
+                    <input type="submit" value="Lock Roster" />
+                </form>
+                <p style="color: green">Roster is not locked.</p>
+                {{/if}}
+                <br>
+                <form action="/admin/fill/playerpics">
+                    <input type="submit" value="Retrieve/Refresh playerpics" />
+                </form>
+                <br>
+                <form action="/admin/fill/weights">
+                    <input type="submit" value="Seed Weights Table" /> 
+                </form>
+                <br>
+                <form action="/admin/fill/leaderboard">
+                    <input type="submit" value="Seed Leaderboards Table" />
+                </form>
+                <br>
+                <form action="/admin/fill/weekly_leaderboard">
+                    <input type="submit" value="Seed Weekly Leaderboards Table" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

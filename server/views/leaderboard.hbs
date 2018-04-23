@@ -1,0 +1,41 @@
+<html class="bg-wrapper leaderboard-bg">
+<div class="dashboard-nav-bar">
+    <a class="nav-item nav-link" href="/leaderboard_weekly">Global Weekly</a>
+    <a class="nav-item nav-link" href="/leaderboard">Global All-Time</a>
+</div>
+<div class="container-dashboard">
+    <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <div class="panel panel-default panel-transparent">
+            <div class="panel-heading">
+                <h3>GLOBAL LEADERBOARD</h3>
+            </div>
+            <div class="panel-body">
+                {{error}}
+                <table class="table table-hover table-striped vertical-align leaderboard">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 10%">#</th>
+                            <th scope="col" style="width: 15%">Points</th>
+                            <th scope="col" style="width: 25%">Username</th>
+                            <th scope="col" style="width: 50%">Roster</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each users}}
+                        <tr>
+                            <td scope="row">{{inc @index}}</td>
+                            <td>{{totalPoints}}</td>
+                            <td>{{username}}</td>
+                            <td class="leaderboard-roster-row">{{#each roster}}
+                                {{name}} <img width="20px" src="/images/{{#if jeff}}jeff_headshot/jeff{{else}}player_headshots/{{id}}{{/if}}.png"> |
+                                {{/each}}
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</html>

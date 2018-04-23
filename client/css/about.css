@@ -1,0 +1,18 @@
+
+.about-text {
+    font-family: ovw-regular;
+    font-size: 30px;
+    text-align: center;
+}
+
+.dev-icon {
+    max-width: 100px;
+    border-radius: 50%;
+}
+
+.dev-profile {
+    margin-top: 20px;
+    text-align: center;
+    width: 50%;
+    float: left;
+}

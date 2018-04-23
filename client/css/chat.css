@@ -1,0 +1,106 @@
+#chat-icon, #chat-window{ 
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+#chat-icon {
+    width: 200px;
+    height: 80px;
+    background: black;
+    border-radius: 20px;
+    padding-left: 5px;
+}
+.container-chat{
+    text-align:center;
+    display: block;
+}
+
+#chat-icon:hover{
+    cursor: pointer;
+}
+
+.chat-icon-text:hover {
+    color: #f99e1a;
+}
+
+#lucio-logo{
+    margin-top: 12px;
+    float: left;
+}
+
+.chat-icon-text {
+    font-family: ovw-regular;
+    background: black;
+    color:white; 
+    font-size: 40px;
+    padding-top:10px;
+    float: left;
+}
+
+#chat-window {
+    background: white;
+    width: 400px;
+    height: 500px;
+    border-radius: 10px;
+    flex: 1;
+    opacity: 0.95;
+}
+
+#chat-body {
+    opacity: 0.9; 
+}
+
+#chat-input {
+    background: white;
+    position: absolute;
+    bottom: 0px;
+    padding: 5px;
+    border-radius: 10px;
+    opacity: 1;
+}
+
+#chat-header {
+    background:black;
+    font-family: ovw-regular;
+    top:0px;
+    border-radius: 10px 10px 0px 0px;
+    display: inline-block;
+    width: 100%;
+}
+
+.chat-headline{
+    color: white; 
+    padding: 10px;
+    font-size: 35px;
+    margin: 0;
+    float: left;
+}
+
+#minimize-icon {
+    float: right;
+    display: block;
+    max-width: 60px;
+    border-radius: 10px 10px 0 0;
+}
+#minimize-icon:hover{
+    cursor: pointer;
+}
+
+
+
+ul {
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .list-group {
+      max-height: 380px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+  }
+  
+  .list-group-item {
+      overflow: hidden; 
+      word-wrap: break-word;
+  }

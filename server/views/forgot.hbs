@@ -1,0 +1,37 @@
+<html class="bg-wrapper signup-bg">
+    <div class="container-login">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default panel-transparent">
+                <div class="panel-heading">
+                    <h3>RESET PASSWORD </h3>
+                </div>
+                <div class="panel-body">
+                    {{#if message.error }}
+                    <div class="alert alert-danger">
+                        {{message.error}}
+                    </div>
+                    {{/if}}
+                    {{#if message.info }}
+                    <div class="alert alert-info">
+                        {{message.info}}
+                    </div>
+                    {{/if}}
+                    {{#if message.success }}
+                    <div class="alert alert-success">
+                        {{message.success}}
+                    </div>
+                    {{/if}}
+                    <form id="forgot" name="forgot" method="post" action="forgot">
+                        <div class="form-group">
+                            <label for="email">Send a Password Reset to your E-Mail</label>
+                            <input type="email" class="form-control" name="email" placeholder="Enter E-Mail" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg" id="btn-reset">Reset Password</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</html>

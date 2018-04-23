@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta name="description" content="Overwatch Fantasy League - Draft. Watch. Compete. Play." />
+	<link rel="icon" type="image/x-icon" href="/images/logos/favicon.ico">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.dev.js"></script>
+	<script> var loggedIn = {{ loggedIn }} </script>
+	<script src="/js/chat.js"></script>
+	<title>Overwatch Fantasy League</title>
+</head>
+
+<body>
+	<section role="navigation">
+		<nav class="navbar navbar-toggleable-sm fixed-top">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">
+					<img class="logo-ovw" src="/images/logos/light-logo.png" width="30" height="30" class="d-inline-block" alt="logo"> FANTASY LEAGUE</a>
+				<button class="navbar-toggle navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar-toggle" aria-controls="navbar-toggle"
+				 aria-expanded="false" aria-label="Toggle navigation">
+					<img style="height: 30px" src="/images/logos/threelines.png">
+				</button>
+			</div>
+
+			<div class="collapse navbar-collapse" id="navbar-toggle">
+				<div class="navbar-nav">
+					<a class="nav-item nav-link active" href="/news">News</a>
+					<a class="nav-item nav-link" href="/live">Live</a>
+					{{#if loggedIn }}
+					<a class="nav-item nav-link active" href="/dashboard">Dashboard</a>
+					{{/if}}
+					<a class="nav-item nav-link" href="/leaderboard_weekly">Leaderboards</a>
+					<a class="nav-item nav-link" href="/information">Information</a>
+					<a class="nav-item nav-link" href="/about">About Us</a>
+				</div>
+				<div class="navbar-nav navbar-right">
+					{{#if loggedIn }}
+					<a class="nav-item nav-link" href="/logout">Sign Out</a>
+					{{else}}
+					<a class="nav-item nav-link" href="/signin">Log In</a>
+					<a class="nav-item nav-link" href="/signup">Sign Up</a>
+					{{/if}}
+				</div>
+			</div>
+
+		</nav>
+
+	</section>
+	{{{ body }}} 
+	{{#if loggedIn }}
+
+	<div id="chat-icon">
+		<div class="container-chat">
+			<img id="lucio-logo" style="max-height: 50px;" src="/images/logos/lucio-logo.png">
+			<p class="chat-icon-text">JOIN CHAT </p>
+		</div>
+	</div>
+
+	<div id="chat-window" hidden=true>
+		<div id="chat-header">
+			<p class="chat-headline">chat</p>
+			<img id="minimize-icon" src="/images/logos/minimize-icon.png">
+		</div>
+		<div id="chat-body">
+			<ul class="list-group" id="chat-display">
+			</ul>
+		</div>
+		<div class="input-group" id="chat-input">
+			<input type="text" class="form-control" name="chat-message" id="messageToSend" data-username="{{username}}" />
+			<span class="input-group-btn">
+				<button class="btn btn-default" id="chat-send" type="button">Send</button>
+			</span>
+		</div>
+		{{/if}}
+	</div>
+</body>
+
+</html>

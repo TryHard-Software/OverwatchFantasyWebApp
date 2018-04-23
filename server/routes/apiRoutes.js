@@ -1,0 +1,18 @@
+var express = require("express");
+
+var apiController = require("../controllers/apiController.js");
+
+var apiRouter = express.Router();
+
+var router = function(app, passport) {
+
+    apiRouter.route('/updateRoster').post(apiController.updateRoster);
+
+    apiRouter.route('/updateChatHistory').post(apiController.updateChatHistory);
+
+    apiRouter.route('/getChatHistory').get(apiController.getChatHistory);
+
+    return apiRouter;
+};
+
+module.exports = router;

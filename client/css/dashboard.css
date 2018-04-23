@@ -1,0 +1,199 @@
+
+.container-dashboard{
+    margin-top: 20px;
+}
+
+.dashboard-nav-bar {
+    border-bottom: solid 1px white;
+    padding-left: 20px;
+}
+
+
+.roster-lock-message {
+    color: red;
+}
+
+.report-issue {
+    font-family: ovw-italic;
+    font-size: 20px;
+    float: right;
+    padding: 60px 10px 0px 10px; 
+}
+
+.report-issue:hover {
+    color: #f99e1a;
+    text-decoration: none; 
+    cursor: pointer;
+}
+
+.report-form {
+    padding: 10px;
+}
+
+.dashboard-header {
+    display: inline-block;
+    width: 100%;
+}
+.dash-header {
+    float: left;
+}
+
+.panel-heading {
+    z-index: 10;
+}
+
+
+
+.dashboard-nav-bar {
+    background-color: #405275;
+    border-radius:5px;
+}
+
+
+.tabs-linebreak:after {
+    content: " ";
+    display: block;
+    clear: both;
+}
+
+
+#roster, #playerTable {
+    text-align: center;
+    font-family: ovw-regular;
+    font-size: 22px;
+    width: 48%;
+    float: left;
+    margin: 10px;
+    text-align: center;
+}
+
+.table.vertical-align>tbody>tr>td {
+    vertical-align: middle;
+    border: 3px solid white;
+    height: 84px;
+}
+
+.table.vertical-align>thead>tr>th {
+    text-align: center;
+}
+
+.table>thead:first-child>tr:first-child>th {
+    border: 3px solid white;
+}
+
+tr .playerPic {
+    position: absolute;
+    bottom: 0px;
+    margin-left: -40px;
+    left: 50%;
+    width: 80px;
+}
+
+tr .playerPicContainer {
+    padding: 5px;
+    position: relative;
+    min-width: 100px;
+    overflow: hidden;
+}
+
+tr[role="offense"] {
+    background: rgba(250, 0, 0, 0.1);
+}
+
+tr[role="tank"] {
+    background: rgba(38, 0, 255, 0.1);
+}
+
+tr[role="support"] {
+    background: rgba(251, 255, 0, 0.1);
+}
+
+/* START SNACKBAR */
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+
+.toast {
+    visibility: hidden;
+    /* Hidden by default. Visible on click */
+    min-width: 250px;
+    /* Set a default minimum width */
+    margin-left: -125px;
+    /* Divide value of min-width by 2 */
+    background-color: #333;
+    /* Black background color */
+    color: #fff;
+    /* White text color */
+    text-align: center;
+    /* Centered text */
+    border-radius: 2px;
+    /* Rounded borders */
+    padding: 16px;
+    /* Padding */
+    position: fixed;
+    /* Sit on top of the screen */
+    z-index: 1;
+    /* Add a z-index if needed */
+    left: 50%;
+    /* Center the snackbar */
+    bottom: 30px;
+    /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+
+.toast.show {
+    visibility: visible;
+    /* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
+However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+
+@-webkit-keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+/* END SNACKBAR */

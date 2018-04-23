@@ -1,0 +1,274 @@
+<html class="bg-wrapper dashboard-bg">
+<div class="dashboard-nav-bar">
+    <a class="nav-item nav-link" href="/dashboard/roster">Global Roster</a>
+    <a class="nav-item nav-link" href="/dashboard/schedule">Schedule</a>
+</div>
+<div class="container-dashboard">
+    <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <div class="panel panel-default panel-transparent">
+            <div class="panel-heading">
+                <div class="dashboard-header">
+                    <h3 class="dash-header">Global Roster</h3>
+                    <a class="report-issue" data-toggle="modal" data-target="#report-ticket" id="report">Report an Issue</a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="roster">
+                    {{error}}
+                    <h4>Your Roster</h4>
+                    <div style="margin-bottom:10px;" class="mobileSpecificButton" hidden>
+                        <a href="#playerTable" class="button btn btn-primary">Add Players</a>
+                    </div>
+                    <p class="roster-lock-message" hidden>Roster is locked from Wednesday until Sunday</p>
+                    <p>Points: {{userTotalPoints}}</p>
+                    <p>Rank: {{rank}}</p>
+                    <table id="rosterTable" class="table table-bordered table-hover vertical-align">
+                        <thead>
+                            <tr>
+                                <th scope="col">Player</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Team</th>
+                                <th scope="col">Points</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        {{#each roster}} {{#if id}}
+                        <tr teamId={{teamId}} playerId={{id}} role={{role}}>
+                            <td class="playerPicContainer">
+                                <div class="playerPicContainerMinHeight">
+                                    <img class="playerPic" width="80px" src={{#if jeff}} "/images/jeff_headshot/jeff.png"{{else}}
+                                        "/images/player_headshots/{{id}}.png"{{/if}}>
+                                </div>
+                            </td>
+                            <td>
+                                <a>
+                                    <img src="/images/role_icons/{{role}}.png">
+                                    <br>{{name}}</a>
+                            </td>
+                            <td>
+                                <div class="teamContainerOut">
+                                    <div class="teamContainer">
+                                        <img width="40px" src="/images/team_icons/{{teamId}}.png">
+                                        <br>{{teamName}}</td>
+                            </div>
+                            </div>
+                            <td>{{totalPoints}}</td>
+                            <td>
+                                <button class="btn btn-danger move-button">
+                                    <span class='glyphicon glyphicon-minus'></span>
+                                </button>
+                            </td>
+                        </tr>
+                        {{else}}
+                        <tr class="emptyRosterSlot" role={{role}}>
+                            <td>
+                                <div class="playerPicContainerMinHeight"></div>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        {{/if}} {{/each}}
+                    </table>
+                </div>
+                <div id="playerTable">
+                    {{error}}
+                    <h4>Free Agents</h4>
+                    <div style="margin-bottom:10px;" class="mobileSpecificButton" hidden>
+                        <a href="#roster" class="button btn btn-primary">View Roster</a>
+                    </div>
+                    <p class="roster-lock-message" hidden>Roster is locked from Wednesday until Sunday</p>
+                    <ul class="nav nav-tabs">
+                        <li>
+                            <a class="filter" data-toggle="tab" value="all">
+                                <img width="40px" src="/images/logos/dark-logo.png">
+                            </a>
+                        </li>
+                        <li>
+                            <a class="filter" data-toggle="tab" value="offense">
+                                <img src="/images/role_icons/offense.png">
+                            </a>
+                        </li>
+                        <li>
+                            <a class="filter" data-toggle="tab" value="tank">
+                                <img src="/images/role_icons/tank.png">
+                            </a>
+                        </li>
+                        <li class="tabs-linebreak">
+                            <a class="filter" data-toggle="tab" value="support">
+                                <img src="/images/role_icons/support.png">
+                            </a>
+                        </li>
+                        <li>
+                            <a class="filter" data-toggle="tab" value=1>
+                                <img width="40px" src="/images/team_icons/1.png">
+                            </a>
+                        </li>
+                        <li>
+                            <a class="filter" data-toggle="tab" value=2>
+                                <img width="40px" src="/images/team_icons/2.png">
+                            </a>
+                        </li>
+                        <li>
+                            <a class="filter" data-toggle="tab" value=3>
+                                <img width="40px" src="/images/team_icons/3.png">
+                            </a>
+                        </li>
+                        <li>
+                            <a class="filter" data-toggle="tab" value=4>
+                                <img width="40px" src="/images/team_icons/4.png">
+                            </a>
+                        </li>
+                        <li>
+                            <a class="filter" data-toggle="tab" value=5>
+                                <img width="40px" src="/images/team_icons/5.png">
+                            </a>
+                        </li>
+                        <li>
+                            <a class="filter" data-toggle="tab" value=6>
+                                <img width="40px" src="/images/team_icons/6.png">
+                            </a>
+                        </li>
+                        <li>
+                            <a class="filter" data-toggle="tab" value=7>
+                                <img width="40px" src="/images/team_icons/7.png">
+                            </a>
+                        </li>
+                        <li>
+                            <a class="filter" data-toggle="tab" value=8>
+                                <img width="40px" src="/images/team_icons/8.png">
+                            </a>
+                        </li>
+                        <li>
+                            <a class="filter" data-toggle="tab" value=9>
+                                <img width="40px" src="/images/team_icons/9.png">
+                            </a>
+                        </li>
+                        <li>
+                            <a class="filter" data-toggle="tab" value=10>
+                                <img width="40px" src="/images/team_icons/10.png">
+                            </a>
+                        </li>
+                        <li>
+                            <a class="filter" data-toggle="tab" value=11>
+                                <img width="40px" src="/images/team_icons/11.png">
+                            </a>
+                        </li>
+                        <li>
+                            <a class="filter" data-toggle="tab" value=12>
+                                <img width="40px" src="/images/team_icons/12.png">
+                            </a>
+                        </li>
+                    </ul>
+
+                    <table id="agents-table" class="table table-bordered table-hover vertical-align">
+                        <thead>
+                            <tr>
+                                <th scope="col">Player</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Team</th>
+                                <th scope="col"> Points</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        {{#each players}}
+                        <tr teamId={{teamId}} playerId={{id}} role={{role}} class="playerRow">
+                            <td class="playerPicContainer">
+                                <div class="playerPicContainerMinHeight">
+                                    <img class="playerPic" width="80px" src={{#if jeff}} "/images/jeff_headshot/jeff.png"{{else}}
+                                        "/images/player_headshots/{{id}}.png"{{/if}}>
+                                </div>
+                            </td>
+                            <td>
+                                <a>
+                                    <img src="/images/role_icons/{{role}}.png">
+                                    <br> {{name}}</a>
+                            </td>
+                            <td>
+                                <div class="teamContainerOut">
+                                    <div class="teamContainer">
+                                        <img width="40px" src="/images/team_icons/{{teamId}}.png">
+                                        <br>{{teamName}}</td>
+                            </div>
+                            </div>
+                            <td class="pointCol">{{totalPoints}}</td>
+                            <td class="buttonCol">
+                                <button class="btn btn-primary move-button">
+                                    <span class='glyphicon glyphicon-plus'></span>
+                                </button>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="report-ticket" tabindex="-1" role="dialog" aria-labelledby="reportLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h2 id="reportLabel">
+                    Your Feedback is Important to us
+                </h2>
+            </div>
+            <form class="report-form" role="form" action="/sendreport" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="label-text" for="title">Title</label>
+                        <input type="text" class="form-control" name="title" id="report-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-text" for="description">Description</label>
+                        <textarea class="form-control" rows="10" name="message" id="report-message" placeholder="Tell us about an issue.." required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="send-report">
+                        Send Feedback
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirm-report" tabindex="-1" role="dialog" aria-labelledby="confirmLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div style="text-align: center; " class="icon-box">
+                    <img src="/images/hero_icons/dva.png">
+                    <h2 class="modal-title">Thank you! </h2>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p class="label-text">Your report has been successfully sent! </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</html>
+{{!-- {{ rosterLock is converted to bool from string here }} --}}
+<script>var rosterLock = {{ rosterLock }}</script>
+<script src="/js/roster.js"></script>

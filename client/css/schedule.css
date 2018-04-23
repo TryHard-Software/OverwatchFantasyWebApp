@@ -1,0 +1,221 @@
+
+/* schedule page */
+
+.match-stats {
+    margin: 10px;
+}
+
+.match-header {
+    clear: both;
+    overflow: hidden;
+    border: 3px solid white;
+}
+
+.matchheader-team-home {
+    float: left;
+    text-align: center;
+    margin-left: 10px;
+    width: 18%;
+}
+
+.matchheader-center {
+    float: center;
+    text-align: center;
+}
+
+.matchheader-team-away {
+    float: right;
+    text-align: center;
+    margin-right: 10px;
+    width: 18%;
+}
+
+.team-caption, .vs, .match-datetime, 
+.winOrLoss, .toggleStatsButton, 
+.map-caption, .map-winner-caption, 
+.match-details-caption, .map-header, 
+.table-match-detail, .team-detail-header {
+    font-family: ovw-regular;
+}
+
+.team-caption, .team-detail-header {
+    font-size: 25px;
+    padding: 10px;
+    margin: 0;
+    overflow: hidden;
+}
+
+.vs {
+    font-size: 60px;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.match-datetime, .map-caption, .map-header {
+    font-size: 20px;
+}
+
+.winOrLoss {
+    font-size: 60px;
+    padding: 20px;
+    margin: 20px;
+}
+
+.toggleStatsButton {
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.match-maps {
+    display: block;
+    overflow: hidden;
+}
+
+.map:first-child {
+    border-left: 3px solid white;
+}
+
+.map:last-child {
+    border-right: 3px solid white;
+}
+
+.map {
+    text-align: center;
+    width: 20%;
+    margin: 0;
+    padding: 5px;
+    float: left;
+    border-top: 0;
+    border-left: 1.5px solid white;
+    border-right: 1.5px solid white;
+    border-bottom: 3px solid white;
+}
+
+.map-image {
+    max-width: 140px;
+}
+
+
+.map-caption {
+    padding: 10px;
+    margin: 0;
+    height: 60px;
+}
+
+.map-winner-caption {
+    margin: 5px;
+    padding: 5px;
+}
+
+.match-details {
+    overflow: hidden;
+    clear: both;
+}
+
+.match-details-team {
+    width: 50%;
+    float: left;
+    overflow: hidden;
+    text-align: center;
+    border: 3px solid white;
+    margin: 0;
+}
+
+.match-details-caption {
+    font-size: 20px;
+}
+
+.red {
+    color: red;
+}
+
+.table-match-detail {
+    overflow: hidden;
+    margin: 0;
+}
+
+.match-table-header {
+    border: 3px solid white;
+}
+
+.team-name-header {
+    padding: 20px;
+}
+
+.table-match-detail {
+    border-top: 3px solid white;
+    border-bottom: 3px solid white;
+}
+
+.table-match-detail>thead>tr>th {
+    border: 3px solid white;
+    font-size: 20px;
+    text-align: center;
+    margin: 0;
+}
+
+.table-match-detail>tbody>tr>td {
+    border: 3px solid white;
+    margin: 0;
+}
+
+.table-match-detail>thead>tr>td{
+    border-top: 3px solid white;
+    border-bottom: 3px solid white;
+    border-left: 0;
+    border-right: 0;
+}
+
+.table-match-detail>tbody>tr>td {
+    font-size: 20px;
+    padding: 5px;
+    margin: 0;
+}
+
+ 
+.table-match-detail>thead>tr>th:first-child {
+    border-left: none;
+}
+.table-match-detail>thead>tr>th:last-child {
+    border-right: none;
+}
+.table-match-detail>tbody>tr>:first-child {
+    border-left: none;
+}
+.table-match-detail>tbody>tr>:last-child {
+    border-right: none;
+}
+
+.td-hero-image {
+    float:right;
+}
+
+.td-role {
+    max-width: 20px;
+}
+.playercaption {
+    margin: 0;
+    padding: 5px;
+}
+.herocaption{
+    float:right;
+    margin: 0;
+    padding-top: 3px;
+    padding-right: 5px;
+}
+
+th.th-name{
+    width: 36%;
+}
+th.th-hero{
+    width: 35%;
+}
+th.th-kills{
+    width: 7%;
+}
+th.th-deaths{
+    width: 7%;
+}
+th.th-points{
+    width: 15%;
+}

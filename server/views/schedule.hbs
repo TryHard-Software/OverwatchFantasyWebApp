@@ -1,0 +1,640 @@
+<script src="/js/schedule.js"></script>
+
+<html class="bg-wrapper dashboard-bg">
+<div class="dashboard-nav-bar">
+    <a class="nav-item nav-link" href="/dashboard/roster">Global Roster</a>
+    <a class="nav-item nav-link" style="color: #f99e1a;" href="/dashboard/schedule">Schedule</a>
+</div>
+<div class="container-dashboard">
+    <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <div class="panel panel-default panel-transparent">
+            <div class="panel-heading">
+                <div class="dashboard-header">
+                    <h3 class="dash-header">Schedule</h3>
+                    {{error}}
+                    <a class="report-issue" data-toggle="modal" data-target="#report-ticket" id="report">Report an Issue</a>
+                </div>
+            </div>
+            <div class="panel-body">
+                {{#each upcomingMatches}} {{/each}} {{#each previousMatches}}
+                <div class="match-stats">
+                    <div class="match-header">
+                        <div class="matchheader-team-home">
+                            <p class="team-caption">{{teamHomeName}}</p>
+                            <img class="home-team-image" width="100px" src="/images/team_icons/{{teamHomeId}}.png">
+                        </div>
+                        <div class="matchheader-team-home">
+                            <p class="winOrLoss"> {{winOrLoss winningTeamId teamHomeId}} </p>
+                        </div>
+                        <div class="matchheader-team-away">
+                            <p class="team-caption">{{teamAwayName}}</p>
+                            <img class="away-team-image" width="100px" src="/images/team_icons/{{teamAwayId}}.png">
+                        </div>
+                        <div class="matchheader-team-away">
+                            <p class="winOrLoss"> {{winOrLoss winningTeamId teamAwayId}} </p>
+                        </div>
+                        <div class="matchheader-center">
+                            <p class="vs">VS</p>
+                            <p class="match-datetime">{{formatDate datetime}}</p>
+                        </div>
+                    </div>
+                    <div class="match-maps">
+                        <div class="map">
+                            <p class="map-header">{{map1Name}}</p>
+                            <img class="map-image" src="/images/maps/{{map1Id}}.png">
+                            <p class="map-caption">Winner:
+                                <img class="winning-team-image" width="40px" src="/images/team_icons/{{map1WinnerId}}.png"> </p>
+                            <button class="btn btn-primary toggleStatsButton" data-id="{{id}}" data-map="1">Stats </button>
+                        </div>
+
+                        <div class="map">
+                            <p class="map-header">{{map2Name}}</p>
+                            <img class="map-image" src="/images/maps/{{map2Id}}.png">
+                            <p class="map-caption">Winner:
+                                <img class="winning-team-image" width="40px" src="/images/team_icons/{{map2WinnerId}}.png"> </p>
+                            <button class="btn btn-primary toggleStatsButton" data-id="{{id}}" data-map="2">Stats </button>
+                        </div>
+
+                        <div class="map">
+                            <p class="map-header">{{map3Name}}</p>
+                            <img class="map-image" src="/images/maps/{{map3Id}}.png">
+                            <p class="map-caption">Winner:
+                                <img class="winning-team-image" width="40px" src="/images/team_icons/{{map3WinnerId}}.png"> </p>
+                            <button class="btn btn-primary toggleStatsButton" data-id="{{id}}" data-map="3">Stats </button>
+                        </div>
+                        <div class="map">
+                            <p class="map-header">{{map4Name}}</p>
+                            <img class="map-image" src="/images/maps/{{map4Id}}.png">
+                            <p class="map-caption">Winner:
+                                <img class="winning-team-image" width="40px" src="/images/team_icons/{{map4WinnerId}}.png"> </p>
+                            <button class="btn btn-primary toggleStatsButton" data-id="{{id}}" data-map="4">Stats </button>
+                        </div>
+                        <div class="map">
+                            <p class="map-header">{{map5Name}}</p>
+                            <img class="map-image" src="/images/maps/{{map5Id}}.png"> {{#if map5WinnerId }}
+                            <p class="map-caption">Winner:
+                                <img class="winning-team-image" width="40px" src="/images/team_icons/{{map5WinnerId}}.png"> </p>
+                            {{else }}
+
+                            <p class="map-caption">Not Played </p>
+                            {{/if}}
+                            <button class="btn btn-primary toggleStatsButton" data-id="{{id}}" data-map="5">Stats </button>
+                        </div>
+
+                    </div>
+                    <div class="match-details">
+                        <div class="match_{{id}}" id="match_{{id}}_map_1" hidden>
+                            <div class="match-details-team">
+                                <table class="table table-hover table-match-detail">
+                                    <thead>
+                                        <tr class="match-table-header">
+                                            <p class="team-detail-header">{{teamHomeName}}</p>
+                                        </tr>
+                                        <tr>
+                                            <th class="th-name" scope="col">Name</th>
+                                            <th class="th-hero" scope="col">Hero</th>
+                                            <th class="th-kills" scope="col">Kills</th>
+                                            <th class="th-deaths" scope="col">Deaths</th>
+                                            <th class="th-points" scope="col">Points</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#if noData}}
+                                        <tr>
+                                                <p class="team-caption">No data have been updated yet for this match. </p>
+                                            </tr>
+                                            {{else}} {{#each playerMatches.homeTeam.map1}}
+                                            <tr>
+                                                <td style="padding: 0">
+                                                    <p class="playercaption">{{playerName}}
+                                                        <img class="td-role" src="/images/role_icons/{{role}}.png">
+                                                    </p>
+                                                </td>
+                                                <td class="hero-cell" style="padding: 0">
+
+                                                    <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
+                                                    <p class="herocaption">{{heroName}}</p>
+                                                </td>
+                                                <td> {{kills}} </td>
+                                                <td>{{deaths}}</td>
+                                                <td>
+                                                    {{#if userHas}}
+                                                    <span class="red">{{points}}</span>
+                                                    {{else}} {{points}} {{/if}}
+                                                </td>
+                                            </tr>
+                                            {{/each}}
+                                            {{/if}}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div class="match-details-team">
+                                <table class="table table-hover table-bordered table-match-detail">
+                                    <thead>
+                                        <tr class="match-table-header">
+                                            <p class="team-detail-header">{{teamAwayName}}</p>
+                                        </tr>
+                                        <tr>
+                                            <th class="th-name" scope="col">Name</th>
+                                            <th class="th-hero" scope="col">Hero</th>
+                                            <th class="th-kills" scope="col">Kills</th>
+                                            <th class="th-deaths" scope="col">Deaths</th>
+                                            <th class="th-points" scope="col">Points</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#if noData}}
+                                        <tr>
+                                            <td>
+                                                <p class="team-caption">No data have been updated yet for this match. </p>
+                                            </td>
+                                        {{else}}
+                                        {{#each playerMatches.awayTeam.map1}}
+                                        <tr>
+                                            <td style="padding: 0">
+                                                <p class="playercaption">{{playerName}}
+                                                    <img class="td-role" src="/images/role_icons/{{role}}.png">
+                                                </p>
+
+                                            </td>
+                                            <td class="hero-cell" style="padding: 0">
+                                                <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
+                                                <p class="herocaption">{{heroName}}
+                                                </p>
+
+                                            </td>
+                                            <td> {{kills}} </td>
+                                            <td>{{deaths}}</td>
+                                            <td>
+                                                {{#if userHas}}
+                                                <span class="red">{{points}}</span>
+                                                {{else}} {{points}} {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                        {{/if}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="match_{{id}}" id="match_{{id}}_map_2" hidden>
+                            <div class="match-details-team">
+                                <table class="table table-hover table-match-detail">
+                                    <thead>
+                                        <tr class="match-table-header">
+                                            <p class="team-detail-header">{{teamHomeName}}</p>
+                                        </tr>
+                                        <tr>
+                                            <th class="th-name" scope="col">Name</th>
+                                            <th class="th-hero" scope="col">Hero</th>
+                                            <th class="th-kills" scope="col">Kills</th>
+                                            <th class="th-deaths" scope="col">Deaths</th>
+                                            <th class="th-points" scope="col">Points</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#if noData}}
+                                        <tr>
+                                            <td>
+                                                <p class="team-caption">No data have been updated yet for this match. </p>
+                                            </td>
+                                            {{else}}
+                                        {{#each playerMatches.homeTeam.map2}}
+                                        <tr>
+                                            <td style="padding: 0">
+                                                <p class="playercaption">{{playerName}}
+                                                    <img class="td-role" src="/images/role_icons/{{role}}.png">
+                                                </p>
+                                            </td>
+                                            <td class="hero-cell" style="padding: 0">
+
+                                                <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
+                                                <p class="herocaption">{{heroName}}</p>
+                                            </td>
+                                            <td> {{kills}} </td>
+                                            <td>{{deaths}}</td>
+                                            <td>
+                                                {{#if userHas}}
+                                                <span class="red">{{points}}</span>
+                                                {{else}} {{points}} {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                        {{/if}}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div class="match-details-team">
+                                <table class="table table-hover table-bordered table-match-detail">
+                                    <thead>
+                                        <tr class="match-table-header">
+                                            <p class="team-detail-header">{{teamAwayName}}</p>
+                                        </tr>
+                                        <tr>
+                                            <th class="th-name" scope="col">Name</th>
+                                            <th class="th-hero" scope="col">Hero</th>
+                                            <th class="th-kills" scope="col">Kills</th>
+                                            <th class="th-deaths" scope="col">Deaths</th>
+                                            <th class="th-points" scope="col">Points</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#if noData}}
+                                        <tr>
+                                            <td>
+                                                <p class="team-caption">No data have been updated yet for this match. </p>
+                                            </td>
+                                            {{else}}
+                                        {{#each playerMatches.awayTeam.map2}}
+                                        <tr>
+                                            <td style="padding: 0">
+                                                <p class="playercaption">{{playerName}}
+                                                    <img class="td-role" src="/images/role_icons/{{role}}.png">
+                                                </p>
+
+                                            </td>
+                                            <td class="hero-cell" style="padding: 0">
+                                                <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
+                                                <p class="herocaption">{{heroName}}
+                                                </p>
+
+                                            </td>
+                                            <td> {{kills}} </td>
+                                            <td>{{deaths}}</td>
+                                            <td>
+                                                {{#if userHas}}
+                                                <span class="red">{{points}}</span>
+                                                {{else}} {{points}} {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                        {{/if}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="match_{{id}}" id="match_{{id}}_map_3" hidden>
+                            <div class="match-details-team">
+                                <table class="table table-hover table-match-detail">
+                                    <thead>
+                                        <tr class="match-table-header">
+                                            <p class="team-detail-header">{{teamHomeName}}</p>
+                                        </tr>
+                                        <tr>
+                                            <th class="th-name" scope="col">Name</th>
+                                            <th class="th-hero" scope="col">Hero</th>
+                                            <th class="th-kills" scope="col">Kills</th>
+                                            <th class="th-deaths" scope="col">Deaths</th>
+                                            <th class="th-points" scope="col">Points</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#if noData}}
+                                        <tr>
+                                            <td>
+                                                <p class="team-caption">No data have been updated yet for this match. </p>
+                                            </td>
+                                            {{else}}
+                                        {{#each playerMatches.homeTeam.map3}}
+                                        <tr>
+                                            <td style="padding: 0">
+                                                <p class="playercaption">{{playerName}}
+                                                    <img class="td-role" src="/images/role_icons/{{role}}.png">
+                                                </p>
+                                            </td>
+                                            <td class="hero-cell" style="padding: 0">
+
+                                                <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
+                                                <p class="herocaption">{{heroName}}</p>
+                                            </td>
+                                            <td> {{kills}} </td>
+                                            <td>{{deaths}}</td>
+                                            <td>
+                                                {{#if userHas}}
+                                                <span class="red">{{points}}</span>
+                                                {{else}} {{points}} {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                        {{/if}}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div class="match-details-team">
+                                <table class="table table-hover table-bordered table-match-detail">
+                                    <thead>
+                                        <tr class="match-table-header">
+                                            <p class="team-detail-header">{{teamAwayName}}</p>
+                                        </tr>
+                                        <tr>
+                                            <th class="th-name" scope="col">Name</th>
+                                            <th class="th-hero" scope="col">Hero</th>
+                                            <th class="th-kills" scope="col">Kills</th>
+                                            <th class="th-deaths" scope="col">Deaths</th>
+                                            <th class="th-points" scope="col">Points</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#if noData}}
+                                        <tr>
+                                            <td>
+                                                <p class="team-caption">No data have been updated yet for this match. </p>
+                                            </td>
+                                        {{else}}
+                                        {{#each playerMatches.awayTeam.map3}}
+                                        <tr>
+                                            <td style="padding: 0">
+                                                <p class="playercaption">{{playerName}}
+                                                    <img class="td-role" src="/images/role_icons/{{role}}.png">
+                                                </p>
+
+                                            </td>
+                                            <td class="hero-cell" style="padding: 0">
+                                                <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
+                                                <p class="herocaption">{{heroName}}
+                                                </p>
+
+                                            </td>
+                                            <td> {{kills}} </td>
+                                            <td>{{deaths}}</td>
+                                            <td>
+                                                {{#if userHas}}
+                                                <span class="red">{{points}}</span>
+                                                {{else}} {{points}} {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                        {{/if}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="match_{{id}}" id="match_{{id}}_map_4" hidden>
+                            <div class="match-details-team">
+                                <table class="table table-hover table-match-detail">
+                                    <thead>
+                                        <tr class="match-table-header">
+                                            <p class="team-detail-header">{{teamHomeName}}</p>
+                                        </tr>
+                                        <tr>
+                                            <th class="th-name" scope="col">Name</th>
+                                            <th class="th-hero" scope="col">Hero</th>
+                                            <th class="th-kills" scope="col">Kills</th>
+                                            <th class="th-deaths" scope="col">Deaths</th>
+                                            <th class="th-points" scope="col">Points</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#if noData}}
+                                        <tr>
+                                            <td>
+                                                <p class="team-caption">No data have been updated yet for this match. </p>
+                                            </td>
+                                            {{else}}
+                                        {{#each playerMatches.homeTeam.map4}}
+                                        <tr>
+                                            <td style="padding: 0">
+                                                <p class="playercaption">{{playerName}}
+                                                    <img class="td-role" src="/images/role_icons/{{role}}.png">
+                                                </p>
+                                            </td>
+                                            <td class="hero-cell" style="padding: 0">
+
+                                                <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
+                                                <p class="herocaption">{{heroName}}</p>
+                                            </td>
+                                            <td> {{kills}} </td>
+                                            <td>{{deaths}}</td>
+                                            <td>
+                                                {{#if userHas}}
+                                                <span class="red">{{points}}</span>
+                                                {{else}} {{points}} {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                        {{/if}}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div class="match-details-team">
+                                <table class="table table-hover table-bordered table-match-detail">
+                                    <thead>
+                                        <tr class="match-table-header">
+                                            <p class="team-detail-header">{{teamAwayName}}</p>
+                                        </tr>
+                                        <tr>
+                                            <th class="th-name" scope="col">Name</th>
+                                            <th class="th-hero" scope="col">Hero</th>
+                                            <th class="th-kills" scope="col">Kills</th>
+                                            <th class="th-deaths" scope="col">Deaths</th>
+                                            <th class="th-points" scope="col">Points</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#if noData}}
+                                        <tr>
+                                            <td>
+                                                <p class="team-caption">No data have been updated yet for this match. </p>
+                                            </td>
+                                            {{else}}
+                                        {{#each playerMatches.awayTeam.map4}}
+                                        <tr>
+                                            <td style="padding: 0">
+                                                <p class="playercaption">{{playerName}}
+                                                    <img class="td-role" src="/images/role_icons/{{role}}.png">
+                                                </p>
+
+                                            </td>
+                                            <td class="hero-cell" style="padding: 0">
+                                                <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
+                                                <p class="herocaption">{{heroName}}
+                                                </p>
+
+                                            </td>
+                                            <td> {{kills}} </td>
+                                            <td>{{deaths}}</td>
+                                            <td>
+                                                {{#if userHas}}
+                                                <span class="red">{{points}}</span>
+                                                {{else}} {{points}} {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                        {{/if}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="match_{{id}}" id="match_{{id}}_map_5" hidden>
+                            <div class="match-details-team">
+                                <table class="table table-hover table-match-detail">
+                                    <thead>
+                                        <tr class="match-table-header">
+                                            <p class="team-detail-header">{{teamHomeName}}</p>
+                                        </tr>
+                                        <tr>
+                                            <th class="th-name" scope="col">Name</th>
+                                            <th class="th-hero" scope="col">Hero</th>
+                                            <th class="th-kills" scope="col">Kills</th>
+                                            <th class="th-deaths" scope="col">Deaths</th>
+                                            <th class="th-points" scope="col">Points</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#if noData}}
+                                        <tr>
+                                            <td>
+                                                <p class="team-caption">No data have been updated yet for this match. </p>
+                                            </td>
+                                            {{else}}
+                                        {{#each playerMatches.homeTeam.map5}}
+                                        <tr>
+                                            <td style="padding: 0">
+                                                <p class="playercaption">{{playerName}}
+                                                    <img class="td-role" src="/images/role_icons/{{role}}.png">
+                                                </p>
+                                            </td>
+                                            <td class="hero-cell" style="padding: 0">
+
+                                                <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
+                                                <p class="herocaption">{{heroName}}</p>
+                                            </td>
+                                            <td> {{kills}} </td>
+                                            <td>{{deaths}}</td>
+                                            <td>
+                                                {{#if userHas}}
+                                                <span class="red">{{points}}</span>
+                                                {{else}} {{points}} {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                        {{/if}}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div class="match-details-team">
+                                <table class="table table-hover table-bordered table-match-detail">
+                                    <thead>
+                                        <tr class="match-table-header">
+                                            <p class="team-detail-header">{{teamAwayName}}</p>
+                                        </tr>
+                                        <tr>
+                                            <th class="th-name" scope="col">Name</th>
+                                            <th class="th-hero" scope="col">Hero</th>
+                                            <th class="th-kills" scope="col">Kills</th>
+                                            <th class="th-deaths" scope="col">Deaths</th>
+                                            <th class="th-points" scope="col">Points</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#if noData}}
+                                        <tr>
+                                            <td>
+                                                <p class="team-caption">No data have been updated yet for this match. </p>
+                                            </td>
+                                            {{else}}
+                                        {{#each playerMatches.awayTeam.map5}}
+                                        <tr>
+                                            <td style="padding: 0">
+                                                <p class="playercaption">{{playerName}}
+                                                    <img class="td-role" src="/images/role_icons/{{role}}.png">
+                                                </p>
+
+                                            </td>
+                                            <td class="hero-cell" style="padding: 0">
+                                                <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
+                                                <p class="herocaption">{{heroName}}
+                                                </p>
+
+                                            </td>
+                                            <td> {{kills}} </td>
+                                            <td>{{deaths}}</td>
+                                            <td>
+                                                {{#if userHas}}
+                                                <span class="red">{{points}}</span>
+                                                {{else}} {{points}} {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                        {{/if}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="report-ticket" tabindex="-1" role="dialog" aria-labelledby="reportLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h2 id="reportLabel">
+                    Your Feedback is Important to us
+                </h2>
+            </div>
+            <form class="report-form" role="form" action="/sendreport" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="label-text" for="title">Title</label>
+                        <input type="text" class="form-control" name="title" id="report-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-text" for="description">Description</label>
+                        <textarea class="form-control" rows="10" name="message" id="report-message" placeholder="Tell us about an issue.." required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="send-report">
+                        Send Feedback
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirm-report" tabindex="-1" role="dialog" aria-labelledby="confirmLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div style="text-align: center; " class="icon-box">
+                    <img src="/images/hero_icons/dva.png">
+                    <h2 class="modal-title">Thank you! </h2>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p class="label-text">Your report has been successfully sent! </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</html>
