@@ -75,15 +75,18 @@ function schedule(req, res) {
                                 var matchesMap = new Map();
                                 for (var m = 0; m < matches.length; m++) {
                                     var match = matches[m];
-                                    console.log(match.match_datetime < now);
-
                                     var teamAwayId = match.team_away;
                                     var teamHomeId = match.team_home;
                                     var map1WinnerId = match.map1_winner;
+                                    if (map1WinnerId == 0) map1WinnerId = "tie";
                                     var map2WinnerId = match.map2_winner;
+                                    if (map2WinnerId == 0) map2WinnerId = "tie";
                                     var map3WinnerId = match.map3_winner;
+                                    if (map3WinnerId == 0) map3WinnerId = "tie";
                                     var map4WinnerId = match.map4_winner;
+                                    if (map4WinnerId == 0) map4WinnerId = "tie";
                                     var map5WinnerId = match.map5_winner;
+                                    if (map5WinnerId == 0) map5WinnerId = "tie";
                                     var map1Id = match.map1;
                                     var map2Id = match.map2;
                                     var map3Id = match.map3;
@@ -91,11 +94,11 @@ function schedule(req, res) {
                                     var map5Id = match.map5 ? match.map5 : 99;
                                     var awayTeamName = teams.get(teamAwayId) ? teams.get(teamAwayId).name : "None";
                                     var homeTeamName = teams.get(teamHomeId) ? teams.get(teamHomeId).name : "None";
-                                    var map1WinnerName = teams.get(map1WinnerId) ? teams.get(map1WinnerId).name : "None";
-                                    var map2WinnerName = teams.get(map2WinnerId) ? teams.get(map2WinnerId).name : "None";
-                                    var map3WinnerName = teams.get(map3WinnerId) ? teams.get(map3WinnerId).name : "None";
-                                    var map4WinnerName = teams.get(map4WinnerId) ? teams.get(map4WinnerId).name : "None";
-                                    var map5WinnerName = teams.get(map5WinnerId) ? teams.get(map5WinnerId).name : "N/A";
+                                    // var map1WinnerName = teams.get(map1WinnerId) ? teams.get(map1WinnerId).name : "None";
+                                    // var map2WinnerName = teams.get(map2WinnerId) ? teams.get(map2WinnerId).name : "None";
+                                    // var map3WinnerName = teams.get(map3WinnerId) ? teams.get(map3WinnerId).name : "None";
+                                    // var map4WinnerName = teams.get(map4WinnerId) ? teams.get(map4WinnerId).name : "None";
+                                    // var map5WinnerName = teams.get(map5WinnerId) ? teams.get(map5WinnerId).name : "N/A";
                                     var map1Name = maps.get(map1Id) ? maps.get(map1Id).name : "None";
                                     var map2Name = maps.get(map2Id) ? maps.get(map2Id).name : "None";
                                     var map3Name = maps.get(map3Id) ? maps.get(map3Id).name : "None";
@@ -134,11 +137,11 @@ function schedule(req, res) {
                                         map3WinnerId: map3WinnerId,
                                         map4WinnerId: map4WinnerId,
                                         map5WinnerId: map5WinnerId,
-                                        map1WinnerName: map1WinnerName,
-                                        map2WinnerName: map2WinnerName,
-                                        map3WinnerName: map3WinnerName,
-                                        map4WinnerName: map4WinnerName,
-                                        map5WinnerName: map5WinnerName,
+                                        // map1WinnerName: map1WinnerName,
+                                        // map2WinnerName: map2WinnerName,
+                                        // map3WinnerName: map3WinnerName,
+                                        // map4WinnerName: map4WinnerName,
+                                        // map5WinnerName: map5WinnerName,
                                         winningTeamId: winningTeamId,
                                         playerMatches: {
                                             homeTeam: {
