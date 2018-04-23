@@ -129,6 +129,14 @@
     color: red;
 }
 
+.transparent-team-image {
+    opacity: 0.12;
+    width: 80%;
+    position: absolute;
+    top: 60px;
+    left: 10%;
+}
+
 .table-match-detail {
     overflow: hidden;
     margin: 0;
