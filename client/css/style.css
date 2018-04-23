@@ -154,7 +154,10 @@ a:hover {
         display: block;
     }
     .panel-body {
-        text-align: center;
+        padding: 5px;
+    }
+    .match-stats-detail, .roster-detail {
+        padding: 0px;
     }
     tr .playerPicContainer {
         padding: 0;
@@ -187,8 +190,9 @@ a:hover {
         margin-top: -50px;
         height: 100px;
     }
-    table {
-        table-layout: fixed;
+    
+    table#rosterTable, table#agents-table {
+        table-layout: fixed; 
     }
     #roster, #playerTable {
         width: 100%;
@@ -208,4 +212,85 @@ a:hover {
     .table.leaderboard>tbody>tr>td {
         font-size: 12px;
     }
+    
+    .home-team-image, .away-team-image {
+        max-width: 50px;
+        margin-top: 10px;
+    }
+    .team-caption, .map-header {
+        display: none;
+    }
+    .vs, .winOrLoss, .match-datetime, .map-caption {
+        font-size: 16px;
+    }
+    .match-stats {
+        margin: 10px 0 10px 0;
+    }
+    .map {
+        padding: 0;
+    }
+    .map-caption {
+        padding: 0;
+        height: 60px;
+    }
+    .winning-team-image {
+        max-width: 30px;
+    }
+    .winOrLoss {
+        margin: 20px 0 0 0;
+        padding: 0;
+    }
+    .vs {
+        margin-bottom: 5px;
+    }
+    .match-datetime {
+        margin: 0;
+        padding: 0;
+    }
+    .map-image {
+        max-width: 100%;
+    }
+    .toggleStatsButton {
+        font-size: 16px;
+        margin-bottom: 5px;
+        width: 80%;
+        padding: 3px;
+    }
+    .match-details-team {
+        width: 100%;
+    }
+    .table-match-detail {
+        font-size: 16px;
+    }
+    .td-role {
+        margin: auto;
+        max-width: 20px;
+    }
+    .td-hero-image {
+        margin: auto;
+        max-width: 30px;
+    }
+
+    .table-match-detail>thead>tr>th {
+        font-size: 16px;
+        overflow: hidden;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .table-match-detail>tbody>tr>td {
+        font-size: 16px;
+        vertical-align: middle;
+    }
+    .playercaption, .herocaption {
+        font-size: 12px;
+        margin: 0; 
+    }
+    .herocaption {
+       padding: 5px 0 0 5px;
+    }
+   
+    td.hero-cell {
+        padding: 0;
+    }
+
 }
