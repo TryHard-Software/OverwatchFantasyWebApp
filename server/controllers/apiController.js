@@ -100,10 +100,10 @@ function updateRoster(req, res) {
                                 }
                                 // else update the current entry
                                 else {
-                                    insertObj = {
+                                    var insertObj = {
                                         player_id: roster[r]
                                     };
-                                    constraintObj = {
+                                    var constraintObj = {
                                         user_id: req.user.id,
                                         position: r
                                     };
