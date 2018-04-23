@@ -292,7 +292,7 @@ function schedule(req, res) {
                                 
                                 // for testing
 
-                                previousMatches.length = 15;
+                                //previousMatches.length = 15;
                                 // sort upcomingMatches by earliest date first
                                 upcomingMatches.sort(function (a, b) {
                                     return new Date(b.datetime) + new Date(a.datetime);
