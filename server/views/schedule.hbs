@@ -85,19 +85,29 @@
                     <div class="match-details">
                         {{#if noData}}
                         <div class="match_{{id}}" id="match_{{id}}_map_1" hidden>
-                        <p class="team-caption">Please check back later for stats</p>
+                            <div class="match-details-team" style="width: 100%">
+                                <p class="team-caption">Please check back later for stats</p>
+                            </div>
                         </div>
                         <div class="match_{{id}}" id="match_{{id}}_map_2" hidden>
-                        <p class="team-caption">Please check back later for stats</p>
+                            <div class="match-details-team" style="width: 100%">
+                                <p class="team-caption">Please check back later for stats</p>
+                            </div>
                         </div>
                         <div class="match_{{id}}" id="match_{{id}}_map_3" hidden>
-                        <p class="team-caption">Please check back later for stats</p>
+                            <div class="match-details-team" style="width: 100%">
+                                <p class="team-caption">Please check back later for stats</p>
+                            </div>
                         </div>
                         <div class="match_{{id}}" id="match_{{id}}_map_4" hidden>
-                        <p class="team-caption">Please check back later for stats</p>
+                            <div class="match-details-team" style="width: 100%">
+                                <p class="team-caption">Please check back later for stats</p>
+                            </div>
                         </div>
                         <div class="match_{{id}}" id="match_{{id}}_map_5" hidden>
-                        <p class="team-caption">Please check back later for stats</p>
+                            <div class="match-details-team" style="width: 100%">
+                                <p class="team-caption">Please check back later for stats</p>
+                            </div>
                         </div>
                         {{else}}
                         <div class="match_{{id}}" id="match_{{id}}_map_1" hidden>
@@ -200,27 +210,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                         {{#each playerMatches.homeTeam.map2}}
-                                            <tr>
-                                                <td style="padding: 0">
-                                                    <p class="playercaption">{{playerName}}
-                                                        <img class="td-role" src="/images/role_icons/{{role}}.png">
-                                                    </p>
-                                                </td>
-                                                <td class="hero-cell" style="padding: 0">
+                                        {{#each playerMatches.homeTeam.map2}}
+                                        <tr>
+                                            <td style="padding: 0">
+                                                <p class="playercaption">{{playerName}}
+                                                    <img class="td-role" src="/images/role_icons/{{role}}.png">
+                                                </p>
+                                            </td>
+                                            <td class="hero-cell" style="padding: 0">
 
-                                                    <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
-                                                    <p class="herocaption">{{heroName}}</p>
-                                                </td>
-                                                <td> {{kills}} </td>
-                                                <td>{{deaths}}</td>
-                                                <td>
-                                                    {{#if userHas}}
-                                                    <span class="red">{{points}}</span>
-                                                    {{else}} {{points}} {{/if}}
-                                                </td>
-                                            </tr>
-                                            {{/each}}
+                                                <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
+                                                <p class="herocaption">{{heroName}}</p>
+                                            </td>
+                                            <td> {{kills}} </td>
+                                            <td>{{deaths}}</td>
+                                            <td>
+                                                {{#if userHas}}
+                                                <span class="red">{{points}}</span>
+                                                {{else}} {{points}} {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
                                     </tbody>
                                 </table>
 
@@ -240,28 +250,28 @@
                                         </tr>
                                     </thead>
                                     <tbody> {{#each playerMatches.awayTeam.map2}}
-                                            <tr>
-                                                <td style="padding: 0">
-                                                    <p class="playercaption">{{playerName}}
-                                                        <img class="td-role" src="/images/role_icons/{{role}}.png">
-                                                    </p>
+                                        <tr>
+                                            <td style="padding: 0">
+                                                <p class="playercaption">{{playerName}}
+                                                    <img class="td-role" src="/images/role_icons/{{role}}.png">
+                                                </p>
 
-                                                </td>
-                                                <td class="hero-cell" style="padding: 0">
-                                                    <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
-                                                    <p class="herocaption">{{heroName}}
-                                                    </p>
+                                            </td>
+                                            <td class="hero-cell" style="padding: 0">
+                                                <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
+                                                <p class="herocaption">{{heroName}}
+                                                </p>
 
-                                                </td>
-                                                <td> {{kills}} </td>
-                                                <td>{{deaths}}</td>
-                                                <td>
-                                                    {{#if userHas}}
-                                                    <span class="red">{{points}}</span>
-                                                    {{else}} {{points}} {{/if}}
-                                                </td>
-                                            </tr>
-                                            {{/each}}
+                                            </td>
+                                            <td> {{kills}} </td>
+                                            <td>{{deaths}}</td>
+                                            <td>
+                                                {{#if userHas}}
+                                                <span class="red">{{points}}</span>
+                                                {{else}} {{points}} {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
                                     </tbody>
                                 </table>
                             </div>
@@ -283,27 +293,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                         {{#each playerMatches.homeTeam.map3}}
-                                            <tr>
-                                                <td style="padding: 0">
-                                                    <p class="playercaption">{{playerName}}
-                                                        <img class="td-role" src="/images/role_icons/{{role}}.png">
-                                                    </p>
-                                                </td>
-                                                <td class="hero-cell" style="padding: 0">
+                                        {{#each playerMatches.homeTeam.map3}}
+                                        <tr>
+                                            <td style="padding: 0">
+                                                <p class="playercaption">{{playerName}}
+                                                    <img class="td-role" src="/images/role_icons/{{role}}.png">
+                                                </p>
+                                            </td>
+                                            <td class="hero-cell" style="padding: 0">
 
-                                                    <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
-                                                    <p class="herocaption">{{heroName}}</p>
-                                                </td>
-                                                <td> {{kills}} </td>
-                                                <td>{{deaths}}</td>
-                                                <td>
-                                                    {{#if userHas}}
-                                                    <span class="red">{{points}}</span>
-                                                    {{else}} {{points}} {{/if}}
-                                                </td>
-                                            </tr>
-                                            {{/each}} 
+                                                <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
+                                                <p class="herocaption">{{heroName}}</p>
+                                            </td>
+                                            <td> {{kills}} </td>
+                                            <td>{{deaths}}</td>
+                                            <td>
+                                                {{#if userHas}}
+                                                <span class="red">{{points}}</span>
+                                                {{else}} {{points}} {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
                                     </tbody>
                                 </table>
 
@@ -323,28 +333,28 @@
                                         </tr>
                                     </thead>
                                     <tbody> {{#each playerMatches.awayTeam.map3}}
-                                            <tr>
-                                                <td style="padding: 0">
-                                                    <p class="playercaption">{{playerName}}
-                                                        <img class="td-role" src="/images/role_icons/{{role}}.png">
-                                                    </p>
+                                        <tr>
+                                            <td style="padding: 0">
+                                                <p class="playercaption">{{playerName}}
+                                                    <img class="td-role" src="/images/role_icons/{{role}}.png">
+                                                </p>
 
-                                                </td>
-                                                <td class="hero-cell" style="padding: 0">
-                                                    <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
-                                                    <p class="herocaption">{{heroName}}
-                                                    </p>
+                                            </td>
+                                            <td class="hero-cell" style="padding: 0">
+                                                <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
+                                                <p class="herocaption">{{heroName}}
+                                                </p>
 
-                                                </td>
-                                                <td> {{kills}} </td>
-                                                <td>{{deaths}}</td>
-                                                <td>
-                                                    {{#if userHas}}
-                                                    <span class="red">{{points}}</span>
-                                                    {{else}} {{points}} {{/if}}
-                                                </td>
-                                            </tr>
-                                            {{/each}}
+                                            </td>
+                                            <td> {{kills}} </td>
+                                            <td>{{deaths}}</td>
+                                            <td>
+                                                {{#if userHas}}
+                                                <span class="red">{{points}}</span>
+                                                {{else}} {{points}} {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
                                     </tbody>
                                 </table>
                             </div>
@@ -366,27 +376,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                         {{#each playerMatches.homeTeam.map4}}
-                                            <tr>
-                                                <td style="padding: 0">
-                                                    <p class="playercaption">{{playerName}}
-                                                        <img class="td-role" src="/images/role_icons/{{role}}.png">
-                                                    </p>
-                                                </td>
-                                                <td class="hero-cell" style="padding: 0">
+                                        {{#each playerMatches.homeTeam.map4}}
+                                        <tr>
+                                            <td style="padding: 0">
+                                                <p class="playercaption">{{playerName}}
+                                                    <img class="td-role" src="/images/role_icons/{{role}}.png">
+                                                </p>
+                                            </td>
+                                            <td class="hero-cell" style="padding: 0">
 
-                                                    <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
-                                                    <p class="herocaption">{{heroName}}</p>
-                                                </td>
-                                                <td> {{kills}} </td>
-                                                <td>{{deaths}}</td>
-                                                <td>
-                                                    {{#if userHas}}
-                                                    <span class="red">{{points}}</span>
-                                                    {{else}} {{points}} {{/if}}
-                                                </td>
-                                            </tr>
-                                            {{/each}}
+                                                <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
+                                                <p class="herocaption">{{heroName}}</p>
+                                            </td>
+                                            <td> {{kills}} </td>
+                                            <td>{{deaths}}</td>
+                                            <td>
+                                                {{#if userHas}}
+                                                <span class="red">{{points}}</span>
+                                                {{else}} {{points}} {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
                                     </tbody>
                                 </table>
 
@@ -407,28 +417,28 @@
                                     </thead>
                                     <tbody>
                                         {{#each playerMatches.awayTeam.map4}}
-                                            <tr>
-                                                <td style="padding: 0">
-                                                    <p class="playercaption">{{playerName}}
-                                                        <img class="td-role" src="/images/role_icons/{{role}}.png">
-                                                    </p>
+                                        <tr>
+                                            <td style="padding: 0">
+                                                <p class="playercaption">{{playerName}}
+                                                    <img class="td-role" src="/images/role_icons/{{role}}.png">
+                                                </p>
 
-                                                </td>
-                                                <td class="hero-cell" style="padding: 0">
-                                                    <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
-                                                    <p class="herocaption">{{heroName}}
-                                                    </p>
+                                            </td>
+                                            <td class="hero-cell" style="padding: 0">
+                                                <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
+                                                <p class="herocaption">{{heroName}}
+                                                </p>
 
-                                                </td>
-                                                <td> {{kills}} </td>
-                                                <td>{{deaths}}</td>
-                                                <td>
-                                                    {{#if userHas}}
-                                                    <span class="red">{{points}}</span>
-                                                    {{else}} {{points}} {{/if}}
-                                                </td>
-                                            </tr>
-                                            {{/each}}
+                                            </td>
+                                            <td> {{kills}} </td>
+                                            <td>{{deaths}}</td>
+                                            <td>
+                                                {{#if userHas}}
+                                                <span class="red">{{points}}</span>
+                                                {{else}} {{points}} {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
                                     </tbody>
                                 </table>
                             </div>
@@ -451,26 +461,26 @@
                                     </thead>
                                     <tbody>
                                         {{#each playerMatches.homeTeam.map5}}
-                                            <tr>
-                                                <td style="padding: 0">
-                                                    <p class="playercaption">{{playerName}}
-                                                        <img class="td-role" src="/images/role_icons/{{role}}.png">
-                                                    </p>
-                                                </td>
-                                                <td class="hero-cell" style="padding: 0">
+                                        <tr>
+                                            <td style="padding: 0">
+                                                <p class="playercaption">{{playerName}}
+                                                    <img class="td-role" src="/images/role_icons/{{role}}.png">
+                                                </p>
+                                            </td>
+                                            <td class="hero-cell" style="padding: 0">
 
-                                                    <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
-                                                    <p class="herocaption">{{heroName}}</p>
-                                                </td>
-                                                <td> {{kills}} </td>
-                                                <td>{{deaths}}</td>
-                                                <td>
-                                                    {{#if userHas}}
-                                                    <span class="red">{{points}}</span>
-                                                    {{else}} {{points}} {{/if}}
-                                                </td>
-                                            </tr>
-                                            {{/each}}
+                                                <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
+                                                <p class="herocaption">{{heroName}}</p>
+                                            </td>
+                                            <td> {{kills}} </td>
+                                            <td>{{deaths}}</td>
+                                            <td>
+                                                {{#if userHas}}
+                                                <span class="red">{{points}}</span>
+                                                {{else}} {{points}} {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
                                     </tbody>
                                 </table>
 
@@ -490,34 +500,34 @@
                                         </tr>
                                     </thead>
                                     <tbody> {{#each playerMatches.awayTeam.map5}}
-                                            <tr>
-                                                <td style="padding: 0">
-                                                    <p class="playercaption">{{playerName}}
-                                                        <img class="td-role" src="/images/role_icons/{{role}}.png">
-                                                    </p>
+                                        <tr>
+                                            <td style="padding: 0">
+                                                <p class="playercaption">{{playerName}}
+                                                    <img class="td-role" src="/images/role_icons/{{role}}.png">
+                                                </p>
 
-                                                </td>
-                                                <td class="hero-cell" style="padding: 0">
-                                                    <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
-                                                    <p class="herocaption">{{heroName}}
-                                                    </p>
+                                            </td>
+                                            <td class="hero-cell" style="padding: 0">
+                                                <img class="td-hero-image" width="40px" src="/images/hero_icons/{{heroId}}.png">
+                                                <p class="herocaption">{{heroName}}
+                                                </p>
 
-                                                </td>
-                                                <td> {{kills}} </td>
-                                                <td>{{deaths}}</td>
-                                                <td>
-                                                    {{#if userHas}}
-                                                    <span class="red">{{points}}</span>
-                                                    {{else}} {{points}} {{/if}}
-                                                </td>
-                                            </tr>
-                                            {{/each}}
+                                            </td>
+                                            <td> {{kills}} </td>
+                                            <td>{{deaths}}</td>
+                                            <td>
+                                                {{#if userHas}}
+                                                <span class="red">{{points}}</span>
+                                                {{else}} {{points}} {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
 
-                    {{/if}} 
+                        {{/if}}
                     </div>
                 </div>
                 {{/each}}
