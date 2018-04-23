@@ -39,10 +39,10 @@ function root(req, res) {
 function rosterLockTrue(req, res) {
     var data = {
         value: "true"
-    }
+    };
     var constraint = {
         key: "rosterLock"
-    }
+    };
     db.update("globals", data, constraint, function (error, result) {
         if (error) {
             console.log(error);
@@ -55,10 +55,10 @@ function rosterLockTrue(req, res) {
 function rosterLockFalse(req, res) {
     var data = {
         value: "false"
-    }
+    };
     var constraint = {
         key: "rosterLock"
-    }
+    };
     db.update("globals", data, constraint, function (error, result) {
         if (error) {
             console.log(error);
