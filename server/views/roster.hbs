@@ -23,6 +23,44 @@
                     <p>Points: {{userTotalPoints}}</p>
                     <p>Rank: {{rank}}</p>
                     <p>Weekly Rank: {{weeklyRank}}</p>
+
+                    
+                        <div class="playerCard" id="playerCard_{{id}}">
+                            <div class="playerCard-left">
+                                <img class="playerCard-pic" width="200px" src={{#if jeff}} "/images/jeff_headshot/jeff.png"{{else}}
+                                    "/images/player_headshots/1.png"{{/if}}>
+                            </div>
+                            <div class="playerCard-right">
+                                <div class="playerCard-info">
+                                    <p class="playerCard-header">chipshajen
+                                    </p>
+                                    <p class="playerCard-caption">Team: 
+                                    <img width="30px" src="/images/team_icons/1.png"> Role: 
+                                    <img src="/images/role_icons/offense.png">
+                                    </p>
+
+                                </div>
+                                <p class="playerCard-caption">Heroes Played </p>
+
+                                <table class="table table-bordered playerCard-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="width: 10%">Hero</th>
+                                            <th scope="col" style="width: 30%"> Avg Kills</th>
+                                            <th scope="col"style="width: 30%">Avg Deaths</th>
+                                            <th scope="col"style="width: 30%"> Avg K/D</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <td style="padding:0;"><img class="td-hero-image" width="40px" src="/images/hero_icons/2.png"></td>
+                                        <td><span class="playerCard-avgkills"> </span></td>
+                                        <td><span class="playerCard-avgdeaths"> </span></td>
+                                        <td><span class="playerCard-avgKD"> </span></td>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     <table id="rosterTable" class="table table-bordered table-hover vertical-align">
                         <thead>
                             <tr>

@@ -1,6 +1,5 @@
 var utility = require("./utility.js");
 var db = require('../models');
-var sgMail = require('@sendgrid/mail');
 
 module.exports = { gateway, root, schedule, roster };
 
@@ -16,8 +15,8 @@ function root(req, res, next) {
     res.redirect("/dashboard/roster");
 }
 
+
 function schedule(req, res) {
-    var limit = req.query.limit || 0;
     var data = {};
     db.findAllRows("gamemaps", function(error, result){
         if(error)
@@ -75,18 +74,15 @@ function schedule(req, res) {
                                 var matchesMap = new Map();
                                 for (var m = 0; m < matches.length; m++) {
                                     var match = matches[m];
+                                    console.log(match.match_datetime < now);
+
                                     var teamAwayId = match.team_away;
                                     var teamHomeId = match.team_home;
                                     var map1WinnerId = match.map1_winner;
-                                    if (map1WinnerId == 0) map1WinnerId = "tie";
                                     var map2WinnerId = match.map2_winner;
-                                    if (map2WinnerId == 0) map2WinnerId = "tie";
                                     var map3WinnerId = match.map3_winner;
-                                    if (map3WinnerId == 0) map3WinnerId = "tie";
                                     var map4WinnerId = match.map4_winner;
-                                    if (map4WinnerId == 0) map4WinnerId = "tie";
                                     var map5WinnerId = match.map5_winner;
-                                    if (map5WinnerId == 0) map5WinnerId = "tie";
                                     var map1Id = match.map1;
                                     var map2Id = match.map2;
                                     var map3Id = match.map3;
@@ -94,11 +90,11 @@ function schedule(req, res) {
                                     var map5Id = match.map5 ? match.map5 : 99;
                                     var awayTeamName = teams.get(teamAwayId) ? teams.get(teamAwayId).name : "None";
                                     var homeTeamName = teams.get(teamHomeId) ? teams.get(teamHomeId).name : "None";
-                                    // var map1WinnerName = teams.get(map1WinnerId) ? teams.get(map1WinnerId).name : "None";
-                                    // var map2WinnerName = teams.get(map2WinnerId) ? teams.get(map2WinnerId).name : "None";
-                                    // var map3WinnerName = teams.get(map3WinnerId) ? teams.get(map3WinnerId).name : "None";
-                                    // var map4WinnerName = teams.get(map4WinnerId) ? teams.get(map4WinnerId).name : "None";
-                                    // var map5WinnerName = teams.get(map5WinnerId) ? teams.get(map5WinnerId).name : "N/A";
+                                    var map1WinnerName = teams.get(map1WinnerId) ? teams.get(map1WinnerId).name : "None";
+                                    var map2WinnerName = teams.get(map2WinnerId) ? teams.get(map2WinnerId).name : "None";
+                                    var map3WinnerName = teams.get(map3WinnerId) ? teams.get(map3WinnerId).name : "None";
+                                    var map4WinnerName = teams.get(map4WinnerId) ? teams.get(map4WinnerId).name : "None";
+                                    var map5WinnerName = teams.get(map5WinnerId) ? teams.get(map5WinnerId).name : "N/A";
                                     var map1Name = maps.get(map1Id) ? maps.get(map1Id).name : "None";
                                     var map2Name = maps.get(map2Id) ? maps.get(map2Id).name : "None";
                                     var map3Name = maps.get(map3Id) ? maps.get(map3Id).name : "None";
@@ -106,6 +102,7 @@ function schedule(req, res) {
                                     var map5Name = maps.get(map5Id) ? maps.get(map5Id).name : "N/A";
                                     var awayScore = 0;
                                     var homeScore = 0;
+                                    var noData = match.map1_winner ? false : true; 
                                     map1WinnerId == teamAwayId ? awayScore++ : homeScore++;
                                     map2WinnerId == teamAwayId ? awayScore++ : homeScore++;
                                     map3WinnerId == teamAwayId ? awayScore++ : homeScore++;
@@ -136,11 +133,11 @@ function schedule(req, res) {
                                         map3WinnerId: map3WinnerId,
                                         map4WinnerId: map4WinnerId,
                                         map5WinnerId: map5WinnerId,
-                                        // map1WinnerName: map1WinnerName,
-                                        // map2WinnerName: map2WinnerName,
-                                        // map3WinnerName: map3WinnerName,
-                                        // map4WinnerName: map4WinnerName,
-                                        // map5WinnerName: map5WinnerName,
+                                        map1WinnerName: map1WinnerName,
+                                        map2WinnerName: map2WinnerName,
+                                        map3WinnerName: map3WinnerName,
+                                        map4WinnerName: map4WinnerName,
+                                        map5WinnerName: map5WinnerName,
                                         winningTeamId: winningTeamId,
                                         playerMatches: {
                                             homeTeam: {
@@ -157,7 +154,8 @@ function schedule(req, res) {
                                                 map4: [],
                                                 map5: []
                                             }
-                                        }
+                                        },
+                                        noData: noData
                                     }
                                     //matchesArr.push(matchData);
                                     matchesMap.set(match.id, matchData);
@@ -272,14 +270,15 @@ function schedule(req, res) {
                                     });
 
                                 }
+
+
+
                                 var now = new Date();
                                 var upcomingMatches = [];
                                 var previousMatches = [];
                                 matchesMap.forEach(function (value, key) {
-                                    if (value.playerMatches.homeTeam.map1.length === 0) {
-                                        value.noData = true;
-                                    }
-                                    if (value.datetime < now && value.map1WinnerId) {
+                                    console.log(value.datetime);
+                                    if (value.datetime < now && value.playerMatches.homeTeam.map1.length > 0) {
                                         previousMatches.push(value);
                                     } else {
                                         upcomingMatches.push(value);
@@ -289,10 +288,10 @@ function schedule(req, res) {
                                 previousMatches.sort(function (a, b) {
                                     return new Date(b.datetime) - new Date(a.datetime);
                                 });
-                                if (limit !== 0 && limit < previousMatches.length) {
-                                    previousMatches.length = limit;
-                                    data.seeMoreLink = true;
-                                }
+                                
+                                // for testing
+
+                                //previousMatches.length = 15;
                                 // sort upcomingMatches by earliest date first
                                 upcomingMatches.sort(function (a, b) {
                                     return new Date(b.datetime) + new Date(a.datetime);
@@ -336,153 +335,129 @@ function roster(req, res) {
             var rank = 0; 
             if (result) {
                 rank = result.rank; 
-            } else {
-                rank = "None";
             }
-            var constraint = {
-                user_id: req.user.id,
-                leaderboard_name: "global_weekly"
-            }
-            db.findOneWithConstraint("leaderboards", constraint, "", function (error, result) {
-                if (error) {
+            db.findAllRows("teams", function (error, results) {
+                if(error)
+                {
                     console.log(error);
                     return;
                 }
-                var weeklyRank = 0;
-                if (result) {
-                    weeklyRank = result.rank;
-                } else {
-                    weeklyRank = "None";
+                var teams = results;
+                if (teams.length === 0) {
+                    error = "No teams data.";
+                    data.error = error;
+                    res.render('roster', data);
+                    return;
                 }
-                db.findAllRows("teams", function (error, results) {
+
+                db.findAllRowsOrderBy("players", "ORDER BY name ASC ", function (error, results) {
                     if(error)
                     {
                         console.log(error);
                         return;
                     }
-                    var teams = utility.mapOnId(results);
-                    if (teams.size === 0) {
-                        error = "No teams data.";
+                    var playersRes = results;
+                    var players = [];
+                    if (results.length === 0) {
+                        error = "No player data.";
                         data.error = error;
                         res.render('roster', data);
                         return;
                     }
-                    db.findAllRowsOrderBy("players", "ORDER BY name ASC ", function (error, results) {
-                        if(error)
-                        {
-                            console.log(error);
-                            return;
-                        }
-                        var playersRes = results;
-                        var playersMap = new Map();
-                        if (results.length === 0) {
-                            error = "No player data.";
-                            data.error = error;
-                            res.render('roster', data);
-                            return;
-                        }
-                        for (var p = 0; p < playersRes.length; p++) {
-                            (function () {
-                                var player = playersRes[p];
-                                var name = player.name;
-                                var id = player.id;
-                                var teamId = player.team_id;
-                                var role = player.role.toLowerCase();
-                                var teamName = teams.get(player.team_id) ? teams.get(player.team_id).name : "None";
+                    for (var p = 0; p < playersRes.length; p++) {
+                        (function () {
+                            var player = playersRes[p];
+                            var name = player.name;
+                            var id = player.id;
+                            var teamId = player.team_id;
+                            var role = player.role.toLowerCase();
+                            var teamName = utility.getTeamNameFromTeamId(teams, player.team_id);
+                            var constraint = {
+                                player_id: player.id,
+                                user_id: req.user.id
+                            };
+                            db.findAllWithConstraint("points", constraint, "", function (error, results) {
+                                if(error)
+                                {
+                                    console.log(error);
+                                    return;
+                                }
+                                var points = results;
+                                var totalPoints = 0;
+                                for (var m = 0; m < points.length; m++) {
+                                    var point = points[m];
+                                    totalPoints += point.points;
+                                    userTotalPoints += point.points;
+                                }
                                 var playerData = {
                                     name: name,
                                     id: id,
                                     teamName: teamName,
                                     teamId: teamId,
                                     role: role,
-                                    totalPoints: 0
+                                    totalPoints: parseFloat(totalPoints.toFixed(2))
                                 };
                                 if (name === "Jeff Kaplan") {
                                     playerData.jeff = true;
                                 }
-                                playersMap.set(id, playerData);
-                                if (playersMap.size === playersRes.length) {
+                                players.push(playerData);
+                                if (players.length === playersRes.length) {
+                                    players.sort(function (obj1, obj2) {
+                                        return obj2.totalPoints - obj1.totalPoints;
+                                    });
                                     var constraint = {
                                         user_id: req.user.id
-                                    };
-                                    db.findAllWithConstraint("points", constraint, "", function (error, results) {
-                                        if (error) {
+                                    }
+                                    db.findAllWithConstraint("rosters", constraint, "ORDER BY position ASC", function (error, results) {
+                                        if(error)
+                                        {
                                             console.log(error);
                                             return;
                                         }
-                                        var points = results;
-                                        // add points to the proper player map item
-                                        for (var m = 0; m < points.length; m++) {
-                                            var point = points[m];
-                                            var pointPoints = point.points;
-                                            var playerId = point.player_id;
-                                            var prevPlayer = playersMap.get(playerId);
-                                            prevPlayer.totalPoints += pointPoints;
-                                            playersMap.set(playerId, prevPlayer)
-                                            userTotalPoints += pointPoints;
-                                        }
-                                        var constraint = {
-                                            user_id: req.user.id
-                                        };
-                                        db.findAllWithConstraint("rosters", constraint, "ORDER BY position ASC", function (error, results) {
-                                            if(error)
-                                            {
-                                                console.log(error);
-                                                return;
-                                            }
-                                            var rosterRes = results;
-                                            var roster = [];
-                                            for (var x = 0; x < rosterRes.length; x++) {
-                                                if (rosterRes[x].player_id) {
-                                                    var found = playersMap.get(rosterRes[x].player_id);
-                                                    roster.push(found);
-                                                } else {
-                                                    if (x < 4) {
-                                                        roster.push({ role: "offense" });
-                                                    } else if (x < 8) {
-                                                        roster.push({ role: "tank" });
-                                                    } else if (x < 12) {
-                                                        roster.push({ role: "support" });
-                                                    }
-
-                                                }
-                                            }
-                                            // fill empty roster
-                                            while (roster.length < 12) {
-                                                if (roster.length < 4) {
+                                        var rosterRes = results;
+                                        var roster = [];
+                                        for (var x = 0; x < rosterRes.length; x++) {
+                                            if (rosterRes[x].player_id) {
+                                                var found = players.find(function (element) {
+                                                    return element.id === rosterRes[x].player_id;
+                                                });
+                                                roster.push(found);
+                                            } else {
+                                                if (x < 4) {
                                                     roster.push({ role: "offense" });
-                                                } else if (roster.length < 8) {
+                                                } else if (x < 8) {
                                                     roster.push({ role: "tank" });
-                                                } else {
+                                                } else if (x < 12) {
                                                     roster.push({ role: "support" });
                                                 }
+
                                             }
-                                            // turn players map into array and sort it
-                                            var players = [];
-                                            playersMap.forEach(function (value, key) {
-                                                var player = value;
-                                                player.totalPoints = parseFloat(parseFloat(player.totalPoints).toFixed(2));
-                                                players.push(value);
-                                            });
-                                            players.sort(function (obj1, obj2) {
-                                                return obj2.totalPoints - obj1.totalPoints;
-                                            });
-                                            data.rank = rank;
-                                            data.weeklyRank = weeklyRank;
-                                            data.userTotalPoints = parseFloat(userTotalPoints.toFixed(2));
-                                            data.players = players;
-                                            data.roster = roster;
-                                            data.error = error;
-                                            res.render("roster", data);
-                                            return;
-                                        });
+                                        }
+                                        // fill empty roster
+                                        while (roster.length < 12) {
+                                            if (roster.length < 4) {
+                                                roster.push({ role: "offense" });
+                                            } else if (roster.length < 8) {
+                                                roster.push({ role: "tank" });
+                                            } else {
+                                                roster.push({ role: "support" });
+                                            }
+                                        }
+                                        data.rank = rank;
+                                        data.userTotalPoints = parseFloat(userTotalPoints.toFixed(2));
+                                        data.players = players;
+                                        data.roster = roster;
+                                        data.error = error;
+                                        res.render("roster", data);
+                                        return;
                                     });
                                 }
-                            })();
-                        }
-                    });
+                            });
+                        })();
+                    }
                 });
             });
-        });
+
+        })
     });
 }

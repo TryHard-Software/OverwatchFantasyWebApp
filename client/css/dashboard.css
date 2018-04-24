@@ -197,3 +197,39 @@ However, delay the fade out process for 2.5 seconds */
 }
 
 /* END SNACKBAR */
+
+/* playerCards */ 
+.playerCard { 
+    width: 500px;
+    clear: both; 
+    position: absolute;
+}
+
+.playerCard-left {
+    float: left; 
+    width: 40%; 
+}
+.playerCard-right {
+    float: left;
+    width: 60%; 
+}
+.playerCard-table {
+    width: 100%; 
+    font-size: 16px;
+}
+
+.playerCard-header {
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+.playerCard-caption {
+    margin: 5px;
+}
+.table.playerCard-table>tbody>tr>td {
+    padding: 0;
+    border: 3px solid white;
+    text-align: center;
+}
+.table.playerCard-table>thead>tr>th {
+    text-align: center;
+}

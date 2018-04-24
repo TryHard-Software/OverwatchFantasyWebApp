@@ -164,6 +164,16 @@ $(document).ready(function () {
         $('#report-ticket').modal('hide');
         $('#confirm-report').modal('show'); 
         });
+
+        
+    //send email
+    $("#send-report").on("click", function (e) {
+        e.preventDefault();
+
+        
+        });
+
+        
 });
 
 function updateDbRoster() {

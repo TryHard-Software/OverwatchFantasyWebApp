@@ -2,7 +2,6 @@
 var db = require('../models');
 var utility = require("./utility.js");
 var moment = require('moment');
-var bCrypt = require('bcrypt-nodejs');
 
 
 module.exports = { updateRoster, updateChatHistory, getChatHistory };
@@ -100,10 +99,10 @@ function updateRoster(req, res) {
                                 }
                                 // else update the current entry
                                 else {
-                                    var insertObj = {
+                                    insertObj = {
                                         player_id: roster[r]
                                     };
-                                    var constraintObj = {
+                                    constraintObj = {
                                         user_id: req.user.id,
                                         position: r
                                     };
