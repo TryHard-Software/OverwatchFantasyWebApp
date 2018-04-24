@@ -7,14 +7,6 @@ import About from './About';
 import News from './News';
 import './app.scss';
 
- function RightNav(props) {
-    const isLoggedIn = props.isLoggedIn;
-    console.log(isLoggedIn);
-    if (isLoggedIn) {
-    return (<a className="nav-item nav-link" href="/signin">Log In</a>);
-    }
-  return (<a className="nav-item nav-link" href="/signup">Sign Up</a>);
-  }
 
 class App extends React.Component {
   constructor() {
@@ -54,7 +46,6 @@ class App extends React.Component {
                   <Link className="nav-item nav-link" to="/app/news">News</Link>
                   <Link className="nav-item nav-link" to="/app/live" >Live</Link>
                   <a className="nav-item nav-link active" href="/dashboard">Dashboard</a>
-                                     <button onClick={this.handleClick.bind(this)}>Hero</button>
                   <a className="nav-item nav-link" href="/leaderboard_weekly">Leaderboards</a>
                   <Link className="nav-item nav-link" to="/app/information" >Information</Link>
                   <Link className="nav-item nav-link" to="/app/about" >About</Link>
