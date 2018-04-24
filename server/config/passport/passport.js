@@ -46,7 +46,7 @@ module.exports = function (passport) {
                 } else {
                     var userPassword = generateHash(password);
                     var data = {
-                        username: username,
+                        username: username.toLowerCase(),
                         password: userPassword,
                         email: req.body.email,
                         access_level: 2
