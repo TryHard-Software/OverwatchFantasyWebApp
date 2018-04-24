@@ -9,7 +9,6 @@ $(document).ready(function () {
     }
 
     $("#bg-video").on("ended", function () {
-        console.log("wat")
         myvid.play();
     });
    
