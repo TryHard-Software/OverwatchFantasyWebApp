@@ -5,6 +5,10 @@
     margin: 10px;
 }
 
+.match-stats:hover {
+    background-color: rgba(158, 158, 158, 0.527);
+}
+
 .match-header {
     clear: both;
     overflow: hidden;

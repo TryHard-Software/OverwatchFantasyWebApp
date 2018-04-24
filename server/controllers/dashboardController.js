@@ -16,8 +16,8 @@ function root(req, res, next) {
     res.redirect("/dashboard/roster");
 }
 
-
 function schedule(req, res) {
+    var limit = req.query.limit || 0;
     var data = {};
     db.findAllRows("gamemaps", function(error, result){
         if(error)
@@ -289,10 +289,10 @@ function schedule(req, res) {
                                 previousMatches.sort(function (a, b) {
                                     return new Date(b.datetime) - new Date(a.datetime);
                                 });
-                                
-                                // for testing
-
-                                //previousMatches.length = 15;
+                                if (limit !== 0 && limit < previousMatches.length) {
+                                    previousMatches.length = limit;
+                                    data.seeMoreLink = true;
+                                }
                                 // sort upcomingMatches by earliest date first
                                 upcomingMatches.sort(function (a, b) {
                                     return new Date(b.datetime) + new Date(a.datetime);
