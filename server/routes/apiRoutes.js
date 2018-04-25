@@ -12,6 +12,8 @@ var router = function(app, passport) {
 
     apiRouter.route('/getChatHistory').get(apiController.getChatHistory);
 
+    apiRouter.route('/getLiveFeedHistory').get(apiController.getLiveFeedHistory);
+
     return apiRouter;
 };
 
