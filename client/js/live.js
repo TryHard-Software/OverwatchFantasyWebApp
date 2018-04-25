@@ -36,5 +36,32 @@ $(document).ready(function () {
         embed.setWidth(w * .98);
         embed.setHeight(w * 9 / 16 * .98);
     }
+    
+
+    getRecentLiveFeed();
 })
 
+
+function getRecentLiveFeed() {
+    $.get("/api/getLiveFeedHistory", function (livefeed) {
+      for (var i = 0; i < livefeed.length; i++) {
+        var killer_id = livefeed[i].killer_id;
+        var killer_name = livefeed[i].killer_name;
+        var killer_hero = livefeed[i].killer_hero;
+        //var killer_heroid = livefeed[i].killer_heroid;
+        var victim_id = livefeed[i].victim_id;
+        var victim_name = livefeed[i].victim_name;
+        var victim_hero = livefeed[i].victim_hero;
+        //var victim_heroid = livefeed[i].victim_heroid;
+        var action = livefeed[i].action;
+        var msgToDisplay = `${killer_name} 
+        <img class="live-playerpic" src="/images/player_headshots/${killer_id}.png" >
+        with ${killer_hero} ${action} ${victim_name} with ${victim_hero}`
+        console.log(msgToDisplay); 
+        $('#live-feed-display').prepend($('<li class="list-group-item">').html(msgToDisplay));
+      }
+      
+    })
+  }
+  
+  

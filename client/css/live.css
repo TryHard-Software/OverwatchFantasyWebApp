@@ -25,3 +25,16 @@
     overflow: auto;
     resize: both;
 }
+
+.live-feed-header {
+    text-align: center;
+}
+
+#live-feed-display { 
+    font-family: ovw-regular;
+    font-size: 20px;
+}
+
+.live-playerpic, .live-heropic {
+    width: 30px;
+}
