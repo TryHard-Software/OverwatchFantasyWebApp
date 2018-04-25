@@ -6,6 +6,10 @@ var apiRouter = express.Router();
 
 var router = function(app, passport) {
 
+    apiRouter.route('/livestats').post(apiController.liveStatsPost);
+
+    apiRouter.route('/livestats').get(apiController.liveStatsGet);
+
     apiRouter.route('/updateRoster').post(apiController.updateRoster);
 
     apiRouter.route('/updateChatHistory').post(apiController.updateChatHistory);

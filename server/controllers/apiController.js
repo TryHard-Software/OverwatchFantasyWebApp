@@ -5,7 +5,27 @@ var moment = require('moment');
 var bCrypt = require('bcrypt-nodejs');
 
 
-module.exports = { updateRoster, updateChatHistory, getChatHistory };
+module.exports = { liveStatsPost, liveStatsGet, updateRoster, updateChatHistory, getChatHistory };
+
+var liveStats = [];
+
+function liveStatsPost(req, res) {
+    var data = req.body;
+    var token = req.query.token;
+    if (token === "wefweio587329fj32947fhwe923ry54y") {
+        liveStats.push(data);
+        if (liveStats.length > 30) {
+            liveStats.shift();
+        }
+    } else {
+        console.log("invalid token");
+    }
+    res.send("success");
+}
+
+function liveStatsGet(req, res) {
+    res.json(liveStats);
+}
 
 function updateRoster(req, res) {
     if (req.user) {
