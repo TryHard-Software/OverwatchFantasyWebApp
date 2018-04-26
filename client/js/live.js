@@ -1,3 +1,6 @@
+var roster;
+var weights;
+
 
 $(document).ready(function () {
 
@@ -47,7 +50,14 @@ $(document).ready(function () {
 
 
 function getRecentLiveFeed() {
-    $.get("/api/getLiveFeedHistory", function (livefeed) {
+    $.get("/api/getLiveFeedHistory", function (data) {
+        var livefeed = data.feeds;
+        var rosterSet = new Set();
+        for (var r = 0; r < data.roster.length; r++) {
+            rosterSet.add(data.roster[r].player_id);
+        }
+        roster = rosterSet;
+        weights = data.weights;
       for (var i = 0; i < livefeed.length; i++) {
         var uuid = livefeed[i].uuid;
         var killer_id = livefeed[i].killer_id;
@@ -61,13 +71,28 @@ function getRecentLiveFeed() {
         var victim_heroid = livefeed[i].victim_heroid;
         var victim_team_id = livefeed[i].victim_team_id;
         var action = livefeed[i].action;
+        var map_id = livefeed[i].map_id;
+        // if it has no map id, just go with 1. this is just for reference anyways.
+        if (!map_id) {
+            map_id = 1
+        }
+        var pointsHighlightCss = "";
+        // if user has player in roster, than highlight
+        if (roster.has(livefeed[i].killer_id)) {
+            pointsHighlightCss = " live-points-highlight'";
+        }
+        // dont show points for ressurections. we dont calculate those yet
+        var points = "<span class='live-points" + pointsHighlightCss + "'> +" + weights[killer_heroid][map_id].toFixed(2) + "</span>";
+        if (action === "resurrected") {
+            points = "";
+        }
         var msgToDisplay = `<img class="live-teampic" src="/images/team_icons/${killer_team_id}.png"> 
             ${killer_name} 
-            <img class="live-heropic" src="/images/hero_icons/${killer_heroid}.png"> 
-            ${action} 
+            <img class="live-heropic" src="/images/hero_icons/${killer_heroid}.png">  
+             ${action} 
             <img class="live-teampic" src="/images/team_icons/${victim_team_id}.png"> 
             ${victim_name} 
-            <img class="live-heropic" src="/images/hero_icons/${victim_heroid}.png">`
+            <img class="live-heropic" src="/images/hero_icons/${victim_heroid}.png">` + points
           $('#live-feed-display').prepend($('<li class="list-group-item" data-uuid="' + uuid + '">').html(msgToDisplay));
       }
       
@@ -78,22 +103,39 @@ function pollLiveStats() {
     $.get("/api/livestats", function (liveStats) {
         for (var x = 0; x < liveStats.length; x++) {
             var uuid = liveStats[x].uuid;
-            var msgToDisplay = `<img class="live-teampic" src="/images/team_icons/${liveStats[x].killer_team_id}.png"> 
-            ${liveStats[x].killer_name} 
-            <img class="live-heropic" src="/images/hero_icons/${liveStats[x].killer_hero_id}.png"> 
-            ${liveStats[x].action} 
-            <img class="live-teampic" src="/images/team_icons/${liveStats[x].victim_team_id}.png"> 
-            ${liveStats[x].victim_name} 
-            <img class="live-heropic" src="/images/hero_icons/${liveStats[x].victim_hero_id}.png">`
-            var alreadyExists = false;
-            $(".list-group-item").each(function() {
+            // only append items that aren't already present
+            var exists = false
+            $(".list-group-item").each(function () {
                 if (uuid == $(this).data("uuid")) {
-                    alreadyExists = true;
+                    exists = true
                 }
             });
-            if (!alreadyExists) {
-                $('#live-feed-display').prepend($('<li class="list-group-item" data-uuid="' + uuid + '">').html(msgToDisplay));
+            if (exists === true) {
+                continue;
             }
+            var map_id = liveStats[x].map_id;
+            // if it has no map id, just go with 1. this is just for reference anyways.
+            if (!map_id) {
+                map_id = 1
+            }
+            var pointsHighlightCss = "";
+            // if user has player in roster, than highlight
+            if (roster.has(liveStats[x].killer_player_id)) {
+                pointsHighlightCss = " live-points-highlight'";
+            }
+            // dont show points for ressurections. we dont calculate those yet
+            var points = "<span class='live-points" + pointsHighlightCss + "'> +" + weights[liveStats[x].killer_hero_id][map_id].toFixed(2) + "</span>";
+            if (liveStats[x].action === "resurrected") {
+                points = "";
+            }
+            var msgToDisplay = `<img class="live-teampic" src="/images/team_icons/${liveStats[x].killer_team_id}.png"> 
+            ${liveStats[x].killer_name} 
+            <img class="live-heropic" src="/images/hero_icons/${liveStats[x].killer_hero_id}.png">  
+             ${liveStats[x].action} 
+            <img class="live-teampic" src="/images/team_icons/${liveStats[x].victim_team_id}.png"> 
+            ${liveStats[x].victim_name} 
+            <img class="live-heropic" src="/images/hero_icons/${liveStats[x].victim_hero_id}.png">` + points
+            $('#live-feed-display').prepend($('<li class="list-group-item" data-uuid="' + uuid + '">').html(msgToDisplay));
         }
         liveStats = null;
     });

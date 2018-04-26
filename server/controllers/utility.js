@@ -2,7 +2,7 @@
 module.exports = {
     getPlayerIdFromName, getTeamNameFromTeamId,
     getRoleFromPlayerId, mapOnId,
-    getHeroIdFromName
+    getHeroIdFromName, getMapIdFromOwlName
 };
 
 // Get playerId from name
@@ -40,6 +40,16 @@ function getRoleFromPlayerId(playersArray, playerId) {
     for (var m = 0; m < playersArray.length; m++) {
         if (playersArray[m].id == playerId) {
             return playersArray[m].role.toLowerCase();
+        }
+    }
+    return false;
+};
+
+// Get mapId from owlName
+function getMapIdFromOwlName(mapsArray, owlName) {
+    for (var x = 0; x < mapsArray.length; x++) {
+        if (mapsArray[x].owl_name.toLowerCase() === owlName.toLowerCase()) {
+            return mapsArray[x].id;
         }
     }
     return false;

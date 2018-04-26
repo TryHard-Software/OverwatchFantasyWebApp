@@ -17,6 +17,9 @@
                 <div id="live-feed" >
                     <div>
                         <h3 class="live-feed-header">Live Stats</h3>
+                        {{#unless loggedIn}}
+                        <h2 style="text-align: center">Log In To See Your Point Gains</h2>
+                        {{/unless}}
                     </div>
                     <div id="live-feed-body">
                         <ul class="list-group" id="live-feed-display">
