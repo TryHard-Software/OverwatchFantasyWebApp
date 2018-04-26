@@ -66,7 +66,7 @@ function getRecentLiveFeed() {
         ${action} 
         ${victim_name} 
         <img class="live-playerpic" src="/images/player_headshots/${victim_id}.png" >
-        with ${victim_hero}
+        on ${victim_hero}
         <img class="live-playerpic" src="/images/hero_icons/${victim_heroid}.png" >
         `
         console.log(msgToDisplay); 
