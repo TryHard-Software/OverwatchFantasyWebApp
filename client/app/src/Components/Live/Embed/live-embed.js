@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import { withRouter } from 'react-router-dom';
 // import organizationApi from '../../../Data/organization-api';
 import './live-embed.scss';
-import $ from 'jquery';
+//import $ from 'jquery';
 
 class LiveEmbed extends Component {
 
