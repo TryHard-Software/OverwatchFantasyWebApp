@@ -14,8 +14,13 @@ function liveStatsPost(req, res) {
     var token = req.query.token;
     if (token === "wefweio587329fj32947fhwe923ry54y") {
         liveStats.push(data);
-        if (liveStats.length > 30) {
+        var noEternalLoops = 0;
+        while (liveStats.length > 10) {
             liveStats.shift();
+            noEternalLoops += 1;
+            if (noEternalLoops > 5) {
+                break
+            }
         }
     } else {
         console.log("invalid token");
