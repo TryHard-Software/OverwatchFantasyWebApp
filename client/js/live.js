@@ -64,7 +64,7 @@ function getRecentLiveFeed() {
         var msgToDisplay = `<img class="live-teampic" src="/images/team_icons/${killer_team_id}.png"> 
             ${killer_name} 
             <img class="live-heropic" src="/images/hero_icons/${killer_heroid}.png"> 
-            ${action}  
+            ${action} 
             <img class="live-teampic" src="/images/team_icons/${victim_team_id}.png"> 
             ${victim_name} 
             <img class="live-heropic" src="/images/hero_icons/${victim_heroid}.png">`
@@ -81,7 +81,7 @@ function pollLiveStats() {
             var msgToDisplay = `<img class="live-teampic" src="/images/team_icons/${liveStats[x].killer_team_id}.png"> 
             ${liveStats[x].killer_name} 
             <img class="live-heropic" src="/images/hero_icons/${liveStats[x].killer_hero_id}.png"> 
-            ${liveStats[x].action}  
+            ${liveStats[x].action} 
             <img class="live-teampic" src="/images/team_icons/${liveStats[x].victim_team_id}.png"> 
             ${liveStats[x].victim_name} 
             <img class="live-heropic" src="/images/hero_icons/${liveStats[x].victim_hero_id}.png">`
