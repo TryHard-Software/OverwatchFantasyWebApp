@@ -56,10 +56,19 @@ function getMapIdFromOwlName(mapsArray, owlName) {
 };
 
 function mapOnId(array) {
-        var map = new Map();
-        for (var x = 0; x < array.length; x++) {
-            var item = array[x];
-            map.set(item.id, item);
-        }
-        return map;
+    var map = new Map();
+    for (var x = 0; x < array.length; x++) {
+        var item = array[x];
+        map.set(item.id, item);
+    }
+    return map;
+}
+
+function mapOnName(array) {
+    var map = new Map();
+    for (var x = 0; x < array.length; x++) {
+        var item = array[x];
+        map.set(item.id, item);
+    }
+    return map;
 }
