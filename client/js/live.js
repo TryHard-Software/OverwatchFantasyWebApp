@@ -54,22 +54,20 @@ function getRecentLiveFeed() {
         var killer_name = livefeed[i].killer_name;
         var killer_hero = livefeed[i].killer_hero;
         var killer_heroid = livefeed[i].killer_heroid;
+        var killer_team_id = livefeed[i].killer_team_id;
         var victim_id = livefeed[i].victim_id;
         var victim_name = livefeed[i].victim_name;
         var victim_hero = livefeed[i].victim_hero;
         var victim_heroid = livefeed[i].victim_heroid;
+        var victim_team_id = livefeed[i].victim_team_id;
         var action = livefeed[i].action;
-        var msgToDisplay = `${killer_name} 
-        <img class="live-playerpic" src="/images/player_headshots/${killer_id}.png" >
-        with ${killer_hero} 
-        <img class="live-playerpic" src="/images/hero_icons/${killer_heroid}.png" >
-        ${action} 
-        ${victim_name} 
-        <img class="live-playerpic" src="/images/player_headshots/${victim_id}.png" >
-        on ${victim_hero}
-        <img class="live-playerpic" src="/images/hero_icons/${victim_heroid}.png" >
-        `
-        console.log(msgToDisplay); 
+        var msgToDisplay = `<img class="live-teampic" src="/images/team_icons/${killer_team_id}.png"> 
+            ${liveStats[x].killer_name} 
+            <img class="live-heropic" src="/images/hero_icons/${killer_heroid}.png"> 
+            ${liveStats[x].action} 
+            <img class="live-teampic" src="/images/team_icons/${victim_team_id}.png"> 
+            ${liveStats[x].victim_name} 
+            <img class="live-heropic" src="/images/hero_icons/${victim_heroid}.png">`
           $('#live-feed-display').prepend($('<li class="list-group-item" data-uuid="' + uuid + '">').html(msgToDisplay));
       }
       

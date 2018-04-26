@@ -267,10 +267,14 @@ function getLiveFeedHistory(req, res) {
                     results[i].killer_id = killer_id;
                     var killer_heroid = utility.getHeroIdFromName(heroes, heroConversion[feed.killer_hero]);
                     results[i].killer_heroid = killer_heroid;
+                    var killer_team_id = teamsConversion[feed.killer_team];
+                    results[i].killer_team_id = killer_team_id;
                     var victim_id = utility.getPlayerIdFromName(players, feed.victim_name);
                     results[i].victim_id = victim_id;
                     var victim_heroid = utility.getHeroIdFromName(heroes, heroConversion[feed.victim_hero]);
                     results[i].victim_heroid = victim_heroid;
+                    var victim_team_id = teamsConversion[feed.victim_team];
+                    results[i].victim_team_id = victim_team_id;
                 }
                 results.sort(function (a, b) {
                     return new Date(a.createdAt) - new Date(b.createdAt);
