@@ -17,8 +17,6 @@ function getPlayerIdFromName(playersArray, name) {
 
 // Get heroId from name
 function getHeroIdFromName(heroesArray, name) {
-    if(name == "dva") 
-        name = "d.va"
     for (var x = 0; x < heroesArray.length; x++) {
         if (heroesArray[x].hero_name.toLowerCase() === name.toLowerCase()) {
             return heroesArray[x].id;
