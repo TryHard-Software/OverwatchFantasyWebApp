@@ -188,7 +188,7 @@ function getLiveFeedHistory(req, res) {
                 return;
             }
             var heroes = results;
-            var query = `select * from ?? ORDER BY ?? ASC LIMIT 10 `;
+            var query = `select * from ?? ORDER BY ?? DESC LIMIT 10 `;
             var values = ["livestats", "createdAt"];
             db.customizedQuery(query, values, (function (error, results) {
                 if (error) {
