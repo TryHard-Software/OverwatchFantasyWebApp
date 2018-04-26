@@ -62,7 +62,6 @@ function getRecentLiveFeed() {
         var msgToDisplay = `${killer_name} 
         <img class="live-playerpic" src="/images/player_headshots/${killer_id}.png" >
         with ${killer_hero} ${action} ${victim_name} with ${victim_hero}`
-        console.log(msgToDisplay); 
         $('#live-feed-display').prepend($('<li class="list-group-item" data-uuid="' + uuid + '">').html(msgToDisplay));
       }
       
