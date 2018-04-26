@@ -90,7 +90,7 @@ function liveStatsPost(req, res) {
             }
             res.send("Success.");
         });
-    }
+    });
 }
 
 function liveStatsGet(req, res) {
