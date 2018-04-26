@@ -207,7 +207,7 @@ function getLiveFeedHistory(req, res) {
                     results[i].victim_heroid = victim_heroid;
                 }
                 results.sort(function (a, b) {
-                    return new Date(b.createdAt) + new Date(a.createdAt);
+                    return new Date(a.createdAt) - new Date(b.createdAt);
                 });
                 res.json(results);
             }))
