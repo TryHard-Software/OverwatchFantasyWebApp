@@ -39,7 +39,11 @@
     width: 20px;
 }
 
-.live-playerpic, .live-heropic {
+.live-playerpic {
+    width: 30px;
+}
+
+.live-heropic {
     width: 30px;
     border: 2px black solid;
     border-radius: 5px;

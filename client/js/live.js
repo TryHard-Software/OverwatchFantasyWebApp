@@ -79,7 +79,6 @@ function getRecentLiveFeed() {
 function pollLiveStats() {
     $.get("/api/livestats", function (liveStats) {
         for (var x = 0; x < liveStats.length; x++) {
-
             var uuid = liveStats[x].uuid;
             var msgToDisplay = `<img class="live-teampic" src="/images/team_icons/${liveStats[x].killer_team_id}.png"> 
             ${liveStats[x].killer_name} 
