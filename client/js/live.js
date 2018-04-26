@@ -81,12 +81,13 @@ function pollLiveStats() {
         for (var x = 0; x < liveStats.length; x++) {
 
             var uuid = liveStats[x].uuid;
-            var msgToDisplay = `<img class="live-teampic" src="/images/team_icons/${team_id}.png" 
+            var msgToDisplay = `<img class="live-teampic" src="/images/team_icons/${liveStats[x].killer_team_id}.png"> 
             ${liveStats[x].killer_name} 
-            (${liveStats[x].killer_hero}) 
+            <img class="live-heropic" src="/images/hero_icons/${liveStats[x].killer_hero_id}.png"> 
             ${liveStats[x].action} 
+            <img class="live-teampic" src="/images/team_icons/${liveStats[x].victim_team_id}.png"> 
             ${liveStats[x].victim_name} 
-            (${liveStats[x].victim_hero})`
+            <img class="live-heropic" src="/images/hero_icons/${liveStats[x].victim_hero_id}.png">`
             var alreadyExists = false;
             $(".list-group-item").each(function() {
                 if (uuid == $(this).data("uuid")) {

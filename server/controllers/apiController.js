@@ -22,6 +22,36 @@ var teamsConversion = {
     "fusion": 11
 };
 
+var heroConversion = {
+    "ana": "Ana",
+    "bastion": "Bastion",
+    "junkrat": "Junkrat",
+    "lucio": "Lucio",
+    "genji": "Genji",
+    "dva": "D.Va",
+    "doomfist": "Doomfist",
+    "hanzo": "Hanzo",
+    "mccree": "Mccree",
+    "mei": "Mei",
+    "mercy": "Mercy",
+    "moira": "Moria",
+    "orisa": "Orisa",
+    "pharah": "Pharah",
+    "reaper": "Reaper",
+    "reinhardt": "Reinhardt",
+    "roadhog": "Roadhog",
+    "soldier": "Soldier: 76",
+    "sombra": "Sombra",
+    "symmetra": "Symmetra",
+    "torbjorn": "Torbjörn",
+    "tracer": "Tracer",
+    "widowmaker": "Widowmaker",
+    "winston": "Winston",
+    "zarya": "Zarya",
+    "zenyatta": "Zenyatta",
+    "brigitte": "Brigitte"
+};
+
 var liveStats = [];
 
 function liveStatsPost(req, res) {
@@ -31,19 +61,35 @@ function liveStatsPost(req, res) {
         res.send("Invalid token.");
         return;
     } else {
-        var team_id = teamsConversion[data.killer_team];
-        data.team_id = team_id;
-        var awayTeamName = teams.get(teamAwayId) ? teams.get(teamAwayId).name : "None";
-        liveStats.push(data);
-        var noEternalLoops = 0;
-        while (liveStats.length > 10) {
-            liveStats.shift();
-            noEternalLoops += 1;
-            if (noEternalLoops > 5) {
-                break
+        db.findAllRows("heroes", function (error, results) {
+            if (error) {
+                console.log(error);
+                return;
             }
-        }
-        res.send("Success.");
+            var heroes = results;
+            db.findAllRows("heroes", function (error, results) {
+                if (error) {
+                    console.log(error);
+                    return;
+                }
+            var players = results;
+            data.killer_team_id = teamsConversion[data.killer_team];
+            data.victim_team_id = teamsConversion[data.victim_team];
+            data.killer_hero_id = utility.getHeroIdFromName(heroes, heroConversion[feed.killer_hero]);
+            data.victim_hero_id = utility.getHeroIdFromName(heroes, heroConversion[feed.victim_hero]);
+            data.killer_player_id = utility.getPlayerIdFromName(players, feed.killer_name);
+            data.victim_player_id = utility.getPlayerIdFromName(players, feed.victim_name);
+            liveStats.push(data);
+            var noEternalLoops = 0;
+            while (liveStats.length > 10) {
+                liveStats.shift();
+                noEternalLoops += 1;
+                if (noEternalLoops > 5) {
+                    break
+                }
+            }
+            res.send("Success.");
+        });
     }
 }
 
@@ -200,7 +246,6 @@ function getLiveFeedHistory(req, res) {
             return;
         }
         var players = results;
-
         db.findAllRows("heroes", function (error, results) {
             if (error) {
                 console.log(error);
@@ -218,11 +263,11 @@ function getLiveFeedHistory(req, res) {
                     var feed = results[i];
                     var killer_id = utility.getPlayerIdFromName(players, feed.killer_name);
                     results[i].killer_id = killer_id;
-                    var killer_heroid = utility.getHeroIdFromName(heroes, feed.killer_hero);
+                    var killer_heroid = utility.getHeroIdFromName(heroes, heroConversion[feed.killer_hero]);
                     results[i].killer_heroid = killer_heroid;
                     var victim_id = utility.getPlayerIdFromName(players, feed.victim_name);
                     results[i].victim_id = victim_id;
-                    var victim_heroid = utility.getHeroIdFromName(heroes, feed.victim_hero);
+                    var victim_heroid = utility.getHeroIdFromName(heroes, heroConversion[feed.victim_hero]);
                     results[i].victim_heroid = victim_heroid;
                 }
                 results.sort(function (a, b) {
