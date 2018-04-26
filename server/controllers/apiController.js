@@ -7,12 +7,33 @@ var bCrypt = require('bcrypt-nodejs');
 
 module.exports = { liveStatsPost, liveStatsGet, updateRoster, updateChatHistory, getChatHistory, getLiveFeedHistory };
 
+var teamsConversion = {
+    "dragons": 2,
+    "dynasty": 3,
+    "excelsior": 10,
+    "fuel": 4,
+    "mayhem": 9,
+    "outlaws": 5,
+    "shock": 12,
+    "uprising": 1,
+    "valiant": 7,
+    "spitfire": 6,
+    "gladiators": 8,
+    "fusion": 11
+};
+
 var liveStats = [];
 
 function liveStatsPost(req, res) {
     var data = req.body;
     var token = req.query.token;
-    if (token === "wefweio587329fj32947fhwe923ry54y") {
+    if (token !== "wefweio587329fj32947fhwe923ry54y") {
+        res.send("Invalid token.");
+        return;
+    } else {
+        var team_id = teamsConversion[data.killer_team];
+        data.team_id = team_id;
+        var awayTeamName = teams.get(teamAwayId) ? teams.get(teamAwayId).name : "None";
         liveStats.push(data);
         var noEternalLoops = 0;
         while (liveStats.length > 10) {
@@ -22,10 +43,8 @@ function liveStatsPost(req, res) {
                 break
             }
         }
-    } else {
-        console.log("invalid token");
+        res.send("Success.");
     }
-    res.send("success");
 }
 
 function liveStatsGet(req, res) {

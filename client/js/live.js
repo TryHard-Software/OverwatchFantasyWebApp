@@ -79,19 +79,15 @@ function getRecentLiveFeed() {
 function pollLiveStats() {
     $.get("/api/livestats", function (liveStats) {
         for (var x = 0; x < liveStats.length; x++) {
+
+            var uuid = liveStats[x].uuid;
+            var msgToDisplay = `<img class="live-teampic" src="/images/team_icons/${team_id}.png" 
+            ${liveStats[x].killer_name} 
+            (${liveStats[x].killer_hero}) 
+            ${liveStats[x].action} 
+            ${liveStats[x].victim_name} 
+            (${liveStats[x].victim_hero})`
             var alreadyExists = false;
-            var liveStat = liveStats[x];
-            var uuid = liveStat.uuid;
-            var killer_name = liveStat.killer_name;
-            var killer_hero = liveStat.killer_hero;
-            var victim_name = liveStat.victim_name;
-            var victim_hero = liveStat.victim_hero;
-            var action = liveStat.action;
-            var msgToDisplay = `${killer_name} 
-            (${killer_hero}) 
-            ${action} 
-            ${victim_name} 
-            (${victim_hero})`
             $(".list-group-item").each(function() {
                 if (uuid == $(this).data("uuid")) {
                     alreadyExists = true;
@@ -101,5 +97,6 @@ function pollLiveStats() {
                 $('#live-feed-display').prepend($('<li class="list-group-item" data-uuid="' + uuid + '">').html(msgToDisplay));
             }
         }
+        liveStats = null;
     });
 }
