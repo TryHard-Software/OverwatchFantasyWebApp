@@ -1,7 +1,8 @@
 
 module.exports = {
     getPlayerIdFromName, getTeamNameFromTeamId,
-    getRoleFromPlayerId, mapOnId
+    getRoleFromPlayerId, mapOnId,
+    getHeroIdFromName
 };
 
 // Get playerId from name
@@ -9,6 +10,18 @@ function getPlayerIdFromName(playersArray, name) {
     for (var x = 0; x < playersArray.length; x++) {
         if (playersArray[x].name.toLowerCase() === name.toLowerCase()) {
             return playersArray[x].id;
+        }
+    }
+    return false;
+};
+
+// Get heroId from name
+function getHeroIdFromName(heroesArray, name) {
+    if(name == "dva") 
+        name = "d.va"
+    for (var x = 0; x < heroesArray.length; x++) {
+        if (heroesArray[x].hero_name.toLowerCase() === name.toLowerCase()) {
+            return heroesArray[x].id;
         }
     }
     return false;
