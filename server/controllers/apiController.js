@@ -177,29 +177,36 @@ function getLiveFeedHistory(req, res) {
         }
         var players = results;
 
-        var query = `select * from ?? ORDER BY ?? DESC LIMIT 10 `;
-        var values = ["livestats", "createdAt"];
-        db.customizedQuery(query, values, (function (error, results) {
+        db.findAllRows("heroes", function (error, results) {
             if (error) {
                 console.log(error);
                 return;
             }
-            console.log(results);
-            for (var i = 0; i < results.length; i++) {
-                var feed = results[i];
-                var killer_id = utility.getPlayerIdFromName(players, feed.killer_name);
-                results[i].killer_id = killer_id;
-                //var killer_heroid = utility.getHeroIdFromName(feed.kiler_hero);
-                //results[i].killer_heroid = killer_heroid;
-                var victim_id = utility.getPlayerIdFromName(players, feed.victim_name);
-                results[i].victim_id = victim_id;
-                //var victim_heroid = utility.getHeroIdFromName(feed.victim_hero);
-                //results[i].victim_heroid = victim_heroid;
-                console.log(results[i].killer_id); 
-            }
-            res.json(results);
-        }))
+            var heroes = results;
+            var query = `select * from ?? ORDER BY ?? DESC LIMIT 10 `;
+            var values = ["livestats", "createdAt"];
+            db.customizedQuery(query, values, (function (error, results) {
+                if (error) {
+                    console.log(error);
+                    return;
+                }
+                console.log(results);
+                for (var i = 0; i < results.length; i++) {
+                    var feed = results[i];
+                    var killer_id = utility.getPlayerIdFromName(players, feed.killer_name);
+                    results[i].killer_id = killer_id;
+                    var killer_heroid = utility.getHeroIdFromName(heroes, feed.kiler_hero);
+                    results[i].killer_heroid = killer_heroid;
+                    var victim_id = utility.getPlayerIdFromName(players, feed.victim_name);
+                    results[i].victim_id = victim_id;
+                    var victim_heroid = utility.getHeroIdFromName(heroes, feed.victim_hero);
+                    results[i].victim_heroid = victim_heroid;
+                    console.log(results[i].killer_id);
+                }
+                res.json(results);
+            }))
 
+        })
     })
 
 }

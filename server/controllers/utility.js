@@ -14,6 +14,18 @@ function getPlayerIdFromName(playersArray, name) {
     return false;
 };
 
+// Get heroId from name
+function getHeroIdFromName(heroesArray, name) {
+    if(name == "dva") 
+        name = "d.va"
+    for (var x = 0; x < heroesArray.length; x++) {
+        if (heroesArray[x].name.toLowerCase() === name.toLowerCase()) {
+            return heroesArray[x].id;
+        }
+    }
+    return false;
+};
+
 // Get teamName from teamId
 function getTeamNameFromTeamId(teamsArray, teamId) {
     for (var t = 0; t < teamsArray.length; t++) {
