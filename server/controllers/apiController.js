@@ -95,10 +95,11 @@ function liveStatsPost(req, res) {
                             break
                         }
                     }
-                    res.send("Success.");
+
                 });
             });
         });
+        res.send("Success.");
     }
 }
 
