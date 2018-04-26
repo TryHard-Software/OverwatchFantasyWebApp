@@ -67,7 +67,7 @@ function liveStatsPost(req, res) {
                 return;
             }
             var heroes = results;
-            db.findAllRows("heroes", function (error, results) {
+            db.findAllRows("players", function (error, results) {
                 if (error) {
                     console.log(error);
                     return;
@@ -79,6 +79,7 @@ function liveStatsPost(req, res) {
                 data.victim_hero_id = utility.getHeroIdFromName(heroes, heroConversion[feed.victim_hero]);
                 data.killer_player_id = utility.getPlayerIdFromName(players, feed.killer_name);
                 data.victim_player_id = utility.getPlayerIdFromName(players, feed.victim_name);
+                console.log(data);
                 liveStats.push(data);
                 var noEternalLoops = 0;
                 while (liveStats.length > 10) {
