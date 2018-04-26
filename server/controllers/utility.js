@@ -1,7 +1,8 @@
 
 module.exports = {
     getPlayerIdFromName, getTeamNameFromTeamId,
-    getRoleFromPlayerId, mapOnId
+    getRoleFromPlayerId, mapOnId,
+    getHeroIdFromName
 };
 
 // Get playerId from name
@@ -19,7 +20,7 @@ function getHeroIdFromName(heroesArray, name) {
     if(name == "dva") 
         name = "d.va"
     for (var x = 0; x < heroesArray.length; x++) {
-        if (heroesArray[x].name.toLowerCase() === name.toLowerCase()) {
+        if (heroesArray[x].hero_name.toLowerCase() === name.toLowerCase()) {
             return heroesArray[x].id;
         }
     }

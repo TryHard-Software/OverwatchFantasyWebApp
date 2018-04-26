@@ -61,7 +61,6 @@ function getRecentLiveFeed() {
         var action = livefeed[i].action;
         var msgToDisplay = `${killer_name} 
         <img class="live-playerpic" src="/images/player_headshots/${killer_id}.png" >
-<<<<<<< HEAD
         with ${killer_hero} 
         <img class="live-playerpic" src="/images/hero_icons/${killer_heroid}.png" >
         ${action} 
@@ -72,10 +71,6 @@ function getRecentLiveFeed() {
         `
         console.log(msgToDisplay); 
         $('#live-feed-display').prepend($('<li class="list-group-item">').html(msgToDisplay));
-=======
-        with ${killer_hero} ${action} ${victim_name} with ${victim_hero}`
-        $('#live-feed-display').prepend($('<li class="list-group-item" data-uuid="' + uuid + '">').html(msgToDisplay));
->>>>>>> origin/master
       }
       
     })
@@ -95,7 +90,15 @@ function pollLiveStats() {
             var victim_hero = liveStat.victim_hero;
             var action = liveStat.action;
             var msgToDisplay = `${killer_name} 
-            with ${killer_hero} ${action} ${victim_name} with ${victim_hero}`
+            <img class="live-playerpic" src="/images/player_headshots/${killer_id}.png" >
+            with ${killer_hero} 
+            <img class="live-playerpic" src="/images/hero_icons/${killer_heroid}.png" >
+            ${action} 
+            ${victim_name} 
+            <img class="live-playerpic" src="/images/player_headshots/${victim_id}.png" >
+            with ${victim_hero}
+            <img class="live-playerpic" src="/images/hero_icons/${victim_heroid}.png" >`
+            
             $(".list-group-item").each(function() {
                 if (uuid == $(this).data("uuid")) {
                     alreadyExists = true;
