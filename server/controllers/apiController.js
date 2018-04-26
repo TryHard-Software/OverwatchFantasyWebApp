@@ -75,10 +75,10 @@ function liveStatsPost(req, res) {
                 var players = results;
                 data.killer_team_id = teamsConversion[data.killer_team];
                 data.victim_team_id = teamsConversion[data.victim_team];
-                data.killer_hero_id = utility.getHeroIdFromName(heroes, heroConversion[feed.killer_hero]);
-                data.victim_hero_id = utility.getHeroIdFromName(heroes, heroConversion[feed.victim_hero]);
-                data.killer_player_id = utility.getPlayerIdFromName(players, feed.killer_name);
-                data.victim_player_id = utility.getPlayerIdFromName(players, feed.victim_name);
+                data.killer_hero_id = utility.getHeroIdFromName(heroes, heroConversion[data.killer_hero]);
+                data.victim_hero_id = utility.getHeroIdFromName(heroes, heroConversion[data.victim_hero]);
+                data.killer_player_id = utility.getPlayerIdFromName(players, data.killer_name);
+                data.victim_player_id = utility.getPlayerIdFromName(players, data.victim_name);
                 console.log(data);
                 liveStats.push(data);
                 var noEternalLoops = 0;
