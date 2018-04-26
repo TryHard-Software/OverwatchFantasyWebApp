@@ -72,25 +72,26 @@ function liveStatsPost(req, res) {
                     console.log(error);
                     return;
                 }
-            var players = results;
-            data.killer_team_id = teamsConversion[data.killer_team];
-            data.victim_team_id = teamsConversion[data.victim_team];
-            data.killer_hero_id = utility.getHeroIdFromName(heroes, heroConversion[feed.killer_hero]);
-            data.victim_hero_id = utility.getHeroIdFromName(heroes, heroConversion[feed.victim_hero]);
-            data.killer_player_id = utility.getPlayerIdFromName(players, feed.killer_name);
-            data.victim_player_id = utility.getPlayerIdFromName(players, feed.victim_name);
-            liveStats.push(data);
-            var noEternalLoops = 0;
-            while (liveStats.length > 10) {
-                liveStats.shift();
-                noEternalLoops += 1;
-                if (noEternalLoops > 5) {
-                    break
+                var players = results;
+                data.killer_team_id = teamsConversion[data.killer_team];
+                data.victim_team_id = teamsConversion[data.victim_team];
+                data.killer_hero_id = utility.getHeroIdFromName(heroes, heroConversion[feed.killer_hero]);
+                data.victim_hero_id = utility.getHeroIdFromName(heroes, heroConversion[feed.victim_hero]);
+                data.killer_player_id = utility.getPlayerIdFromName(players, feed.killer_name);
+                data.victim_player_id = utility.getPlayerIdFromName(players, feed.victim_name);
+                liveStats.push(data);
+                var noEternalLoops = 0;
+                while (liveStats.length > 10) {
+                    liveStats.shift();
+                    noEternalLoops += 1;
+                    if (noEternalLoops > 5) {
+                        break
+                    }
                 }
-            }
-            res.send("Success.");
+                res.send("Success.");
+            });
         });
-    });
+    }
 }
 
 function liveStatsGet(req, res) {
