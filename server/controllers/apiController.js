@@ -34,7 +34,7 @@ var heroConversion = {
     "mccree": "Mccree",
     "mei": "Mei",
     "mercy": "Mercy",
-    "moira": "Moria",
+    "moira": "Moira",
     "orisa": "Orisa",
     "pharah": "Pharah",
     "reaper": "Reaper",
