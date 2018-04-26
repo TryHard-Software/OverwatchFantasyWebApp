@@ -70,7 +70,7 @@ function getRecentLiveFeed() {
         <img class="live-playerpic" src="/images/hero_icons/${victim_heroid}.png" >
         `
         console.log(msgToDisplay); 
-        $('#live-feed-display').prepend($('<li class="list-group-item">').html(msgToDisplay));
+          $('#live-feed-display').prepend($('<li class="list-group-item" data-uuid="' + uuid + '">').html(msgToDisplay));
       }
       
     })
@@ -82,23 +82,16 @@ function pollLiveStats() {
             var alreadyExists = false;
             var liveStat = liveStats[x];
             var uuid = liveStat.uuid;
-            var killer_id = liveStat.killer_id;
             var killer_name = liveStat.killer_name;
             var killer_hero = liveStat.killer_hero;
-            var victim_id = liveStat.victim_id;
             var victim_name = liveStat.victim_name;
             var victim_hero = liveStat.victim_hero;
             var action = liveStat.action;
             var msgToDisplay = `${killer_name} 
-            <img class="live-playerpic" src="/images/player_headshots/${killer_id}.png" >
-            with ${killer_hero} 
-            <img class="live-playerpic" src="/images/hero_icons/${killer_heroid}.png" >
+            (${killer_hero}) 
             ${action} 
             ${victim_name} 
-            <img class="live-playerpic" src="/images/player_headshots/${victim_id}.png" >
-            with ${victim_hero}
-            <img class="live-playerpic" src="/images/hero_icons/${victim_heroid}.png" >`
-            
+            (${victim_hero})`
             $(".list-group-item").each(function() {
                 if (uuid == $(this).data("uuid")) {
                     alreadyExists = true;
