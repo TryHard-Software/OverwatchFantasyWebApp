@@ -336,6 +336,7 @@ function getLiveFeedHistory(req, res) {
                                                     roster: roster,
                                                     weights: weights
                                                 }
+
                                                 res.json(data);
                                             });
                                         }
