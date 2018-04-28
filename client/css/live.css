@@ -57,3 +57,10 @@
 .live-points-highlight {
     color: red;
 }
+
+#live-video-toggle-label {
+    position: relative;
+    top: 6px;
+    font-family: ovw-regular;
+    font-size: 30px;
+}

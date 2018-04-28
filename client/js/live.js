@@ -4,49 +4,25 @@ var weights;
 
 $(document).ready(function () {
 
-    setInterval(function() {
+    insertTwitchEmbed();
+
+    getRecentLiveFeed();
+
+    setInterval(function () {
         pollLiveStats();
     }, 1000);
 
-    var embed = new Twitch.Player("twitch-embed", {
-        width: 600,
-        height: 340,
-        channel: "overwatchleague"
-    })
-    // if mobile
-    if (screen.width < 768) {
-        $("#live-mobile-info-text").show();
-        setTimeout(function () {
-            $("#live-mobile-info-text").remove();
-        }, 3000);
-        // if not mobile
-    } else {
-        $("#live-resize-highlighter").show();
-        $("#live-resize-info-text").show();
-        setTimeout(function () {
-            $("#live-resize-highlighter").remove();
-            $("#live-resize-info-text").remove();
-        }, 3000);
-    }
-    var twitchContainer = $(".twitch-container");
-    if ($(window).width() > 640) {
-        twitchContainer.height(370);
-        twitchContainer.width(640);
-    }
-    window.onresize = resize;
-    setInterval(function () {
-        resize();
-    }, 200);
-    function resize() {
-        w = twitchContainer.width();
-        h = twitchContainer.height();
-        embed.setWidth(w * .98);
-        embed.setHeight(w * 9 / 16 * .98);
-    }
-    
+    $("#live-video-toggle-button").on("change", function(e) {
+        var checked = document.getElementById("live-video-toggle-button").checked;
+        console.log(checked);
+        if (checked) {
+            insertTwitchEmbed();
+        } else {
+            $(".video-container-inner").remove();
+        }
+    });
 
-    getRecentLiveFeed();
-})
+});
 
 
 function getRecentLiveFeed() {
@@ -139,4 +115,55 @@ function pollLiveStats() {
         }
         liveStats = null;
     });
+}
+
+function insertTwitchEmbed() {
+    var videoHtml = `
+            <div class="video-container-inner">
+                <div class="twitch-container">
+                    <div id="twitch-embed">
+                        <div id="live-resize-highlighter" hidden>
+                        </div>
+                    </div>
+                </div>
+                <h2 id="live-resize-info-text" hidden>Window is resizable</h2>
+                <h2 id="live-mobile-info-text" hidden>On Mobile, tap to "pause" and then "play" again</h2>
+            </div>
+            `
+    $(".video-container").html(videoHtml);
+    var embed = new Twitch.Player("twitch-embed", {
+        width: 600,
+        height: 340,
+        channel: "overwatchleague"
+    });
+    // if mobile
+    if (screen.width < 768) {
+        $("#live-mobile-info-text").show();
+        setTimeout(function () {
+            $("#live-mobile-info-text").remove();
+        }, 3000);
+        // if not mobile
+    } else {
+        $("#live-resize-highlighter").show();
+        $("#live-resize-info-text").show();
+        setTimeout(function () {
+            $("#live-resize-highlighter").remove();
+            $("#live-resize-info-text").remove();
+        }, 3000);
+    }
+    var twitchContainer = $(".twitch-container");
+    if ($(window).width() > 640) {
+        twitchContainer.height(370);
+        twitchContainer.width(640);
+    }
+    window.onresize = resize;
+    setInterval(function () {
+        resize();
+    }, 200);
+    function resize() {
+        w = twitchContainer.width();
+        h = twitchContainer.height();
+        embed.setWidth(w * .98);
+        embed.setHeight(w * 9 / 16 * .98);
+    }
 }
