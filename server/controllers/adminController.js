@@ -240,6 +240,9 @@ function seedWeights(req, res) {
                             kill_weight: parseFloat((1 / goodMapStats.kpm * 10).toFixed(4)) * mercyPenalty,
                             death_weight: parseFloat((1 / goodMapStats.dpm * 10).toFixed(4))
                         };
+                        if (insertObj.kill_weight > 300) {
+                            insertObj.kill_weight = 297.5102;
+                        }
                         db.insert("weights", insertObj, function(error, result) {
                             if (error) {
                                 console.log(error);
@@ -265,6 +268,9 @@ function seedWeights(req, res) {
                             kill_weight: parseFloat((1 / badMapStats.kpm * 10).toFixed(4)) * mercyPenalty,
                             death_weight: parseFloat((1 / badMapStats.dpm * 10).toFixed(4))
                         };
+                        if (insertObj.kill_weight > 300) {
+                            insertObj.kill_weight = 297.5102;
+                        }
                         db.insert("weights", insertObj, function (error, result) {
                             if (error) {
                                 console.log(error);
