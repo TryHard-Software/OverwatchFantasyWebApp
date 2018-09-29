@@ -3,12 +3,27 @@ var mysql = require('mysql');
 var moment = require('moment'); 
 
 var config = require(`../../config/database.js`);
-var connection = mysql.createConnection(config)
 
-connection.connect(function (error) {
-    if (error) throw error;
-});
+var connection;
 
+function dbConnect() {
+    connection = mysql.createConnection(config);
+    connection.connect(function onConnect(err) {
+        if (err) {
+            console.log('error when connecting to db:', err);
+            setTimeout(handleDisconnect, 10000);
+        }
+    });
+    connection.on('error', function onError(err) {
+        console.log('db error', err);
+        if (err.code == 'PROTOCOL_CONNECTION_LOST') {
+            dbConnect();
+        } else {
+            throw err;
+        }
+    });
+}
+dbConnect();
 
 var db = {
     findAllRows: function (tableName, callback) {
