@@ -19,6 +19,7 @@ copyFolder("./client/css", "./build/client/css", (err) => { if (err) console.err
 copyFolder("./client/fonts", "./build/client/fonts", (err) => { if (err) console.error(err); });
 copyFolder("./client/images", "./build/client/images", (err) => { if (err) console.error(err); });
 copyFolder("./client/js", "./build/client/js", (err) => { if (err) console.error(err); });
+copyFolder("./client/.well-known", "./build/client/.well-known", (err) => { if (err) console.error(err); });
 
 function copyFolder(source, destination, callback) {
     rimraf(destination, function (err) {
