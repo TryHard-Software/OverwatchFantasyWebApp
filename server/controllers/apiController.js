@@ -19,7 +19,15 @@ var teamsConversion = {
     "valiant": 7,
     "spitfire": 6,
     "gladiators": 8,
-    "fusion": 11
+    "fusion": 11,
+    "reign": 1000,
+    "hunters": 1001,
+    "charge": 1002,
+    "spark": 1003,
+    "eternal": 1004,
+    "defiant": 1005,
+    "titans": 1006,
+    "justice": 1007
 };
 
 var heroConversion = {
@@ -49,7 +57,10 @@ var heroConversion = {
     "winston": "Winston",
     "zarya": "Zarya",
     "zenyatta": "Zenyatta",
-    "brigitte": "Brigitte"
+    "brigitte": "Brigitte",
+    "hammond": "Hammond",
+    "ashe": "Ashe",
+    "baptiste": "Baptiste"
 };
 
 var liveStats = [];
