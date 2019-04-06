@@ -41,32 +41,48 @@
                     <div class="match-maps">
                         <div class="map">
                             <p class="map-header">{{map1Name}}</p>
-                            <img class="map-image" src="/images/maps/{{map1Id}}.png">
+                            <img class="map-image" src="/images/maps/{{map1Id}}.png"> {{#if map1WinnerId }}
                             <p class="map-caption">Winner:
                                 <img class="winning-team-image" width="40px" src="/images/team_icons/{{map1WinnerId}}.png"> </p>
+                            {{else }}
+                            
+                            <p class="map-caption">Not Played </p>
+                            {{/if}}
                             <button class="btn btn-primary toggleStatsButton" data-id="{{id}}" data-map="1">Stats </button>
                         </div>
 
                         <div class="map">
                             <p class="map-header">{{map2Name}}</p>
-                            <img class="map-image" src="/images/maps/{{map2Id}}.png">
+                            <img class="map-image" src="/images/maps/{{map2Id}}.png"> {{#if map2WinnerId }}
                             <p class="map-caption">Winner:
                                 <img class="winning-team-image" width="40px" src="/images/team_icons/{{map2WinnerId}}.png"> </p>
+                            {{else }}
+                            
+                            <p class="map-caption">Not Played </p>
+                            {{/if}}
                             <button class="btn btn-primary toggleStatsButton" data-id="{{id}}" data-map="2">Stats </button>
                         </div>
 
                         <div class="map">
                             <p class="map-header">{{map3Name}}</p>
-                            <img class="map-image" src="/images/maps/{{map3Id}}.png">
+                            <img class="map-image" src="/images/maps/{{map3Id}}.png"> {{#if map3WinnerId }}
                             <p class="map-caption">Winner:
                                 <img class="winning-team-image" width="40px" src="/images/team_icons/{{map3WinnerId}}.png"> </p>
+                            {{else }}
+                            
+                            <p class="map-caption">Not Played </p>
+                            {{/if}}
                             <button class="btn btn-primary toggleStatsButton" data-id="{{id}}" data-map="3">Stats </button>
                         </div>
                         <div class="map">
                             <p class="map-header">{{map4Name}}</p>
-                            <img class="map-image" src="/images/maps/{{map4Id}}.png">
+                            <img class="map-image" src="/images/maps/{{map4Id}}.png"> {{#if map4WinnerId }}
                             <p class="map-caption">Winner:
                                 <img class="winning-team-image" width="40px" src="/images/team_icons/{{map4WinnerId}}.png"> </p>
+                            {{else }}
+                            
+                            <p class="map-caption">Not Played </p>
+                            {{/if}}
                             <button class="btn btn-primary toggleStatsButton" data-id="{{id}}" data-map="4">Stats </button>
                         </div>
                         <div class="map">
