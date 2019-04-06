@@ -87,10 +87,10 @@ function schedule(req, res) {
                                     if (map4WinnerId == 0) map4WinnerId = "tie";
                                     var map5WinnerId = match.map5_winner;
                                     if (map5WinnerId == 0) map5WinnerId = "tie";
-                                    var map1Id = match.map1 ? match.map5 : 99;
-                                    var map2Id = match.map2 ? match.map5 : 99;
-                                    var map3Id = match.map3 ? match.map5 : 99;
-                                    var map4Id = match.map4 ? match.map5 : 99;
+                                    var map1Id = match.map1 ? match.map1 : 99;
+                                    var map2Id = match.map2 ? match.map2 : 99;
+                                    var map3Id = match.map3 ? match.map3 : 99;
+                                    var map4Id = match.map4 ? match.map4 : 99;
                                     var map5Id = match.map5 ? match.map5 : 99;
                                     var awayTeamName = teams.get(teamAwayId) ? teams.get(teamAwayId).name : "None";
                                     var homeTeamName = teams.get(teamHomeId) ? teams.get(teamHomeId).name : "None";
