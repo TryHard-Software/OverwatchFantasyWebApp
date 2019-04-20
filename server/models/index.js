@@ -11,7 +11,7 @@ function dbConnect() {
     connection.connect(function onConnect(err) {
         if (err) {
             console.log('error when connecting to db:', err);
-            setTimeout(handleDisconnect, 10000);
+            // setTimeout(handleDisconnect, 10000);
         }
     });
     connection.on('error', function onError(err) {
