@@ -4,6 +4,7 @@
 /logs
 /crash_*
 /package-lock.json
+/frames
 
 # dependencies
 /node_modules
