@@ -6,7 +6,7 @@ import './live-view.scss';
 
 class Live extends React.Component {
 
-
+    
     render () {
         return (
             <div class="container-live">

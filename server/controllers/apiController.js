@@ -3,6 +3,7 @@ var db = require('../models');
 var utility = require("./utility.js");
 var moment = require('moment');
 var bCrypt = require('bcrypt-nodejs');
+var uuid = require('uuid/v4');
 
 
 module.exports = { liveStatsPost, liveStatsGet, updateRoster, updateChatHistory, getChatHistory, getLiveFeedHistory };
@@ -72,6 +73,7 @@ function liveStatsPost(req, res) {
         res.send("Invalid token.");
         return;
     } else {
+        res.send("Success.");
         db.findAllRows("heroes", function (error, results) {
             if (error) {
                 console.log(error);
@@ -90,13 +92,15 @@ function liveStatsPost(req, res) {
                         return;
                     }
                     var maps = results;
+                    data.uuid = uuid();
                     data.killer_team_id = teamsConversion[data.killer_team];
                     data.victim_team_id = teamsConversion[data.victim_team];
                     data.killer_hero_id = utility.getHeroIdFromName(heroes, heroConversion[data.killer_hero]);
                     data.victim_hero_id = utility.getHeroIdFromName(heroes, heroConversion[data.victim_hero]);
                     data.killer_player_id = utility.getPlayerIdFromName(players, data.killer_name);
                     data.victim_player_id = utility.getPlayerIdFromName(players, data.victim_name);
-                    data.map_id = utility.getMapIdFromOwlName(maps, data.map_name);
+                    data.action = "killed";
+                    //data.map_id = utility.getMapIdFromOwlName(maps, data.map_name);
                     liveStats.push(data);
                     var noEternalLoops = 0;
                     while (liveStats.length > 10) {
@@ -106,11 +110,18 @@ function liveStatsPost(req, res) {
                             break
                         }
                     }
-
+                    var query = `INSERT INTO livestats (uuid, killer_team,
+                        killer_name, killer_hero, victim_team, victim_name, victim_hero, action, map_name, killer_position, victim_position)
+                    VALUES
+                        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+                    db.customizedQuery(query, [data.uuid, data.killer_team, data.killer_name, data.killer_hero,
+                        data.victim_team, data.victim_name, data.victim_hero, 'killed', '', 0, 0], function (error, results) {
+                        if (error) return console.log(error);
+                        console.log(results[0]);
+                    });
                 });
             });
         });
-        res.send("Success.");
     }
 }
 
@@ -326,18 +337,18 @@ function getLiveFeedHistory(req, res) {
                                                     var feed = results[i];
                                                     var killer_id = utility.getPlayerIdFromName(players, feed.killer_name);
                                                     results[i].killer_id = killer_id;
-                                                    var killer_heroid = utility.getHeroIdFromName(heroes, heroConversion[feed.killer_hero]);
-                                                    results[i].killer_heroid = killer_heroid;
+                                                    var killer_hero_id = utility.getHeroIdFromName(heroes, heroConversion[feed.killer_hero]);
+                                                    results[i].killer_hero_id = killer_hero_id;
                                                     var killer_team_id = teamsConversion[feed.killer_team];
                                                     results[i].killer_team_id = killer_team_id;
                                                     var victim_id = utility.getPlayerIdFromName(players, feed.victim_name);
                                                     results[i].victim_id = victim_id;
-                                                    var victim_heroid = utility.getHeroIdFromName(heroes, heroConversion[feed.victim_hero]);
-                                                    results[i].victim_heroid = victim_heroid;
+                                                    var victim_hero_id = utility.getHeroIdFromName(heroes, heroConversion[feed.victim_hero]);
+                                                    results[i].victim_hero_id = victim_hero_id;
                                                     var victim_team_id = teamsConversion[feed.victim_team];
                                                     results[i].victim_team_id = victim_team_id;
-                                                    var map_id = utility.getMapIdFromOwlName(maps, feed.map_name);
-                                                    results[i].map_id = map_id;
+                                                    // var map_id = utility.getMapIdFromOwlName(maps, feed.map_name);
+                                                    // results[i].map_id = map_id;
                                                 }
                                                 results.sort(function (a, b) {
                                                     return new Date(a.createdAt) - new Date(b.createdAt);
@@ -346,8 +357,7 @@ function getLiveFeedHistory(req, res) {
                                                     feeds: results,
                                                     roster: roster,
                                                     weights: weights
-                                                }
-
+                                                };
                                                 res.json(data);
                                             });
                                         }
