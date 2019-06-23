@@ -39,14 +39,15 @@ function getRecentLiveFeed() {
         var killer_id = livefeed[i].killer_id;
         var killer_name = livefeed[i].killer_name;
         var killer_hero = livefeed[i].killer_hero;
-        var killer_heroid = livefeed[i].killer_heroid;
+        var killer_hero_id = livefeed[i].killer_hero_id;
         var killer_team_id = livefeed[i].killer_team_id;
         var victim_id = livefeed[i].victim_id;
         var victim_name = livefeed[i].victim_name;
         var victim_hero = livefeed[i].victim_hero;
-        var victim_heroid = livefeed[i].victim_heroid;
+        var victim_hero_id = livefeed[i].victim_hero_id;
         var victim_team_id = livefeed[i].victim_team_id;
-        var action = livefeed[i].action;
+        // var action = livefeed[i].action;
+        var action = 'killed';
         var map_id = livefeed[i].map_id;
         // if it has no map id, just go with 1. this is just for reference anyways.
         if (!map_id) {
@@ -58,17 +59,17 @@ function getRecentLiveFeed() {
             pointsHighlightCss = " live-points-highlight'";
         }
         // dont show points for ressurections. we dont calculate those yet
-        var points = "<span class='live-points" + pointsHighlightCss + "'> +" + weights[killer_heroid][map_id].toFixed(2) + "</span>";
-        if (action === "resurrected") {
-            points = "";
-        }
+        var points = "<span class='live-points" + pointsHighlightCss + "'> +" + weights[killer_hero_id][map_id].toFixed(2) + "</span>";
+        // if (action === "resurrected") {
+        //     points = "";
+        // }
         var msgToDisplay = `<img class="live-teampic" src="/images/team_icons/${killer_team_id}.png"> 
             ${killer_name} 
-            <img class="live-heropic" src="/images/hero_icons/${killer_heroid}.png">  
+            <img class="live-heropic" src="/images/hero_icons/${killer_hero_id}.png">  
              ${action} 
             <img class="live-teampic" src="/images/team_icons/${victim_team_id}.png"> 
             ${victim_name} 
-            <img class="live-heropic" src="/images/hero_icons/${victim_heroid}.png">` + points
+            <img class="live-heropic" src="/images/hero_icons/${victim_hero_id}.png">` + points
           $('#live-feed-display').prepend($('<li class="list-group-item" data-uuid="' + uuid + '">').html(msgToDisplay));
       }
       
