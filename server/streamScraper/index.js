@@ -437,7 +437,9 @@ function childProcessSpawnP(cmd, args) {
             return reject(data);
         });
         task.stderr.on('data', (data) => {
-            data = (new Buffer.from(data, 'binary')).toString('utf8')
+            data = (new Buffer.from(data, 'binary')).toString('utf8');
+            console.log("========= child proccess error ==========");
+            console.log(data);
             return reject(data);
         });
         task.on('close', (code, signal) => {
