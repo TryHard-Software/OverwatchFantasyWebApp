@@ -26,6 +26,11 @@ if (!fs.existsSync(FRAMES_FOLDER_NAME)) {
                 await scrapeStream();
             } catch (error) {
                 console.error(error);
+                try {
+                    ffmpeg.kill('SIGINT');
+                } catch (error) {
+                    // do nothing
+                }
                 const transpiredMs = Date.now() - epochStart;
                 if (transpiredMs < MIN_WAIT_MS) {
                     await timeout(MIN_WAIT_MS - transpiredMs);
@@ -34,6 +39,11 @@ if (!fs.existsSync(FRAMES_FOLDER_NAME)) {
         }
     } catch (error) {
         console.error(error);
+        try {
+            ffmpeg.kill('SIGINT');
+        } catch (error) {
+            // do nothing
+        }
     }
 })();
 
