@@ -49,13 +49,13 @@ async function scrapeStream() {
         });
         const matchStatus = await getLiveMatch();
         // console.log(matchStatus);
-        // if (matchStatus.status !== "IN_PROGRESS") {
-        //     playerHeroes = ["", "", "", "", "", "", "", "", "", "", "", ""];
-        //     playerHeroGuesses = [[], [], [], [], [], [], [], [], [], [], [], []];
-        //     killIdTicker = 0;
-        //     kills = {};
-        //     throw "match not in progress";
-        // }
+        if (matchStatus.status !== "IN_PROGRESS") {
+            playerHeroes = ["", "", "", "", "", "", "", "", "", "", "", ""];
+            playerHeroGuesses = [[], [], [], [], [], [], [], [], [], [], [], []];
+            killIdTicker = 0;
+            kills = {};
+            throw "match not in progress";
+        }
         // const { body: mapReqBody } = await requestP({
         //     method: "GET",
         //     url: "https://api.overwatchleague.com/stats/matches/21349/maps/3",
