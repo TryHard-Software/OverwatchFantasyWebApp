@@ -19,6 +19,7 @@ if (!fs.existsSync(FRAMES_FOLDER_NAME)) {
 (async () => {
     try {
         let epochStart;
+        return;
         for (let b = 0; b < 10000000; b++) {
             console.log("=========== Restart ===========");
             epochStart = Date.now();
