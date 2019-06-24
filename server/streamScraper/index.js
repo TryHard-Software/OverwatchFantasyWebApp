@@ -5,6 +5,7 @@ const path = require('path');
 
 const MIN_WAIT_MS = 30000;
 const FRAMES_FOLDER_NAME = __dirname + '/frames';
+let ffmpeg;
 
 let playerHeroes = ["", "", "", "", "", "", "", "", "", "", "", ""];
 let playerHeroGuesses = [[], [], [], [], [], [], [], [], [], [], [], []];
@@ -118,7 +119,8 @@ async function scrapeStream() {
             right: teamNameMap[rightTeam]
         };
         let alreadyAnalyzedFrames = [];
-        const ffmpeg = child_process.spawn("ffmpeg", [
+        ffmpeg.kill('SIGINT');
+        ffmpeg = child_process.spawn("ffmpeg", [
             '-y',
             '-i', mapStreamUri,
             '-vf', 'fps=1', // PCM 16bits, little-endian
