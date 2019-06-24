@@ -12,7 +12,7 @@ export default props =>
                         We are overwatch enthusiasts that enjoy full-stack development.
                     </div>
                     <div class="dev-profile">
-                        <img class="dev-icon" src="/images/hero_icons/genji.png" />
+                        <img class="dev-icon" alt="genji" src="/images/hero_icons/genji.png" />
                         <h4>Charlie Oh</h4>
                         <p>UCI Alumni </p>
                         <p>Programmer Analyst</p>
@@ -22,7 +22,7 @@ export default props =>
                         <p>mun5424@gmail.com</p>
                     </div>
                     <div class="dev-profile">
-                        <img class="dev-icon" src="/images/hero_icons/tracer.png" />
+                        <img class="dev-icon" alt="tracer" src="/images/hero_icons/tracer.png" />
                         <h4>Ian Shaffer </h4>
                         <p>Full-Stack Developer</p>
                         <p>Application Developer</p>

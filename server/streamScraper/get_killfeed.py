@@ -4,6 +4,8 @@ from cv2 import cv2
 import sys
 import os
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
 if len(sys.argv) < 2:
     print("no filename")
     sys.exit(0)
@@ -19,7 +21,7 @@ TEAM_COLOR_THRESHOLD = 140
 # LOGO_THRESHOLD = 0.01
 # COVERAGE_CONTINUES_THRESHOLD = 0.01
 
-heroes = [x.replace(".png", "") for x in os.listdir("heroes")]
+heroes = [x.replace(".png", "") for x in os.listdir(dir_path + "/heroes")]
 
 killfeed = img[140:410, 890:1260]
 # replay = img[154:212, 152:346]
@@ -132,7 +134,7 @@ for hero in heroes:
 
     method = cv2.TM_SQDIFF_NORMED
 
-    small_image = cv2.imread("heroes/" + hero + '.png')
+    small_image = cv2.imread(dir_path + "/heroes/" + hero + '.png')
     large_image = killfeed
 
     result = cv2.matchTemplate(small_image, large_image, method)

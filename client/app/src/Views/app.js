@@ -22,10 +22,10 @@ class App extends React.Component {
       <div className="app">
           {/* backgrounds */}
           <Switch>
-            <Route exact path="/app/live" component={() => (<div><html className="bg-wrapper live-bg" /></div>)} />
-            <Route exact path="/app/news" component={() => (<div><html className="bg-wrapper news-bg" /></div>)} />
-            <Route exact path="/app/information" component={() => (<div><img className="bg-wrapper information-bg" /></div>)} />
-            <Route exact path="/app/about" component={() => (<div><img className="bg-wrapper about-bg" /></div>)} />
+            <Route exact path="/app/live" component={() => (<div><html alt="live-bg" className="bg-wrapper live-bg" /></div>)} />
+            <Route exact path="/app/news" component={() => (<div><html alt="news-bg" className="bg-wrapper news-bg" /></div>)} />
+            <Route exact path="/app/information" component={() => (<div><img alt="information-bg" className="bg-wrapper information-bg" /></div>)} />
+            <Route exact path="/app/about" component={() => (<div><img alt="about-bg" className="bg-wrapper about-bg" /></div>)} />
             <Route component={() => (<div><html className="bg-wrapper notfound-bg" /></div>)} />
           </Switch>
 
@@ -37,7 +37,7 @@ class App extends React.Component {
                   <img className="logo-ovw" src="/images/logos/light-logo.png" width="30" height="30" alt="logo" /> FANTASY LEAGUE</a>
                   <button className="navbar-toggle navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar-toggle" aria-controls="navbar-toggle"
                     aria-expanded="false" aria-label="Toggle navigation">
-                    <img height="30" src="/images/logos/threelines.png" />
+                    <img alt="hamburger" height="30" src="/images/logos/threelines.png" />
  
                   </button>
               </div>

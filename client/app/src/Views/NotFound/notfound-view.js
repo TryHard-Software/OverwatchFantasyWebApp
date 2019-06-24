@@ -11,6 +11,6 @@ export default props =>
           <h5>Perhaps try not playing Hanzo in competitive????</h5>
         </div>
       </div>
-      <img id="image_404" src="/images/backgrounds/junkrat-orig.jpg" width="214px" />
+      <img id="image_404" alt="404" src="/images/backgrounds/junkrat-orig.jpg" width="214px" />
     </div>
   </div>

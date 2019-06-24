@@ -4,7 +4,7 @@
 /logs
 /crash_*
 /package-lock.json
-/frames
+/server/streamScraper/frames
 
 # dependencies
 /node_modules

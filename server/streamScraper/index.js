@@ -4,7 +4,7 @@ var fs = require('fs');
 const path = require('path');
 
 const MIN_WAIT_MS = 30000;
-const FRAMES_FOLDER_NAME = 'frames';
+const FRAMES_FOLDER_NAME = __dirname + '/frames';
 
 let playerHeroes = ["", "", "", "", "", "", "", "", "", "", "", ""];
 let playerHeroGuesses = [[], [], [], [], [], [], [], [], [], [], [], []];
@@ -49,13 +49,13 @@ async function scrapeStream() {
         });
         const matchStatus = await getLiveMatch();
         // console.log(matchStatus);
-        if (matchStatus.status !== "IN_PROGRESS") {
-            playerHeroes = ["", "", "", "", "", "", "", "", "", "", "", ""];
-            playerHeroGuesses = [[], [], [], [], [], [], [], [], [], [], [], []];
-            killIdTicker = 0;
-            kills = {};
-            throw "match not in progress";
-        }
+        // if (matchStatus.status !== "IN_PROGRESS") {
+        //     playerHeroes = ["", "", "", "", "", "", "", "", "", "", "", ""];
+        //     playerHeroGuesses = [[], [], [], [], [], [], [], [], [], [], [], []];
+        //     killIdTicker = 0;
+        //     kills = {};
+        //     throw "match not in progress";
+        // }
         // const { body: mapReqBody } = await requestP({
         //     method: "GET",
         //     url: "https://api.overwatchleague.com/stats/matches/21349/maps/3",
@@ -162,7 +162,7 @@ async function scrapeStream() {
                 }
             });
             let pGuesses = await childProcessSpawnP("python", [
-                'get_team_heroes.py',
+                __dirname + '/get_team_heroes.py',
                 FRAMES_FOLDER_NAME + '/' + file
             ]);
             if (pGuesses == "timeout") {
@@ -188,7 +188,7 @@ async function scrapeStream() {
             }
             if (!teamsTracked) {
                 let teamGuesses = await childProcessSpawnP("python", [
-                    'get_teams.py',
+                    __dirname + '/get_teams.py',
                     FRAMES_FOLDER_NAME + '/' + file
                 ]);
                 if (teamGuesses == "timeout") {
@@ -246,7 +246,7 @@ async function scrapeStream() {
                 }
             }
             let guesses = await childProcessSpawnP("python", [
-                'get_killfeed.py',
+                __dirname + '/get_killfeed.py',
                 FRAMES_FOLDER_NAME + '/' + file
             ]);
             if (guesses == "timeout") {

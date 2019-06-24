@@ -4,6 +4,8 @@ from cv2 import cv2
 import sys
 import os
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
 if len(sys.argv) < 2:
     print("no filename")
     sys.exit(0)
@@ -21,7 +23,7 @@ WHITEISH_RATIO = 0.3
 
 method = cv2.TM_SQDIFF_NORMED
 
-team_heroes = [x.replace(".png", "") for x in os.listdir("team_heroes")]
+team_heroes = [x.replace(".png", "") for x in os.listdir(dir_path + "/team_heroes")]
 
 left_team = img[70:134, 20:460]
 right_team = img[70:134, 820:1260]
@@ -151,7 +153,7 @@ else:
             final_pick = ["", 10000]
             for team_hero in team_heroes:
 
-                small_image = cv2.imread("team_heroes/" + team_hero + ".png")
+                small_image = cv2.imread(dir_path + "/team_heroes/" + team_hero + ".png")
                 large_image = player
 
                 result = cv2.matchTemplate(small_image, large_image, method)
