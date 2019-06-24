@@ -539,7 +539,6 @@ async function get720StreamUriFromTwitchUsername(streamLogin) {
         streamLogin = 'overwatchleague';
         let oauthToken = '';
         let playerType = 'site';
-        // oauthToken = '=8ie9xx9ui8yymlk0p5ezkin02dpw1u';
         //playerType = 'multiview-primary';
         const { body: authTokenBody } = await requestP({
             method: "GET",
