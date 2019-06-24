@@ -119,7 +119,11 @@ async function scrapeStream() {
             right: teamNameMap[rightTeam]
         };
         let alreadyAnalyzedFrames = [];
-        ffmpeg.kill('SIGINT');
+        try {
+            ffmpeg.kill('SIGINT');
+        } catch(error) {
+            // do nothing
+        }
         ffmpeg = child_process.spawn("ffmpeg", [
             '-y',
             '-i', mapStreamUri,
@@ -142,7 +146,11 @@ async function scrapeStream() {
             }
             if (Date.now() > epochStart + msMax) {
                 console.log("done");
-                ffmpeg.kill('SIGINT');
+                try {
+                    ffmpeg.kill('SIGINT');
+                } catch (error) {
+                    // do nothing
+                }
                 return;
             }
             const files = await filewalkP(FRAMES_FOLDER_NAME);
