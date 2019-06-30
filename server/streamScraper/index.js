@@ -273,11 +273,11 @@ async function scrapeStream() {
                 console.error("timeout");
                 continue;
             }
-            // try {
-            //     fs.unlinkSync('./frames/' + file);
-            // } catch (error) {
-            //     console.error(error);
-            // }
+            try {
+                fs.unlinkSync('./frames/' + file);
+            } catch (error) {
+                console.error(error);
+            }
             const killfeedReports = [[], [], [], [], [], [], [], [], [], [], [], []];
             for (let v = 0; v < 11; v++) {
                 let guess = guesses.substr(guesses.indexOf(`${v}:`) + 4 + v.toString().length - 1, guesses.indexOf(`${v + 1}:`) - guesses.indexOf(`${v}:`) - 7 - v.toString().length + 1);
