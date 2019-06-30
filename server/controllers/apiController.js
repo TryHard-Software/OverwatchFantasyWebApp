@@ -69,7 +69,7 @@ var liveStats = [];
 function liveStatsPost(req, res) {
     var data = req.body;
     var token = req.query.token;
-    if (token !== "wefweio587329fj32947fhwe923ry54y") {
+    if (token !== process.env.LIVE_STATS_WEBHOOK_TOKEN) {
         res.send("Invalid token.");
         return;
     } else {
