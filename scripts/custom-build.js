@@ -13,7 +13,6 @@ fs.readFile('./build/client/app/index.html', 'utf8', (err, data) => {
 
 // copy server views folder
 copyFolder("./server/views", "./build/server/views", (err) => { if(err) console.error(err);});
-copyFolder("./server/streamScraper", "./build/server/streamScraper", (err) => { if (err) console.error(err); });
 
 // copy client public files
 copyFolder("./client/css", "./build/client/css", (err) => { if (err) console.error(err); });

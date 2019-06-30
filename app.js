@@ -13,7 +13,6 @@ app.listen(PORT, function() {
 });
 
 var timers = require(__dirname + `/server/timers`);
-require(__dirname + `/server/streamScraper`);
 var adminController = require(__dirname + `/server/controllers/adminController`);
 
 
