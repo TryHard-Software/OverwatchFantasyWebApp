@@ -99,11 +99,11 @@ function schedule(req, res) {
                                     // var map3WinnerName = teams.get(map3WinnerId) ? teams.get(map3WinnerId).name : "None";
                                     // var map4WinnerName = teams.get(map4WinnerId) ? teams.get(map4WinnerId).name : "None";
                                     // var map5WinnerName = teams.get(map5WinnerId) ? teams.get(map5WinnerId).name : "N/A";
-                                    var map1Name = maps.get(map1Id) ? maps.get(map1Id).name : "N/A";
-                                    var map2Name = maps.get(map2Id) ? maps.get(map2Id).name : "N/A";
-                                    var map3Name = maps.get(map3Id) ? maps.get(map3Id).name : "N/A";
-                                    var map4Name = maps.get(map4Id) ? maps.get(map4Id).name : "N/A";
-                                    var map5Name = maps.get(map5Id) ? maps.get(map5Id).name : "N/A";
+                                    var map1Name = maps.get(map1Id) ? maps.get(map1Id).name : "Havana";
+                                    var map2Name = maps.get(map2Id) ? maps.get(map2Id).name : "Havana";
+                                    var map3Name = maps.get(map3Id) ? maps.get(map3Id).name : "Havana";
+                                    var map4Name = maps.get(map4Id) ? maps.get(map4Id).name : "Havana";
+                                    var map5Name = maps.get(map5Id) ? maps.get(map5Id).name : "Havana";
                                     var awayScore = 0;
                                     var homeScore = 0;
                                     map1WinnerId == teamAwayId ? awayScore++ : homeScore++;
@@ -395,7 +395,8 @@ function roster(req, res) {
                                     teamName: teamName,
                                     teamId: teamId,
                                     role: role,
-                                    totalPoints: 0
+                                    totalPoints: 0,
+                                    inactive: player.inactive
                                 };
                                 if (name === "Jeff Kaplan") {
                                     playerData.jeff = true;
@@ -462,7 +463,7 @@ function roster(req, res) {
                                             playersMap.forEach(function (value, key) {
                                                 var player = value;
                                                 player.totalPoints = parseFloat(parseFloat(player.totalPoints).toFixed(2));
-                                                players.push(value);
+                                                if (!player.inactive) players.push(value);
                                             });
                                             players.sort(function (obj1, obj2) {
                                                 return obj2.totalPoints - obj1.totalPoints;
