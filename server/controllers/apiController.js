@@ -67,6 +67,7 @@ var heroConversion = {
 var liveStats = [];
 
 function liveStatsPost(req, res) {
+    console.log(req.body);
     var data = req.body;
     var token = req.query.token;
     if (token !== process.env.LIVE_STATS_WEBHOOK_TOKEN) {
