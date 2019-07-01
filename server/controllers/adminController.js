@@ -128,7 +128,7 @@ function playerPics(req, res) {
                                         response.pipe(file);
                                     });
                                 } else {
-                                    var readStream = fs.createReadStream(dir + "/none.png");
+                                    var readStream = fs.createReadStream("./client/images/no_headshot.png");
                                     readStream.pipe(file);
                                 }
                                 
@@ -148,7 +148,7 @@ function playerPics(req, res) {
                                         response.pipe(file);
                                     });
                                 } else {
-                                    var readStream = fs.createReadStream(dir + "/none.png");
+                                    var readStream = fs.createReadStream("./build/client/images/no_headshot.png");
                                     readStream.pipe(file);
                                 }
                             } catch (err) {
