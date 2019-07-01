@@ -123,9 +123,15 @@ function playerPics(req, res) {
                                     fs.mkdirSync(dir);
                                 }
                                 var file = fs.createWriteStream(dir + "/" + playerId + ".png");
-                                var request = https.get(headshotUrl, function (response) {
-                                    response.pipe(file);
-                                });
+                                if (headshotUrl) {
+                                    var request = https.get(headshotUrl, function (response) {
+                                        response.pipe(file);
+                                    });
+                                } else {
+                                    var readStream = fs.createReadStream(dir + "/none.png");
+                                    readStream.pipe(file);
+                                }
+                                
                             } catch (err) {
                                 failures.push("Error while writing file stream for player headshot.");
                             }
@@ -137,9 +143,14 @@ function playerPics(req, res) {
                                     fs.mkdirSync(dir);
                                 }
                                 var file = fs.createWriteStream(dir + "/" + playerId + ".png");
-                                var request = https.get(headshotUrl, function (response) {
-                                    response.pipe(file);
-                                });
+                                if (headshotUrl) {
+                                    var request = https.get(headshotUrl, function (response) {
+                                        response.pipe(file);
+                                    });
+                                } else {
+                                    var readStream = fs.createReadStream(dir + "/none.png");
+                                    readStream.pipe(file);
+                                }
                             } catch (err) {
                                 failures.push("Error while writing file stream for player headshot.");
                             }
