@@ -1,0 +1,34 @@
+
+.live-feed-header {
+    text-align: center;
+}
+
+#live-feed-display { 
+    font-family: ovw-regular;
+    font-size: 24px;
+}
+
+.live-teampic {
+    width: 30px;
+    margin: 0px 10px;
+}
+
+.live-playerpic {
+    width: 30px;
+}
+
+.live-heropic {
+    width: 30px;
+    border: 2px black solid;
+    border-radius: 5px;
+    margin: 0px 10px;
+}
+
+.live-points {
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.live-points-highlight {
+    color: red;
+}

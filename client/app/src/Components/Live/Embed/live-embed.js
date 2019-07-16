@@ -1,60 +1,83 @@
 import React, { Component } from 'react';
-// import { withRouter } from 'react-router-dom';
-// import organizationApi from '../../../Data/organization-api';
-import './live-embed.scss';
-// import $ from 'jquery';
 
 class LiveEmbed extends Component {
+  constructor() {
+    super();
+    this.state = {
+      showInfoText: false,
+      showMobileInfoText: false,
+      showHighlighter: false,
+      embed: null
+    };
+    this.intervals = [];
+    this.onResize = this.onResize.bind(this);
+  }
 
-//   componentDidMount() {
-//     const embed = new window.Twitch.Player("twitch-embed", {
-//         width: 600,
-//         height: 340,
-//         channel: "overwatchleague"
-//     });
-//     // if mobile
-//     if (window.screen.width < 768) {
-//         $("#live-mobile-info-text").show();
-//         setTimeout(function () {
-//             $("#live-mobile-info-text").remove();
-//         }, 3000);
-//     // if not mobile
-//     } else {
-//         $("#live-resize-highlighter").show();
-//         $("#live-resize-info-text").show();
-//         setTimeout(function () {
-//             $("#live-resize-highlighter").remove();
-//             $("#live-resize-info-text").remove();
-//         }, 3000);
-//     }
-//     let twitchContainer = $(".twitch-container");
-//     if ($(window).width() > 640) {
-//         twitchContainer.height(370);
-//         twitchContainer.width(640);
-//     }
-//     window.onresize = resize;
-//     setInterval(function () {
-//         resize();
-//     }, 200);
-//     function resize() {
-//         const w = twitchContainer.width();
-//         const h = twitchContainer.height();
-//         embed.setWidth(w * .98);
-//         embed.setHeight(w * 9 / 16 * .98);
-//     }
-//   }
+  componentDidMount() {
+    window.addEventListener("resize", this.onResize);
+    const embed = new window.Twitch.Player("twitch-embed", {
+        width: 600,
+        height: 340,
+        channel: "overwatchleague"
+    });
+    this.setState({embed});
+    // if mobile
+    if (window.screen.width < 768) {
+        this.setState({showMobileInfoText: true});
+        this.intervals.push(setTimeout(function () {
+          this.setState({showMobileInfoText: false});
+        }, 3000));
+    // if not mobile
+    } else {
+      this.setState({showInfoText: true});
+      this.setState({showHighlighter: true});
+        this.intervals.push(setTimeout(function () {
+            this.setState({showInfoText: false});
+            this.setState({showHighlighter: false});
+        }.bind(this), 3000));
+    }
+    const twitchCont = document.getElementsByClassName("twitch-container")[0];
+    if (window.screen.dith > 640) {
+      twitchCont.style.height = 370;
+      twitchCont.style.width = 640;
+    }
+    this.intervals.push(setInterval(function () {
+        this.onResize();
+    }.bind(this), 200));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.onResize);
+    for (const interval of this.intervals) {
+      clearInterval(interval);
+    }
+  }
+
+  onResize() { // this is running even after page change. not okay.
+    const twitchCont = document.getElementsByClassName("twitch-container")[0];
+    if (twitchCont) {
+      const w = twitchCont.offsetWidth;
+      this.state.embed.setWidth(w * .98);
+      this.state.embed.setHeight(w * 9 / 16 * .98);
+    }
+  }
 
   render() {
     return (
       <div>
-        <div class="twitch-container">
+        <div className="twitch-container">
           <div id="twitch-embed">
-            <div id="live-resize-highlighter" hidden>
-            </div>
+            {this.state.showHighlighter && <div id="live-resize-highlighter"></div>}
           </div>
         </div>
-        <h2 id="live-resize-info-text" hidden>Window is resizable</h2>
-        <h2 id="live-mobile-info-text" hidden>On Mobile, tap to "pause" and then "play" again</h2>
+        {this.state.showInfoText && <h2 id="live-resize-info-text">Window is resizable</h2>}
+        {this.state.showMobileInfoText && <h2 id="live-mobile-info-text">On Mobile, tap to "pause" and then "play" again</h2>}
+        {/* <div class="checkbox">
+            <span id="live-video-toggle-label">Video</span>
+            <label>
+                <input id="live-video-toggle-button" checked type="checkbox" data-toggle="toggle" />
+            </label>
+        </div> */}
       </div>
     )
   }

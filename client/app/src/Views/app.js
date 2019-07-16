@@ -22,11 +22,11 @@ class App extends React.Component {
       <div className="app">
           {/* backgrounds */}
           <Switch>
-            <Route exact path="/app/live" component={() => (<div><html alt="live-bg" className="bg-wrapper live-bg" /></div>)} />
-            <Route exact path="/app/news" component={() => (<div><html alt="news-bg" className="bg-wrapper news-bg" /></div>)} />
-            <Route exact path="/app/information" component={() => (<div><img alt="information-bg" className="bg-wrapper information-bg" /></div>)} />
-            <Route exact path="/app/about" component={() => (<div><img alt="about-bg" className="bg-wrapper about-bg" /></div>)} />
-            <Route component={() => (<div><html className="bg-wrapper notfound-bg" /></div>)} />
+            <Route exact path="/app/live" component={() => <div className="bg-wrapper live-bg"></div>} />
+            <Route exact path="/app/news" component={() => <div className="bg-wrapper news-bg"></div>} />
+            <Route exact path="/app/information" component={() => <div className="bg-wrapper information-bg"></div>} />
+            <Route exact path="/app/about" component={() => <div className="bg-wrapper about-bg"></div>} />
+            <Route component={() => <div className="bg-wrapper notfound-bg"></div>} />
           </Switch>
 
           {/* navbar */}

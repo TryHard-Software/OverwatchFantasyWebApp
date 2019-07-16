@@ -7,9 +7,6 @@ export default props =>
         <div className="panel-heading">
           <h3>Oops, We couldn't find what you were looking for...</h3>
         </div>
-        <div className="panel-body">
-          <h5>Perhaps try not playing Hanzo in competitive????</h5>
-        </div>
       </div>
       <img id="image_404" alt="404" src="/images/backgrounds/junkrat-orig.jpg" width="214px" />
     </div>
