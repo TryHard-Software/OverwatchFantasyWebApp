@@ -120,6 +120,10 @@ export default path => {
 
     app.set('view engine', '.hbs');
 
+    app.get("/service-worker.js", (req, res) => {
+        res.sendFile(`${path}/client/app/service-worker.js`);
+    });
+
     // react
     app.get("/app/*", (req, res) => {
         res.sendFile(`${path}/client/app/index.html`);
