@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "./live-embed.scss";
 
 class LiveEmbed extends Component {
   constructor() {
@@ -7,10 +8,13 @@ class LiveEmbed extends Component {
       showInfoText: false,
       showMobileInfoText: false,
       showHighlighter: false,
-      embed: null
+      embed: null,
+      showVideo: true,
+      embeddedTwitch: false
     };
     this.intervals = [];
     this.onResize = this.onResize.bind(this);
+    this.handleVideoToggleButtonClick = this.handleVideoToggleButtonClick.bind(this);
   }
 
   componentDidMount() {
@@ -20,7 +24,7 @@ class LiveEmbed extends Component {
         height: 340,
         channel: "overwatchleague"
     });
-    this.setState({embed});
+    this.setState({embeddedTwitch: true, embed: embed});
     // if mobile
     if (window.screen.width < 768) {
         this.setState({showMobileInfoText: true});
@@ -29,11 +33,10 @@ class LiveEmbed extends Component {
         }, 3000));
     // if not mobile
     } else {
-      this.setState({showInfoText: true});
-      this.setState({showHighlighter: true});
+      this.setState({showInfoText: true, showHighlighter: true});
         this.intervals.push(setTimeout(function () {
-            this.setState({showInfoText: false});
-            this.setState({showHighlighter: false});
+            this.setState({showInfoText: false, showHighlighter: false});
+  
         }.bind(this), 3000));
     }
     const twitchCont = document.getElementsByClassName("twitch-container")[0];
@@ -53,7 +56,18 @@ class LiveEmbed extends Component {
     }
   }
 
-  onResize() { // this is running even after page change. not okay.
+  componentDidUpdate() {
+    if (!this.state.embeddedTwitch) {
+      const embed = new window.Twitch.Player("twitch-embed", {
+        width: 600,
+        height: 340,
+        channel: "overwatchleague"
+      });
+      this.setState({embeddedTwitch: true, embed: embed });
+    }
+  }
+
+  onResize() {
     const twitchCont = document.getElementsByClassName("twitch-container")[0];
     if (twitchCont) {
       const w = twitchCont.offsetWidth;
@@ -62,22 +76,24 @@ class LiveEmbed extends Component {
     }
   }
 
+  handleVideoToggleButtonClick() {
+    if (!this.state.showVideo) this.setState({embeddedTwitch: false});
+    this.setState(prevState => ({ showVideo: !prevState.showVideo}));
+  }
+
   render() {
     return (
       <div>
-        <div className="twitch-container">
-          <div id="twitch-embed">
-            {this.state.showHighlighter && <div id="live-resize-highlighter"></div>}
+        {this.state.showVideo && <div>
+          <div className="twitch-container">
+            <div id="twitch-embed">
+              {this.state.showHighlighter && <div id="live-resize-highlighter"></div>}
+            </div>
           </div>
-        </div>
-        {this.state.showInfoText && <h2 id="live-resize-info-text">Window is resizable</h2>}
-        {this.state.showMobileInfoText && <h2 id="live-mobile-info-text">On Mobile, tap to "pause" and then "play" again</h2>}
-        {/* <div class="checkbox">
-            <span id="live-video-toggle-label">Video</span>
-            <label>
-                <input id="live-video-toggle-button" checked type="checkbox" data-toggle="toggle" />
-            </label>
-        </div> */}
+          {this.state.showInfoText && <h2 id="live-resize-info-text">Window is resizable</h2>}
+          {this.state.showMobileInfoText && <h2 id="live-mobile-info-text">On Mobile, tap to "pause" and then "play" again</h2>}
+        </div>}
+        <button className="btn btn-primary" onClick={this.handleVideoToggleButtonClick}>{this.state.showVideo ? "Hide Stream" : "Show Stream"}</button>
       </div>
     )
   }

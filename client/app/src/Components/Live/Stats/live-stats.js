@@ -68,11 +68,9 @@ class LiveStats extends Component {
     if (this.hasUnmounted || !liveStats) return;
     for (const liveStatsItem of liveStats) {
       const uuid = liveStatsItem.uuid;
-      const tempLivefeeds = this.state.livefeeds;
       if (!this.livefeedSet.has(uuid)) {
         this.livefeedSet.add(uuid);
-        tempLivefeeds.unshift(liveStatsItem);
-        this.setState({livefeeds: tempLivefeeds });
+        this.setState(prevState => ({ livefeeds: [liveStatsItem, ...prevState.livefeeds] }));
       }
     }
   }
