@@ -10,7 +10,8 @@ var cookieParser = require('cookie-parser')
 var flash = require("connect-flash");
 var db = require('./models');
 var logger = require("morgan");
-var moment = require('moment'); 
+var moment = require('moment');
+const cors = require('cors');
 
 export default path => {
 
@@ -35,6 +36,8 @@ export default path => {
         exitOnCrash: false,
         maxCrashFile: 5
     });
+
+    app.use(cors());
 
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
@@ -84,6 +87,7 @@ export default path => {
     var apiRoutes = require("./routes/apiRoutes.js")(app, passport);
     var adminRoutes = require("./routes/adminRoutes.js")(app, passport);
     var authRoutes = require('./routes/authRoutes.js')(app, passport);
+    var newAuthRoutes = require('./routes/newAuthRoutes.js')(app);
     var dashboardRoutes = require('./routes/dashboardRoutes.js')(app, passport);
 
     require('./config/passport/passport.js')(passport);
@@ -91,6 +95,7 @@ export default path => {
     app.use("/api", apiRoutes);
     app.use("/admin", adminRoutes);
     app.use("/dashboard", dashboardRoutes);
+    app.use("/auth", newAuthRoutes);
 
     //For Handlebars
     app.set('views', `${path}/server/views`);

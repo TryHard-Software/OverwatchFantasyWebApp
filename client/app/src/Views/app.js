@@ -1,10 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import Live from './Live';
 import NotFound from './NotFound';
 import Information from './Information';
 import About from './About';
 import News from './News';
+import Login from './Login';
 import './app.scss';
 
 
@@ -14,6 +16,10 @@ class App extends React.Component {
     this.state = {
       isLoggedIn: false
     };
+  }
+
+  componentDidMount() {
+    console.log(Cookies.get('connect.sid'));
   }
 
   render() {
@@ -26,6 +32,7 @@ class App extends React.Component {
             <Route exact path="/app/news" component={() => <div className="bg-wrapper news-bg"></div>} />
             <Route exact path="/app/information" component={() => <div className="bg-wrapper information-bg"></div>} />
             <Route exact path="/app/about" component={() => <div className="bg-wrapper about-bg"></div>} />
+            <Route exact path="/app/signin" component={() => <div className="bg-wrapper signup-bg"></div>} />
             <Route component={() => <div className="bg-wrapper notfound-bg"></div>} />
           </Switch>
 
@@ -51,7 +58,7 @@ class App extends React.Component {
                   <Link className="nav-item nav-link" to="/app/about" >About</Link>
                 </div>
                 <div className="navbar-nav navbar-right">
-                  <a className="nav-item nav-link" href="/signin">Log In</a>
+                  <Link className="nav-item nav-link" to="/app/signin" >Log In</Link>
                   <a className="nav-item nav-link" href="/signup">Sign Up</a>
                 </div>
               </div>
@@ -65,6 +72,7 @@ class App extends React.Component {
             <Route exact path="/app/news" component={News} />
             <Route exact path="/app/information" component={Information} />
             <Route exact path="/app/about" component={About} />
+            <Route exact path="/app/signin" component={Login} />
             <Route component={NotFound} />
           </Switch>
           </div>
