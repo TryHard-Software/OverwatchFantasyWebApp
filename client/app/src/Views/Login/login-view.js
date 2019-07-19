@@ -1,5 +1,7 @@
 import React from 'react';
 import './login-view.scss';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 // import axios from 'axios';
 
 class Login extends React.Component {
@@ -7,17 +9,30 @@ class Login extends React.Component {
         super();
         this.state = {
             message: "",
-            resetComplete: ""
+            resetComplete: "",
+            redirectToDashboard: false
         };
         this.onSubmit = this.onSubmit.bind(this);
     }
 
     async onSubmit(e) {
+        e.preventDefault();
         //const resp = await axios.post("http://localhost:3001/signin");
         //console.log(resp);
+        let goodResponse = true;
+        if (goodResponse) {
+            this.props.setReduxLoggedIn();
+            this.setState({redirectToDashboard: true});
+        } else {
+            this.setState({ message: "Failure" });
+        }
+   
     }
 
     render () {
+        if (this.state.redirectToDashboard) {
+            return <Redirect to='/app/information' />
+        }
         return (
         <div className="container-login">
             <div className="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
@@ -60,6 +75,27 @@ class Login extends React.Component {
         )
     }
 }
-        
 
-export default Login;
+const mapStateToProps = state => {
+    return {
+        isLoggedIn: state.isLoggedIn
+    }
+}
+        
+const mapDispatchToProps = dispatch => {
+    return {
+        setReduxLoggedIn: (e) => {
+            dispatch({
+                type: "SET_LOGGED_IN",
+                isLoggedIn: true
+            })
+        }
+    }
+}
+
+const VisibleLogin =  connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Login)
+
+export default VisibleLogin;
