@@ -2,7 +2,9 @@
 module.exports = {
     getPlayerIdFromName, getTeamNameFromTeamId,
     getRoleFromPlayerId, mapOnId,
-    getHeroIdFromName, getMapIdFromOwlName
+    getHeroIdFromName, getMapIdFromOwlName,
+    getMatchIdFromOwlMatchId, getMapIdFromOwlMapGuid,
+    getWeightFromHeroId
 };
 
 // Get playerId from name
@@ -50,6 +52,36 @@ function getMapIdFromOwlName(mapsArray, owlName) {
     for (var x = 0; x < mapsArray.length; x++) {
         if (mapsArray[x].owl_name.toLowerCase() === owlName.toLowerCase()) {
             return mapsArray[x].id;
+        }
+    }
+    return false;
+};
+
+// Get mapId from owlMapGuid
+function getMapIdFromOwlMapGuid(mapsArray, owlMapGuid) {
+    for (var x = 0; x < mapsArray.length; x++) {
+        if (mapsArray[x].owl_mapGuid === owlMapGuid) {
+            return mapsArray[x].id;
+        }
+    }
+    return false;
+};
+
+// Get maptchId from owlMatchId
+function getMatchIdFromOwlMatchId(matchesArray, owlMatchId) {
+    for (var x = 0; x < matchesArray.length; x++) {
+        if (matchesArray[x].owl_id == owlMatchId) {
+            return matchesArray[x].id;
+        }
+    }
+    return false;
+};
+
+// Get weight from heroId
+function getWeightFromHeroId(weightsArray, heroId) {
+    for (var x = 0; x < weightsArray.length; x++) {
+        if (weightsArray[x].hero_id == heroId) {
+            return weightsArray[x].kill_weight;
         }
     }
     return false;
