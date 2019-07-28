@@ -112,7 +112,27 @@ function schedule(req, res) {
                                     map4WinnerId == teamAwayId ? awayScore++ : homeScore++;
                                     map5WinnerId == teamAwayId ? awayScore++ : homeScore++;
                                     var winningTeamId = awayScore > homeScore ? teamAwayId : teamHomeId;
-                                    teams.get(teamAwayId);
+                                    // teams.get(teamAwayId);
+                                    if (!map1WinnerId) {
+                                        map1Name = "None";
+                                        map1Id = 'na';
+                                    }
+                                    if (!map2WinnerId) {
+                                        map2Name = "None";
+                                        map2Id = 'na';
+                                    }
+                                    if (!map3WinnerId) {
+                                        map3Name = "None";
+                                        map3Id = 'na';
+                                    }
+                                    if (!map4WinnerId) {
+                                        map4Name = "None";
+                                        map4Id = 'na';
+                                    }
+                                    if (!map5WinnerId) {
+                                        map5Name = "None";
+                                        map5Id = 'na';
+                                    }
                                     var matchData = {
                                         id: match.id,
                                         stageId: match.stage_id,
