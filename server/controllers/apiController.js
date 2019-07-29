@@ -161,7 +161,6 @@ function liveStatsPost(req, res) {
                                             setTimeout(()=> {
                                                 db.customizedQuery(query3, [userId, killerPlayerId, playerMatchId, points], function (error, results) {
                                                     if (error) return console.log(error);
-                                                    console.log("point inserted");
                                                 });
                                             }, Math.floor(Math.random() * 100));
                                         }
