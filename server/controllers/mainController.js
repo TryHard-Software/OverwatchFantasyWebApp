@@ -84,9 +84,9 @@ exports.weeklyLeaderboard = function (req, res) {
 
 exports.sendreport = function (req, res) {
     db.findOneRowWithId("users", req.user.id, function (err, found) {
-        if(error)
+        if(err)
         {
-            console.log(error);
+            console.log(err);
             return;
         }
         var email = found.email; 
