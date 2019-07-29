@@ -343,9 +343,11 @@ function seedLeaderboard(req, res) {
                                     });
                                     var playerName = found.name;
                                     var id = found.id;
+                                    var inactive = found.inactive;
                                     var toPush = {
                                         id: id,
-                                        name: playerName
+                                        name: playerName,
+                                        inactive: inactive
                                     };
                                     if (id === 130) {
                                         toPush.jeff = true;
@@ -495,9 +497,11 @@ function seedWeeklyLeaderboard(req, res) {
                                     });
                                     var playerName = found.name;
                                     var id = found.id;
+                                    var inactive = found.inactive;
                                     var toPush = {
                                         id: id,
-                                        name: playerName
+                                        name: playerName,
+                                        inactive
                                     };
                                     if (id === 130) {
                                         toPush.jeff = true;
