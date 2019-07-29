@@ -137,24 +137,24 @@ function liveStatsPost(req, res) {
                                     }
                                 }
                                 var query = `INSERT INTO livestats (uuid, killer_team,
-                                    killer_name, killer_hero, victim_team, victim_name, victim_hero, action, map_name, killer_position, victim_position, match_id, map_index, map_id)
+                                    killer_name, killer_hero, victim_team, victim_name, victim_hero, action, map_name, killer_position, victim_position, match_id, map_index, map_id, createdAt, updatedAt)
                                 VALUES
-                                    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+                                    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, current_timestamp, current_timestamp)`;
                                 db.customizedQuery(query, [data.uuid, data.killer_team, data.killer_name, data.killer_hero,
                                 data.victim_team, data.victim_name, data.victim_hero, 'killed', '', 0, 0, data.match_id, data.map_index, data.map_id], function (error, results) {
                                     if (error) return console.log(error);
                                 });
-                                var query2 = `INSERT INTO playermatches (match_id, player_id, hero_id, map_id, team_id, points, kills, deaths, ults_gained, map_win, match_datetime, time_played)
+                                var query2 = `INSERT INTO playermatches (match_id, player_id, hero_id, map_id, team_id, points, kills, deaths, ults_gained, map_win, match_datetime, time_played, createdAt, updatedAt)
                                 VALUES
-                                    (?, ?, ?, ?, ?, ?, 1, 0, 0, 0, current_timestamp, '00:00:00');`
+                                    (?, ?, ?, ?, ?, ?, 1, 0, 0, 0, current_timestamp, '00:00:00', current_timestamp, current_timestamp);`
                                 db.customizedQuery(query2, [data.match_id, data.killer_player_id, data.killer_hero_id, data.map_id, data.killer_team_id, data.points], function (error, result) {
                                     if (error) return console.log(error);
                                     const playerMatchId = result.insertId;
                                     for (const roster of rosters) {
                                         if (roster.player_id === data.killer_player_id) {
-                                            const query3 = `INSERT INTO points (user_id, player_id, player_match_id, points)
+                                            const query3 = `INSERT INTO points (user_id, player_id, player_match_id, points, createdAt, updatedAt)
                                             VALUES
-                                                (?, ?, ?, ?);`
+                                                (?, ?, ?, ?, current_timestamp, current_timestamp);`
                                             const userId = roster.user_id;
                                             const killerPlayerId = data.killer_player_id;
                                             const points = data.points;
