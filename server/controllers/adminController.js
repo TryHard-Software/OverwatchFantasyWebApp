@@ -183,8 +183,8 @@ function seedWeights(req, res) {
                 kill_weight: parseFloat((1 / hero.kpm * 10).toFixed(4)),
                 death_weight: parseFloat((1 / hero.dpm * 10).toFixed(4))
             };
-            if (insertObj.kill_weight >= 200) {
-                insertObj.kill_weight = 197.5102;
+            if (insertObj.kill_weight >= 100) {
+                insertObj.kill_weight = 97.5102;
             }
             db.insert("weights", insertObj, function(error, result) {
                 if (error) {
