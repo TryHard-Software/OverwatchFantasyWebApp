@@ -86,38 +86,88 @@ function liveStatsPost(req, res) {
                     return;
                 }
                 var players = results;
-                db.findAllRows("gamemaps", function (error, results) {
+                db.findAllRows("matches", function (error, results) {
                     if (error) {
                         console.log(error);
                         return;
                     }
-                    var maps = results;
-                    data.uuid = uuid();
-                    data.killer_team_id = teamsConversion[data.killer_team];
-                    data.victim_team_id = teamsConversion[data.victim_team];
-                    data.killer_hero_id = utility.getHeroIdFromName(heroes, heroConversion[data.killer_hero]);
-                    data.victim_hero_id = utility.getHeroIdFromName(heroes, heroConversion[data.victim_hero]);
-                    data.killer_player_id = utility.getPlayerIdFromName(players, data.killer_name);
-                    data.victim_player_id = utility.getPlayerIdFromName(players, data.victim_name);
-                    data.action = "killed";
-                    //data.map_id = utility.getMapIdFromOwlName(maps, data.map_name);
-                    liveStats.push(data);
-                    var noEternalLoops = 0;
-                    while (liveStats.length > 10) {
-                        liveStats.shift();
-                        noEternalLoops += 1;
-                        if (noEternalLoops > 5) {
-                            break
+                    var matches = results;
+                    db.findAllRows("gamemaps", function (error, results) {
+                        if (error) {
+                            console.log(error);
+                            return;
                         }
-                    }
-                    var query = `INSERT INTO livestats (uuid, killer_team,
-                        killer_name, killer_hero, victim_team, victim_name, victim_hero, action, map_name, killer_position, victim_position)
-                    VALUES
-                        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-                    db.customizedQuery(query, [data.uuid, data.killer_team, data.killer_name, data.killer_hero,
-                        data.victim_team, data.victim_name, data.victim_hero, 'killed', '', 0, 0], function (error, results) {
-                        if (error) return console.log(error);
-                        console.log(results[0]);
+                        var maps = results;
+                        db.findAllRows("rosters", function (error, results) {
+                            if (error) {
+                                console.log(error);
+                                return;
+                            }
+                            var rosters = results;
+                            var getRecentWeightsSql = `
+                                SELECT t1.*
+                                FROM owf.weights AS t1
+                                LEFT JOIN owf.weights AS t2
+                                ON t1.hero_id = t2.hero_id
+                                AND t1.createdAt < t2.createdAt
+                                WHERE t2.id IS NULL AND t1.map_id = 1;
+                            `;
+                            db.customizedQuery(getRecentWeightsSql, function (error, results) {
+                                if (error) return console.log(error);
+                                var weights = results;
+                                data.uuid = uuid();
+                                data.killer_team_id = teamsConversion[data.killer_team];
+                                data.victim_team_id = teamsConversion[data.victim_team];
+                                data.killer_hero_id = utility.getHeroIdFromName(heroes, heroConversion[data.killer_hero]);
+                                data.victim_hero_id = utility.getHeroIdFromName(heroes, heroConversion[data.victim_hero]);
+                                data.killer_player_id = utility.getPlayerIdFromName(players, data.killer_name);
+                                data.victim_player_id = utility.getPlayerIdFromName(players, data.victim_name);
+                                data.match_id = utility.getMatchIdFromOwlMatchId(matches, data.owl_match_id);
+                                data.map_id = utility.getMapIdFromOwlMapGuid(maps, data.map_guid);
+                                data.points = utility.getWeightFromHeroId(weights, data.killer_hero_id);
+                                if (data.points) data.points = parseFloat(data.points.toFixed(2));
+                                data.action = "killed";
+                                liveStats.push(data);
+                                var noEternalLoops = 0;
+                                while (liveStats.length > 10) {
+                                    liveStats.shift();
+                                    noEternalLoops += 1;
+                                    if (noEternalLoops > 5) {
+                                        break
+                                    }
+                                }
+                                var query = `INSERT INTO livestats (uuid, killer_team,
+                                    killer_name, killer_hero, victim_team, victim_name, victim_hero, action, map_name, killer_position, victim_position, match_id, map_index, map_id, createdAt, updatedAt)
+                                VALUES
+                                    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, current_timestamp, current_timestamp)`;
+                                db.customizedQuery(query, [data.uuid, data.killer_team, data.killer_name, data.killer_hero,
+                                data.victim_team, data.victim_name, data.victim_hero, 'killed', '', 0, 0, data.match_id, data.map_index, data.map_id], function (error, results) {
+                                    if (error) return console.log(error);
+                                });
+                                var query2 = `INSERT INTO playermatches (match_id, player_id, hero_id, map_id, team_id, points, kills, deaths, ults_gained, map_win, match_datetime, time_played, createdAt, updatedAt)
+                                VALUES
+                                    (?, ?, ?, ?, ?, ?, 1, 0, 0, 0, current_timestamp, '00:00:00', current_timestamp, current_timestamp);`
+                                db.customizedQuery(query2, [data.match_id, data.killer_player_id, data.killer_hero_id, data.map_id, data.killer_team_id, data.points], function (error, result) {
+                                    if (error) return console.log(error);
+                                    const playerMatchId = result.insertId;
+                                    for (const roster of rosters) {
+                                        if (roster.player_id === data.killer_player_id) {
+                                            const query3 = `INSERT INTO points (user_id, player_id, player_match_id, points, createdAt, updatedAt)
+                                            VALUES
+                                                (?, ?, ?, ?, current_timestamp, current_timestamp);`
+                                            const userId = roster.user_id;
+                                            const killerPlayerId = data.killer_player_id;
+                                            const points = data.points;
+                                            setTimeout(()=> {
+                                                db.customizedQuery(query3, [userId, killerPlayerId, playerMatchId, points], function (error, results) {
+                                                    if (error) return console.log(error);
+                                                });
+                                            }, Math.floor(Math.random() * 100));
+                                        }
+                                    }
+                                });    
+                            });
+                        });
                     });
                 });
             });

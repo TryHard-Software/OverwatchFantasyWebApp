@@ -30,13 +30,12 @@ class LiveEmbed extends Component {
         this.setState({showMobileInfoText: true});
         this.intervals.push(setTimeout(function () {
           this.setState({showMobileInfoText: false});
-        }, 3000));
+        }.bind(this), 3000));
     // if not mobile
     } else {
       this.setState({showInfoText: true, showHighlighter: true});
         this.intervals.push(setTimeout(function () {
             this.setState({showInfoText: false, showHighlighter: false});
-  
         }.bind(this), 3000));
     }
     const twitchCont = document.getElementsByClassName("twitch-container")[0];

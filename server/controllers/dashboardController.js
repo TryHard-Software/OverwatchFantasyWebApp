@@ -71,7 +71,6 @@ function schedule(req, res) {
                                         return; 
                                     }
                                 var matches = result;
-                                //var matches = utility.mapOnId(result);
                                 var matchesMap = new Map();
                                 for (var m = 0; m < matches.length; m++) {
                                     var match = matches[m];
@@ -112,7 +111,27 @@ function schedule(req, res) {
                                     map4WinnerId == teamAwayId ? awayScore++ : homeScore++;
                                     map5WinnerId == teamAwayId ? awayScore++ : homeScore++;
                                     var winningTeamId = awayScore > homeScore ? teamAwayId : teamHomeId;
-                                    teams.get(teamAwayId);
+                                    // teams.get(teamAwayId);
+                                    if (!map1WinnerId) {
+                                        map1Name = "None";
+                                        map1Id = 'na';
+                                    }
+                                    if (!map2WinnerId) {
+                                        map2Name = "None";
+                                        map2Id = 'na';
+                                    }
+                                    if (!map3WinnerId) {
+                                        map3Name = "None";
+                                        map3Id = 'na';
+                                    }
+                                    if (!map4WinnerId) {
+                                        map4Name = "None";
+                                        map4Id = 'na';
+                                    }
+                                    if (!map5WinnerId) {
+                                        map5Name = "None";
+                                        map5Id = 'na';
+                                    }
                                     var matchData = {
                                         id: match.id,
                                         stageId: match.stage_id,
@@ -167,14 +186,31 @@ function schedule(req, res) {
                                 var pointsSet = new Set();
                                 for (var o = 0; o < points.length; o++) {
                                     pointsSet.add(points[o].player_match_id);
-                                    // var playerMatchId = point.player_match_id;
-                                    // var matchId = playerMatchesMap.get(playerMatchId).match_id;
-                                    // var pointData = {
-
-                                    // };
-                                    // matchesArr[(matchId - 1)].points.push(pointData);
-                                    // console.log(matchId);
                                 }
+                                const playerMatchMap = {};
+                                for (var p = 0; p < playerMatches.length; p++) {
+                                    var playerMatch = playerMatches[p];
+                                    var playerId = playerMatch.player_id;
+                                    var heroId = playerMatch.hero_id;
+                                    var matchId = playerMatch.match_id;
+                                    var mapId = playerMatch.map_id;
+                                    if (!isNaN(playerId) && !isNaN(heroId) && !isNaN(matchId) && !isNaN(mapId)) {
+                                        var tempId = playerId + "_" + heroId + "_" + matchId + "_" + mapId;
+                                        if (playerMatchMap[tempId]) {
+                                            playerMatchMap[tempId].kills += playerMatch.kills;
+                                            playerMatchMap[tempId].points += playerMatch.points;
+                                            if (!playerMatchMap[tempId].userHas) playerMatchMap[tempId].userHas = pointsSet.has(playerMatch.id);
+                                        } else {
+                                            playerMatch.userHas = pointsSet.has(playerMatch.id);
+                                            playerMatchMap[tempId] = playerMatch;
+                                        }
+                                    }
+                                }
+                                var newPlayerMatchesArray = [];
+                                Object.keys(playerMatchMap).forEach(key => {
+                                    newPlayerMatchesArray.push(playerMatchMap[key]);
+                                });
+                                playerMatches = newPlayerMatchesArray;
                                 for (var p = 0; p < playerMatches.length; p++) {
                                     var playerMatch = playerMatches[p];
                                     var connectedMatch = matchesMap.get(playerMatch.match_id);
@@ -185,6 +221,7 @@ function schedule(req, res) {
                                     var teamId = playerMatch.team_id;
                                     var mapId = playerMatch.map_id;
                                     var role = players.get(playerId) ? players.get(playerId).role : "None";
+                                    if (playerMatch.points) playerMatch.points = parseFloat(playerMatch.points.toFixed(2));
                                     
                                     var playerMatchData = {
                                         playerId: playerId,
@@ -194,15 +231,10 @@ function schedule(req, res) {
                                         kills: playerMatch.kills,
                                         deaths: playerMatch.deaths,
                                         points: playerMatch.points,
-                                        userHas: pointsSet.has(playerMatch.id),
+                                        userHas: playerMatch.userHas,
                                         role: role.toLowerCase()
                                     };
-                                    //connectedMatch.playerMatches.push(playerMatchData);
-                                    // playerMatchesMap.set(playerMatch.id, playerMatch);
                                     if (connectedMatch.teamHomeId === teamId) {
-                                        // console.log(mapId);
-                                        // console.log(connectedMatch.map1Id);
-                                        // console.log(connectedMatch);
                                         switch (mapId) {
                                             case connectedMatch.map1Id:
                                                 connectedMatch.playerMatches.homeTeam.map1.push(playerMatchData);
@@ -272,14 +304,13 @@ function schedule(req, res) {
                                     });
 
                                 }
-                                var now = new Date();
                                 var upcomingMatches = [];
                                 var previousMatches = [];
                                 matchesMap.forEach(function (value, key) {
                                     if (value.playerMatches.homeTeam.map1.length === 0) {
-                                        value.noData = true;
+                                        // value.noData = true;
                                     }
-                                    if (value.datetime < now && value.map1WinnerId) {
+                                    if (value.map1WinnerId) {
                                         previousMatches.push(value);
                                     } else {
                                         upcomingMatches.push(value);

@@ -169,130 +169,31 @@ function playerPics(req, res) {
 };
 
 function seedWeights(req, res) {
-    var totalTotal = 0;
-    db.findAllRows("playermatches", function (error, result) {
+    db.findAllRows("heroes", function (error, result) {
         if (error) {
             console.log(error);
             return;
         }
-        var playerMatchRes = result;
-        db.findAllRows("heroes", function (error, result) {
-            if (error) {
-                console.log(error);
-                return;
+        var heroRes = result;
+        for (var h = 0; h < heroRes.length; h++) {
+            var hero = heroRes[h];
+            var insertObj = {
+                hero_id: hero.id,
+                map_id: 1,
+                kill_weight: parseFloat((1 / hero.kpm * 10).toFixed(4)),
+                death_weight: parseFloat((1 / hero.dpm * 10).toFixed(4))
+            };
+            if (insertObj.kill_weight >= 100) {
+                insertObj.kill_weight = 97.5102;
             }
-            var heroRes = result;
-            db.findAllRows("gamemaps", function (error, result) {
+            db.insert("weights", insertObj, function(error, result) {
                 if (error) {
                     console.log(error);
                     return;
                 }
-                var mapRes = result;
-                var heroes = [];
-                for (var h = 0; h < heroRes.length; h++) {
-                    var hero = heroRes[h];
-                    var heroObj = {
-                        id: hero.id,
-                        goodMaps: [],
-                        badMaps: []
-                    }
-                    for (var m = 0; m < mapRes.length; m++) {
-                        var map = mapRes[m];
-                        var totalSeconds = 0;
-                        var totalKills = 0;
-                        var totalDeaths = 0;
-                        for (var p = 0; p < playerMatchRes.length; p++) {
-                            var playerMatch = playerMatchRes[p];
-                            if (playerMatch.map_id === map.id && playerMatch.hero_id === hero.id) {
-                                var timePlayed = playerMatch.time_played;
-                                var time = timePlayed.split(":");
-                                var seconds = (parseInt(time[0]) * 60 * 60) + (parseInt(time[1]) * 60) + (parseInt(time[2]));
-                                var kills = playerMatch.kills;
-                                var deaths = playerMatch.deaths;
-                                totalSeconds += seconds;
-                                totalKills += kills;
-                                totalDeaths += deaths;
-                            }
-                        }
-                        var killsPerMinute = totalKills / totalSeconds * 60;
-                        var deathsPerMinute = totalDeaths / totalSeconds * 60;
-                        var mapObj = {
-                            id: map.id,
-                            seconds: totalSeconds,
-                            kills: totalKills,
-                            deaths: totalDeaths,
-                            kpm: killsPerMinute,
-                            dpm: deathsPerMinute
-                        }
-                        if (mapObj.seconds < 5000) {
-                            heroObj.badMaps.push(mapObj);
-                        } else {
-                            heroObj.goodMaps.push(mapObj);
-                        }
-                    }
-                    heroes.push(heroObj);
-                }
-                for (var j = 0; j < heroes.length; j++) {
-                    var hero = heroes[j];
-                    var mercyPenalty = 1;
-                    if (hero.id == 11) {
-                        mercyPenalty = 0.5;
-                    }
-                    hero.maps = [];
-                    var totalKpm = 0;
-                    var totalDpm = 0;
-                    for (var k = 0; k < hero.goodMaps.length; k++) {
-                        var goodMapStats = hero.goodMaps[k];
-                        totalKpm += goodMapStats.kpm;
-                        totalDpm += goodMapStats.dpm;
-                        var insertObj = {
-                            hero_id: hero.id,
-                            map_id: goodMapStats.id,
-                            kill_weight: parseFloat((1 / goodMapStats.kpm * 10).toFixed(4)) * mercyPenalty,
-                            death_weight: parseFloat((1 / goodMapStats.dpm * 10).toFixed(4))
-                        };
-                        if (insertObj.kill_weight > 300) {
-                            insertObj.kill_weight = 297.5102;
-                        }
-                        db.insert("weights", insertObj, function(error, result) {
-                            if (error) {
-                                console.log(error);
-                                return;
-                            }
-                        });
-                    }
-                    var avgKpm = parseFloat((totalKpm / hero.goodMaps.length).toFixed(4));
-                    var avgDpm = parseFloat((totalDpm / hero.goodMaps.length).toFixed(4));
-                    for (var k = 0; k < hero.badMaps.length; k++) {
-                        var badMapStats = hero.badMaps[k];
-                        var badMapStatsNew = badMapStats;
-                        if (hero.goodMaps.length < 3) {
-                            badMapStatsNew.kpm = heroRes[j].kpm;
-                            badMapStatsNew.dpm = heroRes[j].dpm;
-                        } else {
-                            badMapStatsNew.kpm = avgKpm;
-                            badMapStatsNew.dpm = avgDpm;
-                        }
-                        var insertObj = {
-                            hero_id: hero.id,
-                            map_id: badMapStats.id,
-                            kill_weight: parseFloat((1 / badMapStats.kpm * 10).toFixed(4)) * mercyPenalty,
-                            death_weight: parseFloat((1 / badMapStats.dpm * 10).toFixed(4))
-                        };
-                        if (insertObj.kill_weight > 300) {
-                            insertObj.kill_weight = 297.5102;
-                        }
-                        db.insert("weights", insertObj, function (error, result) {
-                            if (error) {
-                                console.log(error);
-                                return;
-                            }
-                        });
-                    }
-                }
-                res.render("admin", { message: "Successfully seeded weights table." });
             });
-        });
+        }
+        res.render("admin", { message: "Successfully seeded weights table." });
     });
 };
 
@@ -343,9 +244,11 @@ function seedLeaderboard(req, res) {
                                     });
                                     var playerName = found.name;
                                     var id = found.id;
+                                    var inactive = found.inactive;
                                     var toPush = {
                                         id: id,
-                                        name: playerName
+                                        name: playerName,
+                                        inactive: inactive
                                     };
                                     if (id === 130) {
                                         toPush.jeff = true;
@@ -495,9 +398,11 @@ function seedWeeklyLeaderboard(req, res) {
                                     });
                                     var playerName = found.name;
                                     var id = found.id;
+                                    var inactive = found.inactive;
                                     var toPush = {
                                         id: id,
-                                        name: playerName
+                                        name: playerName,
+                                        inactive
                                     };
                                     if (id === 130) {
                                         toPush.jeff = true;

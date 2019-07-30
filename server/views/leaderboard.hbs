@@ -1,6 +1,6 @@
 <html class="bg-wrapper leaderboard-bg">
 <div class="dashboard-nav-bar">
-    <a class="nav-item nav-link" href="/leaderboard">Global All-Time</a>
+    <a class="nav-item nav-link" style="color: #f99e1a;" href="/leaderboard">Global All-Time</a>
 </div>
 <div class="container-dashboard">
     <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
@@ -26,7 +26,11 @@
                             <td>{{totalPoints}}</td>
                             <td>{{username}}</td>
                             <td class="leaderboard-roster-row">{{#each roster}}
-                                {{name}} <img width="20px" src="/images/{{#if jeff}}jeff_headshot/jeff{{else}}player_headshots/{{id}}{{/if}}.png"> |
+                                {{#if inactive}} 
+                                    {{name}} <img width="20px" src="/images/no_headshot.png"> |
+                                {{else}}
+                                    {{name}} <img width="20px" src="/images/{{#if jeff}}jeff_headshot/jeff{{else}}player_headshots/{{id}}{{/if}}.png"> |
+                                {{/if}}
                                 {{/each}}
                             </td>
                         </tr>
