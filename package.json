@@ -53,7 +53,7 @@
     "mysql2": "^1.5.3",
     "ncp": "^2.0.0",
     "negotiator": "^0.6.1",
-    "node-sass": "^4.7.2",
+    "node-sass": "^4.13.1",
     "nodemailer": "^4.6.4",
     "nodemailer-sendgrid": "^1.0.3",
     "nodemailer-sendgrid-transport": "^0.2.0",
