@@ -5,7 +5,7 @@
   "private": true,
   "proxy": "http://localhost:3001",
   "dependencies": {
-    "async": "^2.6.0",
+    "async": "^3.2.2",
     "autoprefixer": "7.1.6",
     "axios": "^0.17.1",
     "babel-cli": "^6.26.0",
